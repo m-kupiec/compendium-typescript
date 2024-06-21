@@ -83,6 +83,8 @@ npx tsc
 
 ### Interfaces
 
+#### Objects
+
 > You can explicitly describe this object’s shape using an interface declaration:
 >
 > ```ts
@@ -99,6 +101,31 @@ npx tsc
 >   name: "Hayes",
 >   id: 0,
 > };
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
+
+#### Classes
+
+> You can use an interface declaration with classes:
+>
+> ```ts
+> interface User {
+>   name: string;
+>   id: number;
+> }
+>
+> class UserAccount {
+>   name: string;
+>   id: number;
+>
+>   constructor(name: string, id: number) {
+>     this.name = name;
+>     this.id = id;
+>   }
+> }
+>
+> const user: User = new UserAccount("Murphy", 1);
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
