@@ -35,7 +35,7 @@ npm install typescript --save-dev
 Running the compiler:
 
 ```bash
-npx tsc
+npx tsc index.ts
 ```
 
 ## Getting Started
