@@ -217,7 +217,7 @@ npx tsc index.ts
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
 
-# Type Checking
+# Type Checker
 
 ## Type Inference
 
