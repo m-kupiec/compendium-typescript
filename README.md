@@ -24,6 +24,20 @@
 
 "Many JavaScript apps are made up of hundreds of thousands of files. A single change to one individual file can affect the behaviour of any number of other files, like throwing a pebble into a pond and causing ripples to spread out to the bank. Validating the connections between every part of your project can get time consuming quickly, using a type-checked language like TypeScript can handle that automatically and provide instant feedback during development. These features allows TypeScript to help developers feel more confident in their code, and save considerable amounts time in validating that they have not accidentally broken the project." ([TypeScript](https://www.typescriptlang.org/why-create-typescript/))
 
+## Installation
+
+Installing:
+
+```bash
+npm install typescript --save-dev
+```
+
+Running the compiler:
+
+```bash
+npx tsc
+```
+
 ## Getting Started
 
 > Adding this to a JS file shows errors in your editor:
