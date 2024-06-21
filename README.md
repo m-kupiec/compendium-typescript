@@ -64,21 +64,6 @@ npx tsc
 
 "There is already a small set of primitive types available in JavaScript: `boolean`, `bigint`, `null`, `number`, `string`, `symbol`, and `undefined`, which you can use in an interface. TypeScript extends this list with a few more, such as `any` (allow anything), `unknown` (ensure someone using this type declares what the type is), `never` (it’s not possible that this type could happen), and `void` (a function which returns `undefined` or has no return value)." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
 
-## Type Inference
-
-"TypeScript knows the JavaScript language and will generate types for you in many cases. For example in creating a variable and assigning it to a particular value, TypeScript will use the value as its type." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
-
-> For example, to create an object with an inferred type which includes `name: string` and `id: number`, you can write:
->
-> ```js
-> const user = {
->   name: "Hayes",
->   id: 0,
-> };
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
-
 ## Type Definition
 
 ### Use Case
@@ -224,6 +209,23 @@ npx tsc
 >
 > // Since the backpack variable is a string, you can't pass a number to the add function.
 > backpack.add(23);
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
+
+# Type Checking
+
+## Type Inference
+
+"TypeScript knows the JavaScript language and will generate types for you in many cases. For example in creating a variable and assigning it to a particular value, TypeScript will use the value as its type." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
+
+> For example, to create an object with an inferred type which includes `name: string` and `id: number`, you can write:
+>
+> ```js
+> const user = {
+>   name: "Hayes",
+>   id: 0,
+> };
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
