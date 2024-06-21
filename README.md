@@ -310,6 +310,14 @@ npx tsc index.ts
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
 
+> You can also catch certain bugs with options like:
+>
+> - `noImplicitReturns` which prevents you from forgetting to return at the end of a function.
+> - `noFallthroughCasesInSwitch` which is helpful if you never want to forget a break statement between cases in a switch block.
+>   TypeScript will also warn about unreachable code and labels, which you can disable with `allowUnreachableCode` and `allowUnusedLabels` respectively.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
+
 ## Output
 
 "although there were errors, the . . . file is still created. You can use TypeScript even if there are errors in your code. But in this case, TypeScript is warning that your code will likely not run as expected." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-tooling-in-5-minutes.html))
