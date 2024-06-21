@@ -10,6 +10,8 @@
 
 "adds additional syntax to JavaScript to support a tighter integration with your editor. Catch errors early in your editor." ([TypeScript](https://www.typescriptlang.org))
 
+"Describe the shape of objects and functions in your code. Making it possible to see documentation and issues in your editor." ([TypeScript](https://www.typescriptlang.org))
+
 "uses type inference to give you great tooling without additional code." ([TypeScript](https://www.typescriptlang.org))
 
 ## Getting Started
