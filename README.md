@@ -79,4 +79,24 @@ npx tsc
 
 "some design patterns make it difficult for types to be inferred automatically (for example, patterns that use dynamic programming). To cover these cases, TypeScript supports an extension of the JavaScript language, which offers places for you to tell TypeScript what the types should be." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
 
+> You can explicitly describe this object’s shape using an interface declaration:
+>
+> ```ts
+> interface User {
+>   name: string;
+>   id: number;
+> }
+> ```
+>
+> You can then declare that a JavaScript object conforms to the shape of your new >interface by using syntax like : TypeName after a variable declaration:
+>
+> ```ts
+> const user: User = {
+>   name: "Hayes",
+>   id: 0,
+> };
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
+
 "there are two syntaxes for building types: Interfaces and Types. You should prefer `interface`. Use `type` when you need specific features." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
