@@ -75,7 +75,7 @@ npx tsc
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
 
-## Type Definitions
+## Type Definition
 
 ### Use Case
 
