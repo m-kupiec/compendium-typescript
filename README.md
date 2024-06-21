@@ -130,6 +130,22 @@ npx tsc
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
 
+#### Functions
+
+> You can use interfaces to annotate parameters and return values to functions:
+>
+> ```ts
+> function deleteUser(user: User) {
+>   // ...
+> }
+>
+> function getAdminUser(): User {
+>   //...
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
+
 ### Interfaces vs. Types
 
 "there are two syntaxes for building types: Interfaces and Types. You should prefer `interface`. Use `type` when you need specific features." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
