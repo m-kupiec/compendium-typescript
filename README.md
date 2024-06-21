@@ -40,6 +40,8 @@ npx tsc
 
 ## Getting Started
 
+"Visual Studio Code uses TypeScript under the hood to make it easier to work with JavaScript." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
+
 > Adding this to a JS file shows errors in your editor:
 >
 > ```js
