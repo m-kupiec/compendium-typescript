@@ -64,6 +64,17 @@ npx tsc
 
 "TypeScript knows the JavaScript language and will generate types for you in many cases. For example in creating a variable and assigning it to a particular value, TypeScript will use the value as its type." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
 
+> For example, to create an object with an inferred type which includes `name: string` and `id: number`, you can write:
+>
+> ```js
+> const user = {
+>   name: "Hayes",
+>   id: 0,
+> };
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
+
 ## Type Definitions
 
 "some design patterns make it difficult for types to be inferred automatically (for example, patterns that use dynamic programming). To cover these cases, TypeScript supports an extension of the JavaScript language, which offers places for you to tell TypeScript what the types should be." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
