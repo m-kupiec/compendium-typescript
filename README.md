@@ -194,3 +194,36 @@ npx tsc
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
+
+### Generics
+
+"Generics provide variables to types." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
+
+> An array with generics can describe the values that the array contains.
+>
+> ```ts
+> type StringArray = Array<string>;
+> type NumberArray = Array<number>;
+> type ObjectWithNameArray = Array<{ name: string }>;
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
+
+> You can declare your own types that use generics:
+>
+> ```ts
+> interface Backpack<Type> {
+>   add: (obj: Type) => void;
+>   get: () => Type;
+> }
+>
+> declare const backpack: Backpack<string>;
+>
+> // object is a string, because we declared it above as the variable part of Backpack.
+> const object = backpack.get();
+>
+> // Since the backpack variable is a string, you can't pass a number to the add function.
+> backpack.add(23);
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
