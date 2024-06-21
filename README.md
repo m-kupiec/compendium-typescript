@@ -1,5 +1,37 @@
 # TypeScript Reference
 
+## TOC
+
+### Overview
+
+- **Definition**
+- **Benefits**
+- **Installation**
+- **Getting Started**
+
+### Language
+
+- **Primitive Types**
+- **Type Annotation**
+- **Type Definition**
+  - Use Case
+  - Interfaces
+    - Objects
+    - Classes
+    - Functions
+  - Interfaces vs. Types
+- **Type Composition**
+  - Overview
+  - Unions
+  - Generics
+
+### Type Checker
+
+- **Type Inference**
+- **Structural Type System**
+
+### Compiler
+
 # Overview
 
 ## Definition
