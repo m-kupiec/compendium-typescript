@@ -227,6 +227,16 @@ npx tsc index.ts
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
 
+> If you ever have a value that TypeScript thinks is possibly `null`/`undefined`, but you know better, you can use the postfix `!` operator to tell it otherwise.
+>
+> ```ts
+> declare var foo: string[] | null;
+> foo.length; // error - 'foo' is possibly 'null'
+> foo!.length; // okay - 'foo!' just has type 'string[]'
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
+
 ### Generics
 
 "Generics provide variables to types." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
