@@ -24,6 +24,7 @@
   - Overview
   - Unions
   - Generics
+- **Type Assertion**
 - **Function Overload Signature**
 - **Miscellaneous**
   - Importing Modules
@@ -276,6 +277,31 @@ npx tsc index.ts
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
+
+## Type Assertion
+
+> ```js
+> var options = {};
+> options.color = "red";
+> options.volume = 11;
+> ```
+>
+> TypeScript will say that you can’t assign to `color` and `volume` because it first figured out the type of `options` as `{}` which doesn’t have any properties.
+>
+> . . . You could . . . define the type of `options` and add a type assertion on the object literal.
+>
+> ```ts
+> interface Options {
+>   color: string;
+>   volume: number;
+> }
+>
+> let options = {} as Options;
+> options.color = "red";
+> options.volume = 11;
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
 
 ## Function Overload Signature
 
