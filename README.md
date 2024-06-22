@@ -12,6 +12,8 @@
 ### Language
 
 - **Primitive Types**
+  - Overview
+  - `null`/`undefined`
 - **Type Annotation**
 - **Type Definition**
   - Use Case
@@ -107,7 +109,11 @@ npx tsc index.ts
 
 ## Primitive Types
 
+### Overview
+
 "There is already a small set of primitive types available in JavaScript: `boolean`, `bigint`, `null`, `number`, `string`, `symbol`, and `undefined`, which you can use in an interface. TypeScript extends this list with a few more, such as `any` (allow anything), `unknown` (ensure someone using this type declares what the type is), `never` (it’s not possible that this type could happen), and `void` (a function which returns `undefined` or has no return value)." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
+
+### `null`/`undefined`
 
 "By default, TypeScript assumes that `null` and `undefined` are in the domain of every type. That means anything declared with the type `number` could be `null` or `undefined`." ([TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html))
 
