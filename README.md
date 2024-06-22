@@ -34,6 +34,7 @@
 - **Type Inference**
   - Overview
   - `noImplicitAny`
+  - `noImplicitThis`
   - Miscellaneous
 - **Structural Type System**
 
@@ -406,6 +407,45 @@ npx tsc index.ts
 "if you never want TypeScript to silently infer `any` for a type without you explicitly saying so, you can use `noImplicitAny` before you start modifying your files. While it might feel somewhat overwhelming, the long-term gains become apparent much more quickly." ([TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html))
 
 "There are certain cases where TypeScript can’t figure out what certain types should be. To be as lenient as possible, it will decide to use the type `any` in its place. While this is great for migration, using `any` means that you’re not getting any type safety, and you won’t get the same tooling support you’d get elsewhere. You can tell TypeScript to flag these locations down and give an error with the `noImplicitAny` option." ([TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html))
+
+### `noImplicitThis`
+
+"When you use the `this` keyword outside of classes, it has the type `any` by default." ([TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html))
+
+> imagine a `Point` class, and imagine a function that we wish to add as a method:
+>
+> ```ts
+> class Point {
+>   constructor(public x, public y) {}
+>   getDistance(p: Point) {
+>     let dx = p.x - this.x;
+>     let dy = p.y - this.y;
+>     return Math.sqrt(dx ** 2 + dy ** 2);
+>   }
+> }
+> // ...
+> // Reopen the interface.
+> interface Point {
+>   distanceFromOrigin(): number;
+> }
+> Point.prototype.distanceFromOrigin = function () {
+>   return this.getDistance({ x: 0, y: 0 });
+> };
+> ```
+>
+> . . . we could easily have misspelled `getDistance` and not gotten an error.
+>
+> For this reason, TypeScript has the `noImplicitThis` option. When that option is set, TypeScript will issue an error when this is used without an explicit (or inferred) type.
+>
+> The fix is to use a `this`-parameter to give an explicit type in the interface or in the function itself:
+>
+> ```ts
+> Point.prototype.distanceFromOrigin = function (this: Point) {
+>   return this.getDistance({ x: 0, y: 0 });
+> };
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
 
 ### Miscellaneous
 
