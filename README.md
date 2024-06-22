@@ -15,6 +15,9 @@
   - Overview
   - `null`/`undefined`
   - `Object`/`{}`/`any`
+- **Complex Types**
+  - Arrays
+  - Promises
 - **Type Annotation**
 - **Type Definition**
   - Use Case
@@ -130,6 +133,24 @@ npx tsc index.ts
 "whenever you use `any`, you lose out on most of the error checking and editor support that TypeScript gives you." ([TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html))
 
 "If a decision ever comes down to `Object` and `{}`, you should prefer `{}`. While they are mostly the same, technically `{}` is a more general type than `Object` in certain esoteric cases." ([TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html))
+
+## Complex Types
+
+### Arrays
+
+"you can use the syntax `number[]`; this syntax works for any type (e.g. `string[]` is an array of strings, and so on). You may also see this written as `Array<number>`, which means the same thing." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
+
+### Promises
+
+> If you want to annotate the return type of a function which returns a promise, you should use the `Promise` type:
+>
+> ```ts
+> async function getFavoriteNumber(): Promise<number> {
+>   return 26;
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
 
 ## Type Annotation
 
