@@ -244,6 +244,20 @@ npx tsc index.ts
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
 
+Adding new fields to an existing interface:
+
+> ```ts
+> interface Window {
+>   title: string;
+> }
+>
+> interface Window {
+>   ts: TypeScriptAPI;
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
+
 #### Objects
 
 > You can explicitly describe this object’s shape using an interface declaration:
