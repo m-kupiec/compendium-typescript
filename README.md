@@ -501,6 +501,24 @@ Adding new fields to an existing interface:
 
 ### Type Assertion
 
+> Sometimes you will have information about the type of a value that TypeScript can’t know about. For example, if you’re using `document.getElementById`, TypeScript only knows that this will return _some_ kind of `HTMLElement`, but you might know that your page will always have an `HTMLCanvasElement` with a given ID. In this situation, you can use a _type assertion_ to specify a more specific type:
+>
+> ```ts
+> const myCanvas = document.getElementById("main_canvas") as HTMLCanvasElement;
+> ```
+>
+> You can also use the angle-bracket syntax (except if the code is in a `.tsx` file), which is equivalent:
+>
+> ```ts
+> const myCanvas = <HTMLCanvasElement>document.getElementById("main_canvas");
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
+
+"TypeScript only allows type assertions which convert to a _more specific_ or _less specific_ version of a type. This rule prevents “impossible” coercions like: `const x = "hello" as number;`" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
+
+"Sometimes . . . will disallow more complex coercions that might be valid. If this happens, you can use two assertions, first to `any` (or `unknown` . . .), then to the desired type: `const a = expr as any as T;`" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
+
 > ```js
 > var options = {};
 > options.color = "red";
