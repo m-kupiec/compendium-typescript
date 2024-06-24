@@ -39,6 +39,7 @@
   - Type Narrowing
   - Type Assertion
   - Non-Null Assertion Operator
+  - Type Literals
   - Function Overload Signature
   - Modules
     - Importing Modules
@@ -566,6 +567,43 @@ Adding new fields to an existing interface:
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
+
+### Type Literals
+
+> ```ts
+> declare function handleRequest(url: string, method: "GET" | "POST"): void;
+>
+> const req = { url: "https://example.com", method: "GET" };
+> handleRequest(req.url, req.method);
+> ```
+>
+> ```ts
+> Argument of type 'string' is not assignable to parameter of type '"GET" | "POST"'.
+> ```
+>
+> In the above example `req.method` is inferred to be string, not `"GET"`.
+>
+> There are two ways to work around this.
+>
+> 1.  You can change the inference by adding a type assertion in either location:
+>
+>     ```ts
+>     // Change 1:
+>     const req = { url: "https://example.com", method: "GET" as "GET" };
+>     // Change 2
+>     handleRequest(req.url, req.method as "GET");
+>     ```
+>
+>     Change 1 means “I intend for req.method to always have the _literal_ type `"GET"`”, preventing the possible assignment of `"GUESS"` to that field after. Change 2 means >“I know for other reasons that `req.method` has the value `"GET"`“.
+>
+> 2.  You can use `as const` to convert the entire object to be type literals:
+>
+>     ```ts
+>     const req = { url: "https://example.com", method: "GET" } as const;
+>     handleRequest(req.url, req.method);
+>     ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
 
 ### Function Overload Signature
 
