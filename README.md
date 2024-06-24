@@ -28,6 +28,7 @@
     - Objects
     - Classes
     - Functions
+  - Type Alias
 - **Type Composition**
   - Overview
   - Unions
@@ -285,6 +286,28 @@ npx tsc index.ts
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
+
+### Type Alias
+
+"type alias is exactly that - a name for any type." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
+
+> Note that aliases are _only_ aliases - you cannot use type aliases to create different/distinct “versions” of the same type. When you use the alias, it’s exactly as if you had written the aliased type. In other words, this code might look illegal, but is OK according to TypeScript because both types are aliases for the same type:
+>
+> ```ts
+> type UserInputSanitizedString = string;
+>
+> function sanitizeInput(str: string): UserInputSanitizedString {
+>   return sanitize(str);
+> }
+>
+> // Create a sanitized input
+> let userInput = sanitizeInput(getInput());
+>
+> // Can still be re-assigned with a string though
+> userInput = "new input";
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
 
 ## Type Composition
 
