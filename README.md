@@ -330,7 +330,35 @@ npx tsc index.ts
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
 
-"TypeScript will only allow an operation if it is valid for _every_ member of the union. For example, if you have the union `string | number`, you can’t use methods that are only available on `string` . . . The solution is to _narrow_ the union with code" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
+> TypeScript will only allow an operation if it is valid for _every_ member of the union. For example, if you have the union `string | number`, you can’t use methods that are only available on `string` . . . The solution is to _narrow_ the union with code . . . For example, TypeScript knows that only a `string` value will have a `typeof` value `"string"`:
+>
+> ```ts
+> function printId(id: number | string) {
+>   if (typeof id === "string") {
+>     // In this branch, id is of type 'string'
+>     console.log(id.toUpperCase());
+>   } else {
+>     // Here, id is of type 'number'
+>     console.log(id);
+>   }
+> }
+> ```
+>
+> Another example is to use a function like `Array.isArray`:
+>
+> ```ts
+> function welcomePeople(x: string[] | string) {
+>   if (Array.isArray(x)) {
+>     // Here: 'x' is 'string[]'
+>     console.log("Hello, " + x.join(" and "));
+>   } else {
+>     // Here: 'x' is 'string'
+>     console.log("Welcome lone traveler " + x);
+>   }
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
 
 #### Non-Null Assertion Operator
 
