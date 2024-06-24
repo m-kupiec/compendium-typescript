@@ -23,7 +23,7 @@
 - **Type Definition**
   - Overview
   - Type Annotation
-  - Interfaces vs. Types
+  - Interfaces vs. Type Aliases
   - Interface Declaration
     - Objects
     - Classes
@@ -218,7 +218,7 @@ npx tsc index.ts
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
 
-### Interfaces vs. Types
+### Interfaces vs. Type Aliases
 
 "there are two syntaxes for building types: Interfaces and Types. You should prefer `interface`. Use `type` when you need specific features." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
 
