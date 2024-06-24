@@ -24,7 +24,7 @@
   - Overview
   - Type Annotation
   - Interfaces vs. Types
-  - Interfaces
+  - Interface Declaration
     - Objects
     - Classes
     - Functions
@@ -221,7 +221,7 @@ npx tsc index.ts
 
 "there are two syntaxes for building types: Interfaces and Types. You should prefer `interface`. Use `type` when you need specific features." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
 
-### Interfaces
+### Interface Declaration
 
 #### Objects
 
