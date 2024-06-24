@@ -572,6 +572,8 @@ Adding new fields to an existing interface:
 
 ### Non-Null Assertion Operator
 
+"a special syntax for removing `null` and `undefined` from a type without doing any explicit checking. Writing `!` after any expression is effectively a type assertion that the value isn’t `null` or `undefined`" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
+
 > If you ever have a value that TypeScript thinks is possibly `null`/`undefined`, but you know better, you can use the postfix `!` operator to tell it otherwise.
 >
 > ```ts
