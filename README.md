@@ -34,12 +34,11 @@
 - **Type Composition**
   - Overview
   - Unions
-    - Overview
-    - Type Narrowing
-    - Non-Null Assertion Operator
   - Generics
 - **Miscellaneous**
+  - Type Narrowing
   - Type Assertion
+  - Non-Null Assertion Operator
   - Function Overload Signature
   - Modules
     - Importing Modules
@@ -394,8 +393,6 @@ Adding new fields to an existing interface:
 
 ### Unions
 
-#### Overview
-
 "A union type is a type formed from two or more other types, representing values that may be _any_ one of those types. We refer to each of these types as the union’s _members_." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
 
 > With a union, you can declare that a type could be one of many types. . . .
@@ -417,6 +414,41 @@ Adding new fields to an existing interface:
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
+
+### Generics
+
+"Generics provide variables to types." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
+
+> An array with generics can describe the values that the array contains.
+>
+> ```ts
+> type StringArray = Array<string>;
+> type NumberArray = Array<number>;
+> type ObjectWithNameArray = Array<{ name: string }>;
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
+
+> You can declare your own types that use generics:
+>
+> ```ts
+> interface Backpack<Type> {
+>   add: (obj: Type) => void;
+>   get: () => Type;
+> }
+>
+> declare const backpack: Backpack<string>;
+>
+> // object is a string, because we declared it above as the variable part of Backpack.
+> const object = backpack.get();
+>
+> // Since the backpack variable is a string, you can't pass a number to the add function.
+> backpack.add(23);
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
+
+## Miscellaneous
 
 #### Type Narrowing
 
@@ -467,53 +499,6 @@ Adding new fields to an existing interface:
 
 "Sometimes you’ll have a union where all the members have something in common. For example, both arrays and strings have a `slice` method. If every member in a union has a property in common, you can use that property without narrowing" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
 
-#### Non-Null Assertion Operator
-
-> If you ever have a value that TypeScript thinks is possibly `null`/`undefined`, but you know better, you can use the postfix `!` operator to tell it otherwise.
->
-> ```ts
-> declare var foo: string[] | null;
-> foo.length; // error - 'foo' is possibly 'null'
-> foo!.length; // okay - 'foo!' just has type 'string[]'
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
-
-### Generics
-
-"Generics provide variables to types." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
-
-> An array with generics can describe the values that the array contains.
->
-> ```ts
-> type StringArray = Array<string>;
-> type NumberArray = Array<number>;
-> type ObjectWithNameArray = Array<{ name: string }>;
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
-
-> You can declare your own types that use generics:
->
-> ```ts
-> interface Backpack<Type> {
->   add: (obj: Type) => void;
->   get: () => Type;
-> }
->
-> declare const backpack: Backpack<string>;
->
-> // object is a string, because we declared it above as the variable part of Backpack.
-> const object = backpack.get();
->
-> // Since the backpack variable is a string, you can't pass a number to the add function.
-> backpack.add(23);
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
-
-## Miscellaneous
-
 ### Type Assertion
 
 > ```js
@@ -535,6 +520,18 @@ Adding new fields to an existing interface:
 > let options = {} as Options;
 > options.color = "red";
 > options.volume = 11;
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
+
+#### Non-Null Assertion Operator
+
+> If you ever have a value that TypeScript thinks is possibly `null`/`undefined`, but you know better, you can use the postfix `!` operator to tell it otherwise.
+>
+> ```ts
+> declare var foo: string[] | null;
+> foo.length; // error - 'foo' is possibly 'null'
+> foo!.length; // okay - 'foo!' just has type 'string[]'
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
