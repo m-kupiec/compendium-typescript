@@ -309,6 +309,24 @@ npx tsc index.ts
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
 
+> Extending a type via intersections:
+>
+> ```ts
+> type Animal = {
+>   name: string;
+> };
+>
+> type Bear = Animal & {
+>   honey: boolean;
+> };
+>
+> const bear = getBear();
+> bear.name;
+> bear.honey;
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
+
 ## Type Composition
 
 ### Overview
