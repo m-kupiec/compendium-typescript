@@ -224,6 +224,26 @@ npx tsc index.ts
 
 ### Interface Declaration
 
+#### General
+
+> Extending an interface:
+>
+> ```ts
+> interface Animal {
+>   name: string;
+> }
+>
+> interface Bear extends Animal {
+>   honey: boolean;
+> }
+>
+> const bear = getBear();
+> bear.name;
+> bear.honey;
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
+
 #### Objects
 
 > You can explicitly describe this object’s shape using an interface declaration:
