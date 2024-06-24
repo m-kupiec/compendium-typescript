@@ -289,6 +289,8 @@ npx tsc index.ts
 
 ### Unions
 
+"A union type is a type formed from two or more other types, representing values that may be _any_ one of those types. We refer to each of these types as the union’s _members_." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
+
 > With a union, you can declare that a type could be one of many types. . . .
 >
 > ```ts
