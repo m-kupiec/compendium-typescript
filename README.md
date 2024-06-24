@@ -20,7 +20,6 @@
     - Arrays
     - Promises
     - Objects
-- **Type Assertion**
 - **Type Definition**
   - Overview
   - Type Annotation
@@ -37,6 +36,7 @@
     - Non-Null Assertion Operator
   - Generics
 - **Miscellaneous**
+  - Type Assertion
   - Function Overload Signature
   - Modules
     - Importing Modules
@@ -180,31 +180,6 @@ npx tsc index.ts
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
 
 "In JavaScript, if you access a property that doesn’t exist, you’ll get the value `undefined` rather than a runtime error. Because of this, when you read from an optional property, you’ll have to check for `undefined` before using it." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
-
-## Type Assertion
-
-> ```js
-> var options = {};
-> options.color = "red";
-> options.volume = 11;
-> ```
->
-> TypeScript will say that you can’t assign to `color` and `volume` because it first figured out the type of `options` as `{}` which doesn’t have any properties.
->
-> . . . You could . . . define the type of `options` and add a type assertion on the object literal.
->
-> ```ts
-> interface Options {
->   color: string;
->   volume: number;
-> }
->
-> let options = {} as Options;
-> options.color = "red";
-> options.volume = 11;
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
 
 ## Type Definition
 
@@ -440,6 +415,31 @@ npx tsc index.ts
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
 
 ## Miscellaneous
+
+### Type Assertion
+
+> ```js
+> var options = {};
+> options.color = "red";
+> options.volume = 11;
+> ```
+>
+> TypeScript will say that you can’t assign to `color` and `volume` because it first figured out the type of `options` as `{}` which doesn’t have any properties.
+>
+> . . . You could . . . define the type of `options` and add a type assertion on the object literal.
+>
+> ```ts
+> interface Options {
+>   color: string;
+>   volume: number;
+> }
+>
+> let options = {} as Options;
+> options.color = "red";
+> options.volume = 11;
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
 
 ### Function Overload Signature
 
