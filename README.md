@@ -36,11 +36,12 @@
     - Type Narrowing
     - Non-Null Assertion Operator
   - Generics
-- **Function Overload Signature**
 - **Miscellaneous**
-  - Importing Modules
-  - Exporting from Modules
-  - Using Libraries
+  - Function Overload Signature
+  - Modules
+    - Importing Modules
+    - Exporting from Modules
+    - Using Libraries
 
 ### Type Checker
 
@@ -438,7 +439,9 @@ npx tsc index.ts
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
 
-## Function Overload Signature
+## Miscellaneous
+
+### Function Overload Signature
 
 > You’ll sometimes find yourself calling a function with too many/few arguments. Typically, this is a bug, but in some cases, you might have declared a function that uses the `arguments` object instead of writing out any parameters:
 >
@@ -485,9 +488,9 @@ npx tsc index.ts
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
 
-## Miscellaneous
+### Modules
 
-### Importing Modules
+#### Importing Modules
 
 "You might start out getting a bunch of errors like `Cannot find name 'require'.`, and `Cannot find name 'define'.`. In these cases, it’s likely that you’re using modules." ([TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html))
 
@@ -535,7 +538,7 @@ npx tsc index.ts
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
 
-### Exporting from Modules
+#### Exporting from Modules
 
 "Typically, exporting from a module involves adding properties to a value like exports or module.exports. TypeScript allows you to use top-level export statements." ([TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html))
 
@@ -584,7 +587,7 @@ npx tsc index.ts
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
 
-### Using Libraries
+#### Using Libraries
 
 "If you started converting over to TypeScript imports, you’ll probably run into errors like `Cannot find module 'foo'.`. The issue here is that you likely don’t have declaration files to describe your library." ([TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html))
 
