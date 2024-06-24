@@ -11,22 +11,24 @@
 
 ### Language
 
-- **Primitive Types**
-  - Overview
-  - `null`/`undefined`
-  - `Object`/`{}`/`any`
-- **Complex Types**
-  - Arrays
-  - Promises
-  - Objects
-- **Type Annotation**
+- **Types**
+  - Primitive Types
+    - Overview
+    - `null`/`undefined`
+    - `Object`/`{}`/`any`
+  - Complex Types
+    - Arrays
+    - Promises
+    - Objects
+- **Type Assertion**
 - **Type Definition**
-  - Use Case
+  - Overview
+  - Type Annotation
+  - Interfaces vs. Types
   - Interfaces
     - Objects
     - Classes
     - Functions
-  - Interfaces vs. Types
 - **Type Composition**
   - Overview
   - Unions
@@ -34,7 +36,6 @@
     - Type Narrowing
     - Non-Null Assertion Operator
   - Generics
-- **Type Assertion**
 - **Function Overload Signature**
 - **Miscellaneous**
   - Importing Modules
@@ -118,19 +119,21 @@ npx tsc index.ts
 
 # Language
 
-## Primitive Types
+## Types
 
-### Overview
+### Primitive Types
+
+#### Overview
 
 "There is already a small set of primitive types available in JavaScript: `boolean`, `bigint`, `null`, `number`, `string`, `symbol`, and `undefined`, which you can use in an interface. TypeScript extends this list with a few more, such as `any` (allow anything), `unknown` (ensure someone using this type declares what the type is), `never` (it’s not possible that this type could happen), and `void` (a function which returns `undefined` or has no return value)." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
 
-### `null`/`undefined`
+#### `null`/`undefined`
 
 "By default, TypeScript assumes that `null` and `undefined` are in the domain of every type. That means anything declared with the type `number` could be `null` or `undefined`." ([TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html))
 
 "When `strictNullChecks` is enabled, `null` and `undefined` get their own types called `null` and `undefined` respectively." ([TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html))
 
-### `Object`/`{}`/`any`
+#### `Object`/`{}`/`any`
 
 "You might be tempted to use `Object` or `{}` to say that a value can have any property on it . . . However `any` is actually the type you want to use in those situations, since it’s the most flexible type. For instance, if you have something that’s typed as `Object` you won’t be able to call methods like `toLowerCase()` on it. . . . `any` is special in that it is the most general type while still allowing you to do anything with it. That means you can call it, construct it, access properties on it, etc." ([TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html))
 
@@ -138,13 +141,13 @@ npx tsc index.ts
 
 "If a decision ever comes down to `Object` and `{}`, you should prefer `{}`. While they are mostly the same, technically `{}` is a more general type than `Object` in certain esoteric cases." ([TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html))
 
-## Complex Types
+### Complex Types
 
-### Arrays
+#### Arrays
 
 "you can use the syntax `number[]`; this syntax works for any type (e.g. `string[]` is an array of strings, and so on). You may also see this written as `Array<number>`, which means the same thing." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
 
-### Promises
+#### Promises
 
 > If you want to annotate the return type of a function which returns a promise, you should use the `Promise` type:
 >
@@ -156,7 +159,7 @@ npx tsc index.ts
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
 
-### Objects
+#### Objects
 
 "You can use `,` or `;` to separate the properties, and the last separator is optional either way." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
 
@@ -177,7 +180,38 @@ npx tsc index.ts
 
 "In JavaScript, if you access a property that doesn’t exist, you’ll get the value `undefined` rather than a runtime error. Because of this, when you read from an optional property, you’ll have to check for `undefined` before using it." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
 
-## Type Annotation
+## Type Assertion
+
+> ```js
+> var options = {};
+> options.color = "red";
+> options.volume = 11;
+> ```
+>
+> TypeScript will say that you can’t assign to `color` and `volume` because it first figured out the type of `options` as `{}` which doesn’t have any properties.
+>
+> . . . You could . . . define the type of `options` and add a type assertion on the object literal.
+>
+> ```ts
+> interface Options {
+>   color: string;
+>   volume: number;
+> }
+>
+> let options = {} as Options;
+> options.color = "red";
+> options.volume = 11;
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
+
+## Type Definition
+
+### Overview
+
+"some design patterns make it difficult for types to be inferred automatically (for example, patterns that use dynamic programming). To cover these cases, TypeScript supports an extension of the JavaScript language, which offers places for you to tell TypeScript what the types should be." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
+
+### Type Annotation
 
 "Type annotations in TypeScript are lightweight ways to record the intended contract of the function or variable." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-tooling-in-5-minutes.html))
 
@@ -207,11 +241,9 @@ npx tsc index.ts
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
 
-## Type Definition
+### Interfaces vs. Types
 
-### Use Case
-
-"some design patterns make it difficult for types to be inferred automatically (for example, patterns that use dynamic programming). To cover these cases, TypeScript supports an extension of the JavaScript language, which offers places for you to tell TypeScript what the types should be." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
+"there are two syntaxes for building types: Interfaces and Types. You should prefer `interface`. Use `type` when you need specific features." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
 
 ### Interfaces
 
@@ -277,10 +309,6 @@ npx tsc index.ts
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
-
-### Interfaces vs. Types
-
-"there are two syntaxes for building types: Interfaces and Types. You should prefer `interface`. Use `type` when you need specific features." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
 
 ## Type Composition
 
@@ -409,31 +437,6 @@ npx tsc index.ts
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
-
-## Type Assertion
-
-> ```js
-> var options = {};
-> options.color = "red";
-> options.volume = 11;
-> ```
->
-> TypeScript will say that you can’t assign to `color` and `volume` because it first figured out the type of `options` as `{}` which doesn’t have any properties.
->
-> . . . You could . . . define the type of `options` and add a type assertion on the object literal.
->
-> ```ts
-> interface Options {
->   color: string;
->   volume: number;
-> }
->
-> let options = {} as Options;
-> options.color = "red";
-> options.volume = 11;
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
 
 ## Function Overload Signature
 
