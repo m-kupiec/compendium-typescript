@@ -283,6 +283,8 @@ npx tsc index.ts
 
 ### Overview
 
+"TypeScript’s type system allows you to build new types out of existing ones using a large variety of operators." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
+
 "you can create complex types by combining simple ones. There are two popular ways to do so: with unions, and with generics." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
 
 ### Unions
