@@ -415,6 +415,19 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
 
+> you can combine . . . [literal types] with non-literal types:
+>
+> ```ts
+> interface Options {
+>   width: number;
+> }
+> function configure(x: Options | "auto") {
+>   // ...
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
+
 ### Generics
 
 "Generics provide variables to types." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
