@@ -464,7 +464,7 @@ Adding new fields to an existing interface:
 
 ## Miscellaneous
 
-#### Type Narrowing
+### Type Narrowing
 
 "Narrowing occurs when TypeScript can deduce a more specific type for a value based on the structure of the code." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
 
@@ -556,7 +556,7 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
 
-#### Non-Null Assertion Operator
+### Non-Null Assertion Operator
 
 > If you ever have a value that TypeScript thinks is possibly `null`/`undefined`, but you know better, you can use the postfix `!` operator to tell it otherwise.
 >
