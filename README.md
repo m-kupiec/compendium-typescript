@@ -30,6 +30,9 @@
 - **Type Composition**
   - Overview
   - Unions
+    - Overview
+    - Type Narrowing
+    - Non-Null Assertion Operator
   - Generics
 - **Type Assertion**
 - **Function Overload Signature**
