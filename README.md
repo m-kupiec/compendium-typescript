@@ -315,6 +315,8 @@ npx tsc index.ts
 
 #### Type Narrowing
 
+"Narrowing occurs when TypeScript can deduce a more specific type for a value based on the structure of the code." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
+
 > Unions provide a way to handle different types too. For example, you may have a function that takes an `array` or a `string` . . . you can make a function return different values depending on whether it is passed a string or an array:
 >
 > ```ts
@@ -327,6 +329,8 @@ npx tsc index.ts
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
+
+"TypeScript will only allow an operation if it is valid for _every_ member of the union. For example, if you have the union `string | number`, you can’t use methods that are only available on `string` . . . The solution is to _narrow_ the union with code" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
 
 #### Non-Null Assertion Operator
 
