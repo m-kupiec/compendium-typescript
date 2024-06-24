@@ -24,6 +24,8 @@
   - Overview
   - Type Annotation
   - Interfaces vs. Type Aliases
+    - Differences
+    - Choice
   - Interface Declaration
     - Objects
     - Classes
@@ -220,11 +222,13 @@ npx tsc index.ts
 
 ### Interfaces vs. Type Aliases
 
-"there are two syntaxes for building types: Interfaces and Types. You should prefer `interface`. Use `type` when you need specific features." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
+#### Differences
 
-"For the most part, you can choose based on personal preference, and TypeScript will tell you if it needs something to be the other kind of declaration. If you would like a heuristic, use `interface` until you need to use features from `type`." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
+"there are two syntaxes for building types: Interfaces and Types." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
 
-"Almost all features of an `interface` are available in `type`, the key distinction is that a type cannot be re-opened to add new properties vs an interface which is always extendable." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
+"Almost all features of an `interface` are available in `type`" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
+
+"the key distinction is that a type cannot be re-opened to add new properties vs an interface which is always extendable." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
 
 Limitations of interfaces:
 
@@ -234,6 +238,12 @@ Limitations of type aliases:
 
 - "Type aliases may not participate in declaration merging, but interfaces can." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
 - "Using interfaces with extends can often be more performant for the compiler than type aliases with intersections" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
+
+#### Choice
+
+"You should prefer `interface`. Use `type` when you need specific features." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
+
+"For the most part, you can choose based on personal preference, and TypeScript will tell you if it needs something to be the other kind of declaration. If you would like a heuristic, use `interface` until you need to use features from `type`." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
 
 ### Interface Declaration
 
