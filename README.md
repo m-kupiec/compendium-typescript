@@ -289,6 +289,8 @@ npx tsc index.ts
 
 ### Unions
 
+#### Overview
+
 "A union type is a type formed from two or more other types, representing values that may be _any_ one of those types. We refer to each of these types as the union’s _members_." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
 
 > With a union, you can declare that a type could be one of many types. . . .
@@ -311,6 +313,8 @@ npx tsc index.ts
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
 
+#### Type Narrowing
+
 > Unions provide a way to handle different types too. For example, you may have a function that takes an `array` or a `string` . . . you can make a function return different values depending on whether it is passed a string or an array:
 >
 > ```ts
@@ -323,6 +327,8 @@ npx tsc index.ts
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
+
+#### Non-Null Assertion Operator
 
 > If you ever have a value that TypeScript thinks is possibly `null`/`undefined`, but you know better, you can use the postfix `!` operator to tell it otherwise.
 >
