@@ -35,6 +35,8 @@
 - **Type Composition**
   - Overview
   - Unions
+    - General
+    - Discriminated Unions
   - Generics
 - **Miscellaneous**
   - Type Assertion
@@ -427,6 +429,8 @@ Adding new fields to an existing interface:
 
 ### Unions
 
+#### General
+
 "A union type is a type formed from two or more other types, representing values that may be _any_ one of those types. We refer to each of these types as the union’s _members_." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
 
 > With a union, you can declare that a type could be one of many types. . . .
@@ -461,6 +465,65 @@ Adding new fields to an existing interface:
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
+
+#### Discriminated Unions
+
+"When every type in a union contains a common property with literal types, TypeScript considers that to be a _discriminated union_, and can narrow out the members of the union." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/narrowing.html))
+
+> ```ts
+> interface Shape {
+>   kind: "circle" | "square";
+>   radius?: number;
+>   sideLength?: number;
+> }
+> ```
+>
+> . . . We need to communicate what we know to the type checker. . . .
+>
+> ```ts
+> interface Circle {
+>   kind: "circle";
+>   radius: number;
+> }
+>
+> interface Square {
+>   kind: "square";
+>   sideLength: number;
+> }
+>
+> type Shape = Circle | Square;
+> ```
+>
+> . . . Let’s see what happens here when we try to access the `radius` of a `Shape`.
+>
+> ```ts
+> function getArea(shape: Shape) {
+>   return Math.PI * shape.radius ** 2;
+> }
+> ```
+>
+> ```ts
+> Property 'radius' does not exist on type 'Shape'.
+> Property 'radius' does not exist on type 'Square'.
+> ```
+>
+> . . . only the union encoding of `Shape` will cause an error regardless of how `strictNullChecks` is configured.
+>
+> ```ts
+> function getArea(shape: Shape) {
+>   if (shape.kind === "circle") {
+>     return Math.PI * shape.radius ** 2;
+>   }
+> }
+> ```
+>
+> That got rid of the error! . . . In this case, `kind` was that common property (which is what’s considered a _discriminant_ property of `Shape`). Checking whether the `kind` property was `"circle"` got rid of every type in `Shape` that didn’t have a `kind` property with the type `"circle"`. That narrowed shape down to the type `Circle`.
+>
+> The same checking works with `switch` statements as well.
+>
+> . . . The important thing here was the encoding of `Shape`. Communicating the right information to TypeScript - that `Circle` and `Square` were really two separate types with specific `kind` fields - was crucial. Doing that lets us write type-safe TypeScript code
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)
 
 ### Generics
 
