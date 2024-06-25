@@ -1027,6 +1027,40 @@ Cons:
 
 "When `strictNullChecks` is enabled, `null` and `undefined` get their own types called `null` and `undefined` respectively. Whenever anything is possibly `null`, you can use a union type with the original type. So for instance, if something could be a `number` or `null`, you’d write the type out as `number | null`." ([TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html))
 
+> ```ts
+> interface Shape {
+>   kind: "circle" | "square";
+>   radius?: number;
+>   sideLength?: number;
+> }
+> ```
+>
+> . . . outside of `strictNullChecks` we’re able to accidentally access any of those fields anyway (since optional properties are just assumed to always be present when reading them).
+
+[TypeScript](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)
+
+> with this TypeScript code, `users.find` has no guarantee that it will actually find a user, but you can write code as though it will:
+>
+> ```ts
+> declare const loggedInUsername: string;
+>
+> const users = [
+>   { name: "Oby", age: 12 },
+>   { name: "Heera", age: 32 },
+> ];
+>
+> const loggedInUser = users.find((u) => u.name === loggedInUsername);
+> console.log(loggedInUser.age);
+> ```
+>
+> Setting `strictNullChecks` to `true` will raise an error that you have not made a >guarantee that the `loggedInUser` exists before trying to use it.
+>
+> ```ts
+> 'loggedInUser' is possibly 'undefined'.
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/tsconfig/#strictNullChecks)
+
 "when using `strictNullChecks`, your dependencies may need to be updated to use `strictNullChecks` as well." ([TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html))
 
 # Compiler
