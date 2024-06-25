@@ -826,6 +826,42 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
 
+> ```js
+> let x = Math.random() < 0.5 ? 10 : "hello world!";
+>
+> /* . . . */
+> ```
+>
+> - ```ts
+>   let x: string | number;
+>   ```
+>
+> ```js
+> /* . . . */
+>
+> x = 1;
+>
+> /* . . . */
+> ```
+>
+> - ```ts
+>   let x: number;
+>   ```
+>
+> ```js
+> /* . . . */
+>
+> x = "goodbye!";
+> ```
+>
+> - ```ts
+>   let x: string;
+>   ```
+>
+> Notice that each of these assignments is valid. Even though the observed type of `x` changed to `number` after our first assignment, we were still able to assign a `string` to `x`. This is because the declared type of `x` - the type that `x` started with - is `string | number`, and assignability is always checked against the declared type. If we’d assigned a `boolean` to `x`, we’d have seen an error since that wasn’t part of the declared type.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)
+
 "Point-free programming — heavy use of currying and function composition — is possible in JavaScript, but can be verbose. In TypeScript, type inference often fails for point-free programs, so you’ll end up specifying type parameters instead of value parameters. The result is so verbose that it’s usually better to avoid point-free programming." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-func.html))
 
 ## Configuration
