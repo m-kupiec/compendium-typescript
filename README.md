@@ -37,7 +37,6 @@
   - Unions
   - Generics
 - **Miscellaneous**
-  - Type Narrowing
   - Type Assertion
   - Non-Null Assertion Operator
   - Type Literals
@@ -52,6 +51,7 @@
 - **Overview**
 - **Structural Type System**
 - **Type Inference**
+- **Type Narrowing**
 - **Configuration**
   - Strictness
     - Overview
@@ -496,55 +496,6 @@ Adding new fields to an existing interface:
 
 ## Miscellaneous
 
-### Type Narrowing
-
-"Narrowing occurs when TypeScript can deduce a more specific type for a value based on the structure of the code." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
-
-> Unions provide a way to handle different types too. For example, you may have a function that takes an `array` or a `string` . . . you can make a function return different values depending on whether it is passed a string or an array:
->
-> ```ts
-> function wrapInArray(obj: string | string[]) {
->   if (typeof obj === "string") {
->     return [obj];
->   }
->   return obj;
-> }
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
-
-> TypeScript will only allow an operation if it is valid for _every_ member of the union. For example, if you have the union `string | number`, you can’t use methods that are only available on `string` . . . The solution is to _narrow_ the union with code . . . For example, TypeScript knows that only a `string` value will have a `typeof` value `"string"`:
->
-> ```ts
-> function printId(id: number | string) {
->   if (typeof id === "string") {
->     // In this branch, id is of type 'string'
->     console.log(id.toUpperCase());
->   } else {
->     // Here, id is of type 'number'
->     console.log(id);
->   }
-> }
-> ```
->
-> Another example is to use a function like `Array.isArray`:
->
-> ```ts
-> function welcomePeople(x: string[] | string) {
->   if (Array.isArray(x)) {
->     // Here: 'x' is 'string[]'
->     console.log("Hello, " + x.join(" and "));
->   } else {
->     // Here: 'x' is 'string'
->     console.log("Welcome lone traveler " + x);
->   }
-> }
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
-
-"Sometimes you’ll have a union where all the members have something in common. For example, both arrays and strings have a `slice` method. If every member in a union has a property in common, you can use that property without narrowing" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
-
 ### Type Assertion
 
 > Sometimes you will have information about the type of a value that TypeScript can’t know about. For example, if you’re using `document.getElementById`, TypeScript only knows that this will return _some_ kind of `HTMLElement`, but you might know that your page will always have an `HTMLCanvasElement` with a given ID. In this situation, you can use a _type assertion_ to specify a more specific type:
@@ -863,6 +814,55 @@ Adding new fields to an existing interface:
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)
 
 "Point-free programming — heavy use of currying and function composition — is possible in JavaScript, but can be verbose. In TypeScript, type inference often fails for point-free programs, so you’ll end up specifying type parameters instead of value parameters. The result is so verbose that it’s usually better to avoid point-free programming." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-func.html))
+
+## Type Narrowing
+
+"Narrowing occurs when TypeScript can deduce a more specific type for a value based on the structure of the code." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
+
+> Unions provide a way to handle different types too. For example, you may have a function that takes an `array` or a `string` . . . you can make a function return different values depending on whether it is passed a string or an array:
+>
+> ```ts
+> function wrapInArray(obj: string | string[]) {
+>   if (typeof obj === "string") {
+>     return [obj];
+>   }
+>   return obj;
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
+
+> TypeScript will only allow an operation if it is valid for _every_ member of the union. For example, if you have the union `string | number`, you can’t use methods that are only available on `string` . . . The solution is to _narrow_ the union with code . . . For example, TypeScript knows that only a `string` value will have a `typeof` value `"string"`:
+>
+> ```ts
+> function printId(id: number | string) {
+>   if (typeof id === "string") {
+>     // In this branch, id is of type 'string'
+>     console.log(id.toUpperCase());
+>   } else {
+>     // Here, id is of type 'number'
+>     console.log(id);
+>   }
+> }
+> ```
+>
+> Another example is to use a function like `Array.isArray`:
+>
+> ```ts
+> function welcomePeople(x: string[] | string) {
+>   if (Array.isArray(x)) {
+>     // Here: 'x' is 'string[]'
+>     console.log("Hello, " + x.join(" and "));
+>   } else {
+>     // Here: 'x' is 'string'
+>     console.log("Welcome lone traveler " + x);
+>   }
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
+
+"Sometimes you’ll have a union where all the members have something in common. For example, both arrays and strings have a `slice` method. If every member in a union has a property in common, you can use that property without narrowing" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
 
 ## Configuration
 
