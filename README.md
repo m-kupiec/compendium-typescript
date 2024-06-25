@@ -17,6 +17,7 @@
     - `null`/`undefined`
     - `Object`/`{}`/`any`
     - `Symbol`
+    - `never`
   - Complex Types
     - Arrays
     - Promises
@@ -179,6 +180,10 @@ npx tsc index.ts
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
+
+#### `never`
+
+"When narrowing, you can reduce the options of a union to a point where you have removed all possibilities and have nothing left. In those cases, TypeScript will use a `never` type to represent a state which shouldn’t exist." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/narrowing.html))
 
 ### Complex Types
 
