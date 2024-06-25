@@ -595,6 +595,22 @@ Adding new fields to an existing interface:
 
 "To define a user-defined type guard, we simply need to define a function whose return type is a _type predicate_" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/narrowing.html))
 
+"_Type Predicate Functions_ are functions that return a `boolean` value and have a particular return type syntax. A _type predicate_ is a type assertion that checks if an object has a specific property or set of properties. This allows TypeScript to narrow (or refine) the type of an object based on the result of the function." ([Matias Hernández](https://matiashernandez.dev/blog/post/what-are-type-predicates-in-typescript))
+
+> the most important problem of this functions is a risk, there is an easy way to introduce bugs to the process. You can wirte incorrect predicates leading to unexpected or undesired type narrowing. This can result in runtime errors or unexpected behavior, which can be difficult to diagnose and fix.
+>
+> Type predicates ressembles the use (and pitfalls) of using `as` for type assertions, you can lie to the type system, it equals to say “I know more about this type than the compiler” and force the type to be the desired one, as an example:
+>
+> ```ts
+> function isString(x: unknown): x is string {
+>   return typeof x === "number";
+> }
+> ```
+>
+> The above example check if `x` is a `number`, and if that is `true` then the predicate say that the variable is a `string`. If later you use that type predicate, TS assume that the variable is an `string` and the type safety will be lost.
+>
+> [Matias Hernández](https://matiashernandez.dev/blog/post/>what-are-type-predicates-in-typescript)
+
 > ```ts
 > function isFish(pet: Fish | Bird): pet is Fish {
 >   return (pet as Fish).swim !== undefined;
