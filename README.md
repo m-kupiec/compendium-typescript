@@ -709,6 +709,27 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
 
+> pair of similar functions:
+>
+> ```ts
+> function filter1<Type>(arr: Type[], func: (arg: Type) => boolean): Type[] {
+>   return arr.filter(func);
+> }
+>
+> function filter2<Type, Func extends (arg: Type) => boolean>(
+>   arr: Type[],
+>   func: Func
+> ): Type[] {
+>   return arr.filter(func);
+> }
+> ```
+>
+> We’ve created a type parameter `Func` that _doesn’t relate two values_. That’s always a red flag, because it means callers wanting to specify type arguments have to manually specify an extra type argument for no reason. `Func` doesn’t do anything but make the function harder to read and reason about!
+>
+> **Rule**: Always use as few type parameters as possible
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
+
 #### Constraints
 
 > Sometimes we want to relate two values, but can only operate on a certain subset of values. In this case, we can use a _constraint_ to limit the kinds of types that a type parameter can accept. We _constrain_ the type parameter to that type by writing an `extends` clause:
