@@ -922,50 +922,30 @@ Adding new fields to an existing interface:
 
 ### Overloads
 
-> You’ll sometimes find yourself calling a function with too many/few arguments. Typically, this is a bug, but in some cases, you might have declared a function that uses the `arguments` object instead of writing out any parameters:
->
-> ```js
-> function myCoolFunction() {
->   if (arguments.length == 2 && !Array.isArray(arguments[1])) {
->     var f = arguments[0];
->     var arr = arguments[1];
->     // ...
->   }
->   // ...
-> }
-> myCoolFunction(
->   function (x) {
->     console.log(x);
->   },
->   [1, 2, 3, 4]
-> );
-> myCoolFunction(
->   function (x) {
->     console.log(x);
->   },
->   1,
->   2,
->   3,
->   4
-> );
-> ```
->
-> In this case, we need to use TypeScript to tell any of our callers about the ways `myCoolFunction` can be called using function overloads.
+> In TypeScript, we can specify a function that can be called in different ways by writing _overload signatures_. To do this, write some number of function signatures (usually two or more), followed by the body of the function:
 >
 > ```ts
-> function myCoolFunction(f: (x: number) => void, nums: number[]): void;
-> function myCoolFunction(f: (x: number) => void, ...nums: number[]): void;
-> function myCoolFunction() {
->   if (arguments.length == 2 && !Array.isArray(arguments[1])) {
->     var f = arguments[0];
->     var arr = arguments[1];
->     // ...
+> function makeDate(timestamp: number): Date;
+> function makeDate(m: number, d: number, y: number): Date;
+> function makeDate(mOrTimestamp: number, d?: number, y?: number): Date {
+>   if (d !== undefined && y !== undefined) {
+>     return new Date(y, mOrTimestamp, d);
+>   } else {
+>     return new Date(mOrTimestamp);
 >   }
->   // ...
 > }
+> const d1 = makeDate(12345678);
+> const d2 = makeDate(5, 5, 5);
+> const d3 = makeDate(1, 3);
 > ```
 >
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
+> ```ts
+> No overload expects 2 arguments, but overloads do exist that expect either 1 or 3 arguments.
+> ```
+>
+> These first two signatures are called the _overload signatures_. Then, we wrote a function implementation with a compatible signature. Functions have an _implementation signature_, but this signature can’t be called directly. Even though we wrote a function with two optional parameters after the required one, it can’t be called with two parameters!
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
 
 ## Miscellaneous
 
