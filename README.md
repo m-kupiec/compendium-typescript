@@ -47,6 +47,7 @@
     - Type Parameters
     - Constraints
     - Specifying Type Arguments
+  - Optional & Default Parameters
 - **Miscellaneous**
   - Type Assertion
   - Non-Null Assertion Operator
@@ -863,6 +864,22 @@ Adding new fields to an existing interface:
 > ```ts
 > const arr = combine<string | number>([1, 2, 3], ["hello"]);
 > ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
+
+### Optional & Default Parameters
+
+> marking the parameter as optional with `?`:
+>
+> ```ts
+> function f(x?: number) {
+>   // ...
+> }
+> f(); // OK
+> f(10); // OK
+> ```
+>
+> Although the parameter is specified as type `number`, the `x` parameter will actually have the type `number | undefined` because unspecified parameters in JavaScript get the value `undefined`.
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
 
