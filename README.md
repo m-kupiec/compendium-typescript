@@ -704,6 +704,33 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
 
+> Sometimes we want to relate two values, but can only operate on a certain subset of values. In this case, we can use a _constraint_ to limit the kinds of types that a type parameter can accept. We _constrain_ the type parameter to that type by writing an `extends` clause:
+>
+> ```ts
+> function longest<Type extends { length: number }>(a: Type, b: Type) {
+>   if (a.length >= b.length) {
+>     return a;
+>   } else {
+>     return b;
+>   }
+> }
+>
+> // longerArray is of type 'number[]'
+> const longerArray = longest([1, 2], [1, 2, 3]);
+> // longerString is of type 'alice' | 'bob'
+> const longerString = longest("alice", "bob");
+> // Error! Numbers don't have a 'length' property
+> const notOK = longest(10, 100);
+> ```
+>
+> ```ts
+> Argument of type 'number' is not assignable to parameter of type '{ length: >number; }'.
+> ```
+>
+> . . . Because we constrained `Type` to `{ length: number }`, we were allowed to access the `.length` property of the `a` and `b` parameters. Without the type constraint, we wouldn’t be able to access those properties because the values might have been some other type without a `length` property.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
+
 ## Miscellaneous
 
 ### Type Assertion
