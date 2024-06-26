@@ -33,6 +33,8 @@
     - Classes
     - Functions
   - Type Alias
+- **Describing Functions**
+  - Function Type Expression
 - **Type Composition**
   - Overview
   - Unions
@@ -450,6 +452,20 @@ Adding new fields to an existing interface:
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
+
+## Describing Functions
+
+### Function Type Expression
+
+> syntactically similar to arrow functions:
+>
+> ```ts
+> function greeter(fn: (a: string) => void) {
+>   fn("Hello, World");
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
 
 ## Type Composition
 
