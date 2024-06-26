@@ -18,6 +18,7 @@
     - `object`
     - `Object`/`{}`/`any`
     - `Symbol`
+    - `unknown`
     - `never`
     - `void`
   - Complex Types
@@ -198,6 +199,35 @@ npx tsc index.ts
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
+
+#### `unknown`
+
+> The `unknown` type represents _any_ value. This is similar to the `any` type, but is safer because it’s not legal to do anything with an unknown value:
+>
+> ```ts
+> function f1(a: any) {
+>   a.b(); // OK
+> }
+> function f2(a: unknown) {
+>   a.b();
+> }
+> ```
+>
+> ```ts
+> 'a' is of type 'unknown'.
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
+
+> useful when describing function types because you can describe functions that accept any value without having `any` values in your function body. Conversely, you can describe a function that returns a value of `unknown` type:
+>
+> ```ts
+> function safeParse(s: string): unknown {
+>   return JSON.parse(s);
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
 
 #### `never`
 
