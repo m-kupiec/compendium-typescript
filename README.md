@@ -54,6 +54,8 @@
   - Optional & Default Parameters
   - Overloads
   - Using `this`
+  - Rest Parameters & Arguments
+    - Parameters
 - **Miscellaneous**
   - Type Assertion
   - Non-Null Assertion Operator
@@ -1088,6 +1090,22 @@ Adding new fields to an existing interface:
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/play/#code/JYOwLgpgTgZghgYwgAgKoGdrIN4FgBQyywAJgFzIgCuAtgEbQDcBRcJNoFdA9twDYQ4IZvgC+BEhAR84UFAm4h0YZAHMIYACIAhCgAoAlMgC8APmQ6RAeivIAtA4RUwDuwVCRYiFDpwtkMMB8nhjQ6HqBwdD6YAAWwOgUoVBGZsg8-IIgBkmYUADaALoi4vgECkoqJHQmaho6hiIVyshsHEq11QB0kSF54TBUIAhgwIrIenEJudBGeITIcmBUUCDIU+hdbaAlBoxAA)
+
+### Rest Parameters & Arguments
+
+#### Parameters
+
+"In addition to using optional parameters or overloads to make functions that can accept a variety of fixed argument counts, we can also define functions that take an _unbounded_ number of arguments using _rest parameters_." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html))
+
+> ```ts
+> function multiply(n: number, ...m: number[]) {
+>   return m.map((x) => n * x);
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
+
+"In TypeScript, the type annotation on these parameters is implicitly `any[]` instead of `any`, and any type annotation given must be of the form `Array<T>` or `T[]`, or a tuple type" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html))
 
 ## Miscellaneous
 
