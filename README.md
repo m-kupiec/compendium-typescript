@@ -730,6 +730,30 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
 
+> Sometimes we forget that a function might not need to be generic:
+>
+> ```ts
+> function greet<Str extends string>(s: Str) {
+>   console.log("Hello, " + s);
+> }
+>
+> greet("world");
+> ```
+>
+> We could just as easily have written a simpler version:
+>
+> ```ts
+> function greet(s: string) {
+>   console.log("Hello, " + s);
+> }
+> ```
+>
+> Remember, type parameters are for _relating the types of multiple values_. If a type parameter is only used once in the function signature, it’s not relating anything. This includes the inferred return type; for example, if `Str` was part of the inferred return type of `greet`, it would be relating the argument and return types, so would be used _twice_ despite appearing only once in the written code.
+>
+> **Rule**: If a type parameter only appears in one location, strongly reconsider if you actually need it
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
+
 #### Constraints
 
 > Sometimes we want to relate two values, but can only operate on a certain subset of values. In this case, we can use a _constraint_ to limit the kinds of types that a type parameter can accept. We _constrain_ the type parameter to that type by writing an `extends` clause:
