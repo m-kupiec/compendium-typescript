@@ -687,6 +687,23 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
 
+> We can use multiple type parameters as well. For example, a standalone version of `map` would look like this:
+>
+> ```ts
+> function map<Input, Output>(
+>   arr: Input[],
+>   func: (arg: Input) => Output
+> ): Output[] {
+>   return arr.map(func);
+> }
+>
+> // Parameter 'n' is of type 'string'
+> // 'parsed' is of type 'number[]'
+> const parsed = map(["1", "2", "3"], (n) => parseInt(n));
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
+
 ## Miscellaneous
 
 ### Type Assertion
