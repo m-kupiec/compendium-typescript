@@ -43,6 +43,7 @@
   - Function Type Expression
   - Call Signature
   - Construct Signature
+  - Generic Function
 - **Miscellaneous**
   - Type Assertion
   - Non-Null Assertion Operator
@@ -667,6 +668,20 @@ Adding new fields to an existing interface:
 > interface CallOrConstruct {
 >   (n?: number): string;
 >   new (s: string): Date;
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
+
+### Generic Function
+
+"It’s common to write a function where the types of the input relate to the type of the output, or where the types of two inputs are related in some way." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html))
+
+> In TypeScript, _generics_ are used when we want to describe a correspondence between two values. We do this by declaring a _type parameter_ in the function signature:
+>
+> ```ts
+> function firstElement<Type>(arr: Type[]): Type | undefined {
+>   return arr[0];
 > }
 > ```
 >
