@@ -44,7 +44,7 @@
   - Call Signature
   - Construct Signature
   - Generic Function
-    - General
+    - Type Parameters
     - Constraints
     - Specifying Type Arguments
 - **Miscellaneous**
@@ -678,7 +678,7 @@ Adding new fields to an existing interface:
 
 ### Generic Function
 
-#### General
+#### Type Parameters
 
 "It’s common to write a function where the types of the input relate to the type of the output, or where the types of two inputs are related in some way." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html))
 
