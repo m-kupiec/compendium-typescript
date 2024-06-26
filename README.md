@@ -18,6 +18,7 @@
     - `Object`/`{}`/`any`
     - `Symbol`
     - `never`
+    - `void`
   - Complex Types
     - Arrays
     - Promises
@@ -243,6 +244,37 @@ npx tsc index.ts
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)
+
+#### `void`
+
+"`void` represents the return value of functions which don’t return a value. It’s the inferred type any time a function doesn’t have any `return` statements, or doesn’t return any explicit value from those `return` statements . . . In JavaScript, a function that doesn’t return any value will implicitly return the value `undefined`. However, `void` and `undefined` are not the same thing in TypeScript." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html))
+
+> Contextual typing with a return type of `void` does **not** force functions to **not** return something. Another way to say this is a contextual function type with a `void` return type (`type voidFunc = () => void`), when implemented, can return _any_ other value, but it will be ignored. . . . And when the return value of one of these functions is assigned to another variable, it will retain the type of `void` . . . This behavior exists so that the following code is valid even though `Array.prototype.push` returns a `number` and the `Array.prototype.forEach` method expects a function with a return type of `void`.
+>
+> ```ts
+> const src = [1, 2, 3];
+> const dst = [0];
+>
+> src.forEach((el) => dst.push(el));
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
+
+> There is one other special case to be aware of, when a literal function definition has a `void` return type, that function must **not** return anything.
+>
+> ```ts
+> function f2(): void {
+>   // @ts-expect-error
+>   return true;
+> }
+>
+> const f3 = function (): void {
+>   // @ts-expect-error
+>   return true;
+> };
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
 
 ### Complex Types
 
