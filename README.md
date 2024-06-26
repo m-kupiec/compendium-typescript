@@ -15,6 +15,7 @@
   - Primitive Types
     - Overview
     - `null`/`undefined`
+    - `object`
     - `Object`/`{}`/`any`
     - `Symbol`
     - `never`
@@ -166,6 +167,12 @@ npx tsc index.ts
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
+
+#### `object`
+
+"This is different from the empty object type `{ }`, and also different from the global type `Object`." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html))
+
+"in JavaScript, function values are objects . . . For this reason, function types are considered to be `object`s in TypeScript."
 
 #### `Object`/`{}`/`any`
 
