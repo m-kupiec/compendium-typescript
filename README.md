@@ -467,6 +467,10 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
 
+"if a parameter type isn’t specified, it’s implicitly `any`" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html))
+
+"the parameter name is required. The function type `(string) => void` means “a function with a parameter named `string` of type `any`“!" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html))
+
 ## Type Composition
 
 ### Overview
