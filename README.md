@@ -57,6 +57,7 @@
   - Rest Parameters & Arguments
     - Parameters
     - Arguments
+  - Parameter Destructuring
 - **Miscellaneous**
   - Type Assertion
   - Non-Null Assertion Operator
@@ -1130,6 +1131,30 @@ Adding new fields to an existing interface:
 > const args = [8, 5] as const;
 > // OK
 > const angle = Math.atan2(...args);
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
+
+### Parameter Destructuring
+
+> The type annotation for the object goes after the destructuring syntax:
+>
+> ```ts
+> function sum({ a, b, c }: { a: number; b: number; c: number }) {
+>   console.log(a + b + c);
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
+
+> you can use a named type here as well:
+>
+> ```ts
+> // Same as prior example
+> type ABC = { a: number; b: number; c: number };
+> function sum({ a, b, c }: ABC) {
+>   console.log(a + b + c);
+> }
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
