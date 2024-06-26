@@ -231,6 +231,18 @@ npx tsc index.ts
 
 #### `never`
 
+> Some functions _never_ return a value:
+>
+> ```ts
+> function fail(msg: string): never {
+>   throw new Error(msg);
+> }
+> ```
+>
+> The `never` type represents values which are never observed. In a return type, this means that the function throws an exception or terminates execution of the program.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
+
 "When narrowing, you can reduce the options of a union to a point where you have removed all possibilities and have nothing left. In those cases, TypeScript will use a `never` type to represent a state which shouldn’t exist." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/narrowing.html))
 
 > The `never` type is assignable to every type; however, no type is assignable to `never` (except `never` itself). This means you can use narrowing and rely on `never` turning up to do exhaustive checking in a `switch` statement.
