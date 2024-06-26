@@ -48,12 +48,12 @@
     - Constraints
     - Specifying Type Arguments
   - Optional & Default Parameters
+  - Overloads
 - **Miscellaneous**
   - Type Assertion
   - Non-Null Assertion Operator
   - Type Literals
   - Type Predicate
-  - Function Overload Signature
   - Modules
     - Importing Modules
     - Exporting from Modules
@@ -920,6 +920,53 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
 
+### Overloads
+
+> You’ll sometimes find yourself calling a function with too many/few arguments. Typically, this is a bug, but in some cases, you might have declared a function that uses the `arguments` object instead of writing out any parameters:
+>
+> ```js
+> function myCoolFunction() {
+>   if (arguments.length == 2 && !Array.isArray(arguments[1])) {
+>     var f = arguments[0];
+>     var arr = arguments[1];
+>     // ...
+>   }
+>   // ...
+> }
+> myCoolFunction(
+>   function (x) {
+>     console.log(x);
+>   },
+>   [1, 2, 3, 4]
+> );
+> myCoolFunction(
+>   function (x) {
+>     console.log(x);
+>   },
+>   1,
+>   2,
+>   3,
+>   4
+> );
+> ```
+>
+> In this case, we need to use TypeScript to tell any of our callers about the ways `myCoolFunction` can be called using function overloads.
+>
+> ```ts
+> function myCoolFunction(f: (x: number) => void, nums: number[]): void;
+> function myCoolFunction(f: (x: number) => void, ...nums: number[]): void;
+> function myCoolFunction() {
+>   if (arguments.length == 2 && !Array.isArray(arguments[1])) {
+>     var f = arguments[0];
+>     var arr = arguments[1];
+>     // ...
+>   }
+>   // ...
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
+
 ## Miscellaneous
 
 ### Type Assertion
@@ -1093,53 +1140,6 @@ Cons:
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)
 
 "classes can use `this is Type` to narrow their type." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/narrowing.html))
-
-### Function Overload Signature
-
-> You’ll sometimes find yourself calling a function with too many/few arguments. Typically, this is a bug, but in some cases, you might have declared a function that uses the `arguments` object instead of writing out any parameters:
->
-> ```js
-> function myCoolFunction() {
->   if (arguments.length == 2 && !Array.isArray(arguments[1])) {
->     var f = arguments[0];
->     var arr = arguments[1];
->     // ...
->   }
->   // ...
-> }
-> myCoolFunction(
->   function (x) {
->     console.log(x);
->   },
->   [1, 2, 3, 4]
-> );
-> myCoolFunction(
->   function (x) {
->     console.log(x);
->   },
->   1,
->   2,
->   3,
->   4
-> );
-> ```
->
-> In this case, we need to use TypeScript to tell any of our callers about the ways `myCoolFunction` can be called using function overloads.
->
-> ```ts
-> function myCoolFunction(f: (x: number) => void, nums: number[]): void;
-> function myCoolFunction(f: (x: number) => void, ...nums: number[]): void;
-> function myCoolFunction() {
->   if (arguments.length == 2 && !Array.isArray(arguments[1])) {
->     var f = arguments[0];
->     var arr = arguments[1];
->     // ...
->   }
->   // ...
-> }
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
 
 ### Modules
 
