@@ -49,6 +49,7 @@
     - Specifying Type Arguments
   - Optional & Default Parameters
   - Overloads
+  - Using `this`
 - **Miscellaneous**
   - Type Assertion
   - Non-Null Assertion Operator
@@ -970,6 +971,27 @@ Adding new fields to an existing interface:
 > _Always prefer parameters with union types instead of overloads when possible_
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
+
+### Using `this`
+
+> ```ts
+> interface User {
+>   id: number;
+>   admin: boolean;
+> }
+> declare const getDB: () => DB;
+> // ---cut---
+> interface DB {
+>   filterUsers(filter: (this: User) => boolean): User[];
+> }
+>
+> const db = getDB();
+> const admins = db.filterUsers(function (this: User) {
+>   return this.admin;
+> });
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/play/#code/JYOwLgpgTgZghgYwgAgKoGdrIN4FgBQyywAJgFzIgCuAtgEbQDcBRcJNoFdA9twDYQ4IZvgC+BEhAR84UFAm4h0YZAHMIYACIAhCgAoAlMgC8APmQ6RAeivIAtA4RUwDuwVCRYiFDpwtkMMB8nhjQ6HqBwdD6YAAWwOgUoVBGZsg8-IIgBkmYUADaALoi4vgECkoqJHQmaho6hiIVyshsHEq11QB0kSF54TBUIAhgwIrIenEJudBGeITIcmBUUCDIU+hdbaAlBoxAA)
 
 ## Miscellaneous
 
