@@ -947,6 +947,30 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
 
+> ```ts
+> function len(s: string): number;
+> function len(arr: any[]): number;
+> function len(x: any) {
+>   return x.length;
+> }
+> ```
+>
+> This function is fine; we can invoke it with strings or arrays. However, we can’t invoke it with a value that might be a string _or_ an array, because TypeScript can only resolve a function call to a single overload . . .
+>
+> Because both overloads have the same argument count and same return type, we can instead write a non-overloaded version of the function:
+>
+> ```ts
+> function len(x: any[] | string) {
+>   return x.length;
+> }
+> ```
+>
+> This is much better! Callers can invoke this with either sort of value, and as an added bonus, we don’t have to figure out a correct implementation signature.
+>
+> _Always prefer parameters with union types instead of overloads when possible_
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
+
 ## Miscellaneous
 
 ### Type Assertion
