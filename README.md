@@ -144,6 +144,14 @@ npx tsc index.ts
 >
 > [TypeScript](https://www.typescriptlang.org)
 
+> To make the first step in moving from JavaScript to TypeScript without adding a complex build step in the process you could:
+>
+> 1.  Define all your types in `types.ts`
+> 2.  Use JSDoc to specifify those types on various items
+> 3.  Turn on `allowJS`
+>
+> See [ThePrimeTime](https://youtube.com/shorts/tj5VW2xJsqU?si=j7HQd31YMLdlj46t)
+
 # Language
 
 ## Types
