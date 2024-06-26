@@ -737,6 +737,38 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
 
+> Here’s a common error when working with generic constraints:
+>
+> ```ts
+> function minimumLength<Type extends { length: number }>(
+>   obj: Type,
+>   minimum: number
+> ): Type {
+>   if (obj.length >= minimum) {
+>     return obj;
+>   } else {
+>     return { length: minimum };
+>   }
+> }
+> ```
+>
+> ```ts
+> Type '{ length: number; }' is not assignable to type 'Type'.
+>   '{ length: number; }' is assignable to the constraint of type 'Type', but 'Type' could be instantiated with a different subtype of constraint '{ length: number; }>'.
+> ```
+>
+> It might look like this function is OK - `Type` is constrained to `{ length: number }`, and the function either returns `Type` or a value matching that constraint. The problem is that the function promises to return the _same_ kind of object as was passed in, not just _some_ object matching the constraint. If this code were legal, you could write code that definitely wouldn’t work:
+>
+> ```ts
+> // 'arr' gets value { length: 6 }
+> const arr = minimumLength([1, 2, 3], 6);
+> // and crashes here because arrays have
+> // a 'slice' method, but not the returned object!
+> console.log(arr.slice(0));
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
+
 ## Miscellaneous
 
 ### Type Assertion
