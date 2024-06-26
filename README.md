@@ -7,7 +7,7 @@
 - **Definition**
 - **Benefits**
 - **Installation**
-- **Getting Started**
+- **Migrating from JavaScript**
 
 ### Language
 
@@ -124,7 +124,7 @@ Running the compiler:
 npx tsc index.ts
 ```
 
-## Getting Started
+## Migrating from JavaScript
 
 "Visual Studio Code uses TypeScript under the hood to make it easier to work with JavaScript." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
 
