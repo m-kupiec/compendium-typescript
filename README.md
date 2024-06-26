@@ -33,16 +33,16 @@
     - Classes
     - Functions
   - Type Alias
-- **Describing Functions**
-  - Function Type Expression
-  - Call Signature
-  - Construct Signature
 - **Type Composition**
   - Overview
   - Unions
     - General
     - Discriminated Unions
   - Generics
+- **Describing Functions**
+  - Function Type Expression
+  - Call Signature
+  - Construct Signature
 - **Miscellaneous**
   - Type Assertion
   - Non-Null Assertion Operator
@@ -455,84 +455,6 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
 
-## Describing Functions
-
-### Function Type Expression
-
-> syntactically similar to arrow functions:
->
-> ```ts
-> function greeter(fn: (a: string) => void) {
->   fn("Hello, World");
-> }
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
-
-"if a parameter type isn’t specified, it’s implicitly `any`" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html))
-
-"the parameter name is required. The function type `(string) => void` means “a function with a parameter named `string` of type `any`“!" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html))
-
-> we can use a type alias to name a function type:
->
-> ```ts
-> type GreetFunction = (a: string) => void;
-> function greeter(fn: GreetFunction) {
->   // ...
-> }
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
-
-### Call Signature
-
-> In JavaScript, functions can have properties in addition to being callable. However, the function type expression syntax doesn’t allow for declaring properties. If we want to describe something callable with properties, we can write a _call signature_ in an object type:
->
-> ```ts
-> type DescribableFunction = {
->   description: string;
->   (someArg: number): boolean;
-> };
-> function doSomething(fn: DescribableFunction) {
->   console.log(fn.description + " returned " + fn(6));
-> }
->
-> function myFunc(someArg: number) {
->   return someArg > 3;
-> }
-> myFunc.description = "default description";
->
-> doSomething(myFunc);
-> ```
->
-> Note that the syntax is slightly different compared to a function type expression - use `:` between the parameter list and the return type rather than `=>`.
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
-
-### Construct Signature
-
-> JavaScript functions can also be invoked with the `new` operator. TypeScript refers to these as constructors because they usually create a new object. You can write a construct signature by adding the `new` keyword in front of a call signature:
->
-> ```ts
-> type SomeConstructor = {
->   new (s: string): SomeObject;
-> };
-> function fn(ctor: SomeConstructor) {
->   return new ctor("hello");
-> }
-> ```
->
-> Some objects, like JavaScript’s `Date` object, can be called with or without `new`. You can combine call and construct signatures in the same type arbitrarily:
->
-> ```ts
-> interface CallOrConstruct {
->   (n?: number): string;
->   new (s: string): Date;
-> }
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
-
 ## Type Composition
 
 ### Overview
@@ -671,6 +593,84 @@ Adding new fields to an existing interface:
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
+
+## Describing Functions
+
+### Function Type Expression
+
+> syntactically similar to arrow functions:
+>
+> ```ts
+> function greeter(fn: (a: string) => void) {
+>   fn("Hello, World");
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
+
+"if a parameter type isn’t specified, it’s implicitly `any`" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html))
+
+"the parameter name is required. The function type `(string) => void` means “a function with a parameter named `string` of type `any`“!" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html))
+
+> we can use a type alias to name a function type:
+>
+> ```ts
+> type GreetFunction = (a: string) => void;
+> function greeter(fn: GreetFunction) {
+>   // ...
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
+
+### Call Signature
+
+> In JavaScript, functions can have properties in addition to being callable. However, the function type expression syntax doesn’t allow for declaring properties. If we want to describe something callable with properties, we can write a _call signature_ in an object type:
+>
+> ```ts
+> type DescribableFunction = {
+>   description: string;
+>   (someArg: number): boolean;
+> };
+> function doSomething(fn: DescribableFunction) {
+>   console.log(fn.description + " returned " + fn(6));
+> }
+>
+> function myFunc(someArg: number) {
+>   return someArg > 3;
+> }
+> myFunc.description = "default description";
+>
+> doSomething(myFunc);
+> ```
+>
+> Note that the syntax is slightly different compared to a function type expression - use `:` between the parameter list and the return type rather than `=>`.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
+
+### Construct Signature
+
+> JavaScript functions can also be invoked with the `new` operator. TypeScript refers to these as constructors because they usually create a new object. You can write a construct signature by adding the `new` keyword in front of a call signature:
+>
+> ```ts
+> type SomeConstructor = {
+>   new (s: string): SomeObject;
+> };
+> function fn(ctor: SomeConstructor) {
+>   return new ctor("hello");
+> }
+> ```
+>
+> Some objects, like JavaScript’s `Date` object, can be called with or without `new`. You can combine call and construct signatures in the same type arbitrarily:
+>
+> ```ts
+> interface CallOrConstruct {
+>   (n?: number): string;
+>   new (s: string): Date;
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
 
 ## Miscellaneous
 
