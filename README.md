@@ -128,18 +128,55 @@ npx tsc index.ts
 
 "Visual Studio Code uses TypeScript under the hood to make it easier to work with JavaScript." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
 
-> Adding this to a JS file shows errors in your editor:
+Steps in the process of moving from JavaScript to TypeScript:
+
+> 1. No editor warnings in JavaScript files / This code crashes at runtime!
+>
+> ```js
+> function compact(arr) {
+>   if (orr.length > 10) return arr.trim(0, 10);
+>   return arr;
+> }
+> ```
+>
+> 2. Adding . . . [`// @ts-check`] to a JS file shows errors in your editor:
 >
 > ```js
 > // @ts-check
+>
+> function compact(arr) {
+>   if (orr.length > 10) return arr.trim(0, 10);
+>   return arr;
+> }
 > ```
 >
-> [TypeScript](https://www.typescriptlang.org)
-
-> Using JSDoc to give type information:
+> ```ts
+> Cannot find name 'orr'.
+> ```
+>
+> 3. Using JSDoc to give type information / Now TS has found a bad call. Arrays have `slice`, not `trim`.
 >
 > ```js
+> // @ts-check
+>
 > /** @param {any[]} arr */
+> function compact(arr) {
+>   if (arr.length > 10) return arr.trim(0, 10);
+>   return arr;
+> }
+> ```
+>
+> ```ts
+> Property 'trim' does not exist on type 'any[]'.
+> ```
+>
+> 4. TypeScript adds natural syntax for providing types:
+>
+> ```ts
+> function compact(arr: string[]) {
+>   if (arr.length > 10) return arr.slice(0, 10);
+>   return arr;
+> }
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org)
