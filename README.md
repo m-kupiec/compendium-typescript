@@ -1110,6 +1110,8 @@ Adding new fields to an existing interface:
 
 #### Arguments
 
+"Using rest arguments may require turning on `downlevelIteration` when targeting older runtimes." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html))
+
 > ```ts
 > // Inferred type is number[] -- "an array with zero or more numbers",
 > // not specifically two numbers
