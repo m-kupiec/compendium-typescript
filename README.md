@@ -46,6 +46,7 @@
   - Generic Function
     - General
     - Constraints
+    - Specifying Type Arguments
 - **Miscellaneous**
   - Type Assertion
   - Non-Null Assertion Operator
@@ -765,6 +766,34 @@ Adding new fields to an existing interface:
 > // and crashes here because arrays have
 > // a 'slice' method, but not the returned object!
 > console.log(arr.slice(0));
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
+
+#### Specifying Type Arguments
+
+> TypeScript can usually infer the intended type arguments in a generic call, but not always. For example, let’s say you wrote a function to combine two arrays:
+>
+> ```ts
+> function combine<Type>(arr1: Type[], arr2: Type[]): Type[] {
+>   return arr1.concat(arr2);
+> }
+> ```
+>
+> Normally it would be an error to call this function with mismatched arrays:
+>
+> ```ts
+> const arr = combine([1, 2, 3], ["hello"]);
+> ```
+>
+> ```ts
+> Type 'string' is not assignable to type 'number'.
+> ```
+>
+> If you intended to do this, however, you could manually specify `Type`:
+>
+> ```ts
+> const arr = combine<string | number>([1, 2, 3], ["hello"]);
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
