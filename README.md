@@ -36,6 +36,7 @@
 - **Describing Functions**
   - Function Type Expression
   - Call Signature
+  - Construct Signature
 - **Type Composition**
   - Overview
   - Unions
@@ -505,6 +506,30 @@ Adding new fields to an existing interface:
 > ```
 >
 > Note that the syntax is slightly different compared to a function type expression - use `:` between the parameter list and the return type rather than `=>`.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
+
+### Construct Signature
+
+> JavaScript functions can also be invoked with the `new` operator. TypeScript refers to these as constructors because they usually create a new object. You can write a construct signature by adding the `new` keyword in front of a call signature:
+>
+> ```ts
+> type SomeConstructor = {
+>   new (s: string): SomeObject;
+> };
+> function fn(ctor: SomeConstructor) {
+>   return new ctor("hello");
+> }
+> ```
+>
+> Some objects, like JavaScript’s `Date` object, can be called with or without `new`. You can combine call and construct signatures in the same type arbitrarily:
+>
+> ```ts
+> interface CallOrConstruct {
+>   (n?: number): string;
+>   new (s: string): Date;
+> }
+> ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
 
