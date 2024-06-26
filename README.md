@@ -56,6 +56,7 @@
   - Using `this`
   - Rest Parameters & Arguments
     - Parameters
+    - Arguments
 - **Miscellaneous**
   - Type Assertion
   - Non-Null Assertion Operator
@@ -1106,6 +1107,30 @@ Adding new fields to an existing interface:
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
 
 "In TypeScript, the type annotation on these parameters is implicitly `any[]` instead of `any`, and any type annotation given must be of the form `Array<T>` or `T[]`, or a tuple type" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html))
+
+#### Arguments
+
+> ```ts
+> // Inferred type is number[] -- "an array with zero or more numbers",
+> // not specifically two numbers
+> const args = [8, 5];
+> const angle = Math.atan2(...args);
+> ```
+>
+> ```ts
+> A spread argument must either have a tuple type or be passed to a rest parameter.
+> ```
+>
+> The best fix for this situation depends a bit on your code, but in general a `const` context is the most straightforward solution:
+>
+> ```ts
+> // Inferred as 2-length tuple
+> const args = [8, 5] as const;
+> // OK
+> const angle = Math.atan2(...args);
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
 
 ## Miscellaneous
 
