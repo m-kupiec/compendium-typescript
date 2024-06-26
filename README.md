@@ -471,6 +471,17 @@ Adding new fields to an existing interface:
 
 "the parameter name is required. The function type `(string) => void` means “a function with a parameter named `string` of type `any`“!" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html))
 
+> we can use a type alias to name a function type:
+>
+> ```ts
+> type GreetFunction = (a: string) => void;
+> function greeter(fn: GreetFunction) {
+>   // ...
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
+
 ## Type Composition
 
 ### Overview
