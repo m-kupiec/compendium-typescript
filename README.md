@@ -883,6 +883,31 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
 
+> What people usually intend when writing `index?` as an optional parameter is that they want both of these calls to be legal:
+>
+> ```ts
+> myForEach([1, 2, 3], (a) => console.log(a));
+> myForEach([1, 2, 3], (a, i) => console.log(a, i));
+> ```
+>
+> What this _actually_ means is that _callback might get invoked with one argument_.
+>
+> . . . TypeScript will enforce this meaning and issue errors that aren’t really possible:
+>
+> ```ts
+> myForEach([1, 2, 3], (a, i) => {
+>   console.log(i.toFixed());
+> });
+> ```
+>
+> ```ts
+> 'i' is possibly 'undefined'.
+> ```
+>
+> **Rule**: When writing a function type for a callback, _never_ write an optional parameter unless you intend to _call_ the function without passing that argument
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
+
 > You can also provide a parameter default:
 >
 > ```ts
