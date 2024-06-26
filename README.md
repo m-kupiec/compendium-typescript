@@ -883,6 +883,18 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
 
+> You can also provide a parameter default:
+>
+> ```ts
+> function f(x = 10) {
+>   // ...
+> }
+> ```
+>
+> Now in the body of `f`, `x` will have type `number` because any `undefined` argument will be replaced with `10`. Note that when a parameter is optional, callers can always pass `undefined`, as this simply simulates a “missing” argument
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
+
 ## Miscellaneous
 
 ### Type Assertion
