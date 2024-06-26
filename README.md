@@ -44,6 +44,8 @@
   - Call Signature
   - Construct Signature
   - Generic Function
+    - General
+    - Constraints
 - **Miscellaneous**
   - Type Assertion
   - Non-Null Assertion Operator
@@ -675,6 +677,8 @@ Adding new fields to an existing interface:
 
 ### Generic Function
 
+#### General
+
 "It’s common to write a function where the types of the input relate to the type of the output, or where the types of two inputs are related in some way." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html))
 
 > In TypeScript, _generics_ are used when we want to describe a correspondence between two values. We do this by declaring a _type parameter_ in the function signature:
@@ -703,6 +707,8 @@ Adding new fields to an existing interface:
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
+
+#### Constraints
 
 > Sometimes we want to relate two values, but can only operate on a certain subset of values. In this case, we can use a _constraint_ to limit the kinds of types that a type parameter can accept. We _constrain_ the type parameter to that type by writing an `extends` clause:
 >
