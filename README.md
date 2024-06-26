@@ -770,6 +770,29 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
 
+> Here are two ways of writing a function that appear similar:
+>
+> ```ts
+> function firstElement1<Type>(arr: Type[]) {
+>   return arr[0];
+> }
+>
+> function firstElement2<Type extends any[]>(arr: Type) {
+>   return arr[0];
+> }
+>
+> // a: number (good)
+> const a = firstElement1([1, 2, 3]);
+> // b: any (bad)
+> const b = firstElement2([1, 2, 3]);
+> ```
+>
+> These might seem identical at first glance, but `firstElement1` is a much better way to write this function. Its inferred return type is `Type`, but `firstElement2`’s inferred return type is `any` . . .
+>
+> **Rule**: When possible, use the type parameter itself rather than constraining it
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
+
 #### Specifying Type Arguments
 
 > TypeScript can usually infer the intended type arguments in a generic call, but not always. For example, let’s say you wrote a function to combine two arrays:
