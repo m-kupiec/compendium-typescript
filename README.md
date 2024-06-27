@@ -19,6 +19,7 @@
     - `Object`/`{}`/`any`
     - `Symbol`
     - `Function`
+    - `ReadonlyArray`
     - `unknown`
     - `never`
     - `void`
@@ -274,6 +275,40 @@ Steps in the process of moving from JavaScript to TypeScript:
 > This is an _untyped function call_ and is generally best avoided because of the unsafe `any` return type. If you need to accept an arbitrary function but don’t intend to call it, the type `() => void` is generally safer.
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
+
+#### `ReadonlyArray`
+
+"The `ReadonlyArray` is a special type that describes arrays that shouldn’t be changed." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
+
+"Much like the `readonly` modifier for properties, it’s mainly a tool we can use for intent. When we see a function that returns `ReadonlyArray`s, it tells us we’re not meant to change the contents at all, and when we see a function that consumes `ReadonlyArray`s, it tells us that we can pass any array into that function without worrying that it will change its contents." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
+
+"Unlike `Array`, there isn’t a `ReadonlyArray` constructor that we can use." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
+
+> Just as TypeScript provides a shorthand syntax for `Array<Type>` with `Type[]`, it also provides a shorthand syntax for `ReadonlyArray<Type>` with `readonly Type[]`.
+>
+> ```ts
+> function doStuff(values: readonly string[]) {
+>   // ...
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
+> unlike the `readonly` property modifier, assignability isn’t bidirectional between regular `Array`s and `ReadonlyArray`s.
+>
+> ```ts
+> let x: readonly string[] = [];
+> let y: string[] = [];
+>
+> x = y;
+> y = x; // Error
+> ```
+>
+> ```ts
+> The type 'readonly string[]' is 'readonly' and cannot be assigned to the mutable type 'string[]'.
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
 
 #### `unknown`
 
