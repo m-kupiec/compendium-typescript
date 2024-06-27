@@ -784,6 +784,10 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
 
+"Whenever we write out types like `number[]` or `string[]`, that’s really just a shorthand for `Array<number>` and `Array<string>`." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
+
+"Modern JavaScript also provides other data structures which are generic, like `Map<K, V>`, `Set<T>`, and `Promise<T>`. All this really means is that because of how `Map`, `Set`, and `Promise` behave, they can work with any sets of types." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
+
 > You can declare your own types that use generics:
 >
 > ```ts
