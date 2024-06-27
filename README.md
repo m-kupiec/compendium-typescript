@@ -24,6 +24,7 @@
   - Tuples
     - General
     - Optional and Rest Elements
+    - Read-Only Tuples
   - `unknown`
   - `never`
   - `void`
@@ -419,6 +420,20 @@ Steps in the process of moving from JavaScript to TypeScript:
 > This is handy when you want to take a variable number of arguments with a rest parameter, and you need a minimum number of elements, but you don’t want to introduce intermediate variables.
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
+#### Read-Only Tuples
+
+> tuple types have `readonly` variants, and can be specified by sticking a `readonly` modifier in front of them - just like with array shorthand syntax.
+>
+> ```ts
+> function doSomething(pair: readonly [string, number]) {
+>   // ...
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
+"writing to any property of a `readonly` tuple isn’t allowed in TypeScript." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
 
 ### `unknown`
 
