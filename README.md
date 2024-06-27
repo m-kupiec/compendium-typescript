@@ -61,6 +61,7 @@
 - **Object Types**
   - General
   - Optional Properties
+  - Destructuring
 - **Miscellaneous**
   - Type Assertion
   - Non-Null Assertion Operator
@@ -1248,6 +1249,28 @@ Adding new fields to an existing interface:
 "In JavaScript, if you access a property that doesn’t exist, you’ll get the value `undefined` rather than a runtime error. Because of this, when you read from an optional property, you’ll have to check for `undefined` before using it." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
 
 "We can also read from those properties - but when we do under `strictNullChecks`, TypeScript will tell us they’re potentially `undefined`." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
+
+### Destructuring
+
+> ```ts
+> interface PaintOptions {
+>   shape: Shape;
+>   xPos?: number;
+>   yPos?: number;
+> }
+> ```
+>
+> . . .
+>
+> ```ts
+> function paintShape({ shape, xPos = 0, yPos = 0 }: PaintOptions) {
+>   // ...
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
+"Note that there is currently no way to place type annotations within destructuring patterns. This is because the following syntax already means something different in JavaScript. . . . In an object destructuring pattern, `shape: Shape` means “grab the property `shape` and redefine it locally as a variable named `Shape`.” Likewise `xPos: number` creates a variable named `number` whose value is based on the parameter’s `xPos`." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
 
 ## Miscellaneous
 
