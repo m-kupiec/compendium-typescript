@@ -378,6 +378,21 @@ Steps in the process of moving from JavaScript to TypeScript:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
 
+> Tuples can also have rest elements, which have to be an array/tuple type.
+>
+> ```ts
+> type StringNumberBooleans = [string, number, ...boolean[]];
+> type StringBooleansNumber = [string, ...boolean[], number];
+> type BooleansStringNumber = [...boolean[], string, number];
+> ```
+>
+> - `StringNumberBooleans` describes a tuple whose first two elements are `string` and `number` respectively, but which may have any number of `booleans` following.
+> - `StringBooleansNumber` describes a tuple whose first element is `string` and then any number of `booleans` and ending with a `number`.
+> - `BooleansStringNumber` describes a tuple whose starting elements are any number of `booleans` and ending with a `string` then a `number`.
+>   A tuple with a rest element has no set “length” - it only has a set of well-known elements in different positions.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
 ### `unknown`
 
 > The `unknown` type represents _any_ value. This is similar to the `any` type, but is safer because it’s not legal to do anything with an unknown value:
