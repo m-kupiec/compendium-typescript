@@ -362,6 +362,22 @@ Steps in the process of moving from JavaScript to TypeScript:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
 
+> tuples can have optional properties by writing out a question mark (`?` after an element’s type). Optional tuple elements can only come at the end, and also affect the type of `length`.
+>
+> ```ts
+> type Either2dOr3d = [number, number, number?];
+>
+> function setCoordinate(coord: Either2dOr3d) {
+>   const [x, y, z] = coord;
+>   // const z: number | undefined
+>
+>   console.log(`Provided coordinates had ${coord.length} dimensions`);
+>   // (property) length: 2 | 3
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
 ### `unknown`
 
 > The `unknown` type represents _any_ value. This is similar to the `any` type, but is safer because it’s not legal to do anything with an unknown value:
