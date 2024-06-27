@@ -58,6 +58,7 @@
     - Parameters
     - Arguments
   - Parameter Destructuring
+- **Object Types**
 - **Miscellaneous**
   - Type Assertion
   - Non-Null Assertion Operator
@@ -406,27 +407,6 @@ Steps in the process of moving from JavaScript to TypeScript:
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
-
-#### Objects
-
-"You can use `,` or `;` to separate the properties, and the last separator is optional either way." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
-
-"The type part of each property is also optional. If you don’t specify a type, it will be assumed to be `any`." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
-
-> Object types can also specify that some or all of their properties are optional. To do this, add a `?` after the property name:
->
-> ```ts
-> function printName(obj: { first: string; last?: string }) {
->   // ...
-> }
-> // Both OK
-> printName({ first: "Bob" });
-> printName({ first: "Alice", last: "Alisson" });
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
-
-"In JavaScript, if you access a property that doesn’t exist, you’ll get the value `undefined` rather than a runtime error. Because of this, when you read from an optional property, you’ll have to check for `undefined` before using it." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
 
 ## Type Definition
 
@@ -1203,6 +1183,27 @@ Adding new fields to an existing interface:
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
+
+## Object Types
+
+"You can use `,` or `;` to separate the properties, and the last separator is optional either way." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
+
+"The type part of each property is also optional. If you don’t specify a type, it will be assumed to be `any`." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
+
+> Object types can also specify that some or all of their properties are optional. To do this, add a `?` after the property name:
+>
+> ```ts
+> function printName(obj: { first: string; last?: string }) {
+>   // ...
+> }
+> // Both OK
+> printName({ first: "Bob" });
+> printName({ first: "Alice", last: "Alisson" });
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
+
+"In JavaScript, if you access a property that doesn’t exist, you’ll get the value `undefined` rather than a runtime error. Because of this, when you read from an optional property, you’ll have to check for `undefined` before using it." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
 
 ## Miscellaneous
 
