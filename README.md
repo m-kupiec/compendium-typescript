@@ -21,6 +21,7 @@
   - `Promise`
   - `Array`
   - `ReadonlyArray`
+  - Tuples
   - `unknown`
   - `never`
   - `void`
@@ -320,6 +321,18 @@ Steps in the process of moving from JavaScript to TypeScript:
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
+### Tuples
+
+> A tuple type is another sort of `Array` type that knows exactly how many elements it contains, and exactly which types it contains at specific positions.
+>
+> ```ts
+> type StringNumberPair = [string, number];
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
+"If we try to index past the number of elements, we’ll get an error." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
 
 ### `unknown`
 
