@@ -334,6 +334,18 @@ Steps in the process of moving from JavaScript to TypeScript:
 
 "If we try to index past the number of elements, we’ll get an error." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
 
+> We can also destructure tuples using JavaScript’s array destructuring.
+>
+> ```ts
+> function doSomething(stringHash: [string, number]) {
+>   const [inputString, hash] = stringHash;
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
+"Tuple types are useful in heavily convention-based APIs, where each element’s meaning is “obvious”. This gives us flexibility in whatever we want to name our variables when we destructure them. . . . However, since not every user holds the same view of what’s obvious, it may be worth reconsidering whether using objects with descriptive property names may be better for your API." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
+
 ### `unknown`
 
 > The `unknown` type represents _any_ value. This is similar to the `any` type, but is safer because it’s not legal to do anything with an unknown value:
