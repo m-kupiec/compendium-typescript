@@ -43,7 +43,7 @@
     - General
     - Discriminated Unions
   - Generics
-- **Describing Functions**
+- **Function Types**
   - Function Type Expression
   - Call Signature
   - Construct Signature
@@ -745,7 +745,7 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
 
-## Describing Functions
+## Function Types
 
 ### Function Type Expression
 
