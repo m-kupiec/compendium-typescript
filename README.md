@@ -64,6 +64,9 @@
   - Destructuring
   - Read-Only Properties
   - Index Signatures
+  - Excess Property Checking
+    - General
+    - Workarounds
 - **Miscellaneous**
   - Type Assertion
   - Non-Null Assertion Operator
@@ -1379,6 +1382,58 @@ Adding new fields to an existing interface:
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
+### Excess Property Checking
+
+#### General
+
+"Object literals get special treatment and undergo _excess property checking_ when assigning them to other variables, or passing them as arguments. If an object literal has any properties that the “target type” doesn’t have, you’ll get an error" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
+
+#### Workarounds
+
+> The easiest method is to just use a type assertion:
+>
+> ```ts
+> let mySquare = createSquare({ width: 100, opacity: 0.5 } as SquareConfig);
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
+> a better approach might be to add a string index signature if you’re sure that the object can have some extra properties that are used in some special way. If `SquareConfig` can have `color` and `width` properties with the above types, but could _also_ have any number of other properties, then we could define it like so:
+>
+> ```ts
+> interface SquareConfig {
+>   color?: string;
+>   width?: number;
+>   [propName: string]: any;
+> }
+> ```
+>
+> Here we’re saying that `SquareConfig` can have any number of properties, and as long as they aren’t `color` or `width`, their types don’t matter.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
+> One final way to get around these checks, which might be a bit surprising, is to assign the object to another variable: Since assigning `squareOptions` won’t undergo excess property checks, the compiler won’t give you an error:
+>
+> ```ts
+> let squareOptions = { colour: "red", width: 100 };
+> let mySquare = createSquare(squareOptions);
+> ```
+>
+> The above workaround will work as long as you have a common property between `squareOptions` and `SquareConfig`. In this example, it was the property `width`. It will however, fail if the variable does not have any common object property. For example:
+>
+> ```ts
+> let squareOptions = { colour: "red" };
+> let mySquare = createSquare(squareOptions);
+> ```
+>
+> ```ts
+> Type '{ colour: string; }' has no properties in common with type 'SquareConfig'.
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
+"Keep in mind that for simple code like above, you probably shouldn’t be trying to “get around” these checks. For more complex object literals that have methods and hold state, you might need to keep these techniques in mind, but a majority of excess property errors are actually bugs." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
 
 ## Miscellaneous
 
