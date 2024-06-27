@@ -346,6 +346,22 @@ Steps in the process of moving from JavaScript to TypeScript:
 
 "Tuple types are useful in heavily convention-based APIs, where each element’s meaning is “obvious”. This gives us flexibility in whatever we want to name our variables when we destructure them. . . . However, since not every user holds the same view of what’s obvious, it may be worth reconsidering whether using objects with descriptive property names may be better for your API." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
 
+> Other than those length checks, simple tuple types like these are equivalent to types which are versions of `Array`s that declare properties for specific indexes, and that declare `length` with a numeric literal type.
+>
+> ```ts
+> interface StringNumberPair {
+>   // specialized properties
+>   length: 2;
+>   0: string;
+>   1: number;
+>
+>   // Other 'Array<string | number>' members...
+>   slice(start?: number, end?: number): Array<string | number>;
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
 ### `unknown`
 
 > The `unknown` type represents _any_ value. This is similar to the `any` type, but is safer because it’s not legal to do anything with an unknown value:
