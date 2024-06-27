@@ -12,21 +12,18 @@
 ### Language
 
 - **Types**
-  - Primitive Types
-    - Overview
-    - `null`/`undefined`
-    - `object`
-    - `Object`/`{}`/`any`
-    - `Symbol`
-    - `Function`
-    - `ReadonlyArray`
-    - `unknown`
-    - `never`
-    - `void`
-  - Complex Types
-    - Arrays
-    - Promises
-    - Objects
+  - Overview
+  - `null`/`undefined`
+  - `object`
+  - `Object`/`{}`/`any`
+  - `Symbol`
+  - `Function`
+  - `Promise`
+  - `Array`
+  - `ReadonlyArray`
+  - `unknown`
+  - `never`
+  - `void`
 - **Type Definition**
   - Overview
   - Type Annotation
@@ -205,9 +202,7 @@ Steps in the process of moving from JavaScript to TypeScript:
 
 ## Types
 
-### Primitive Types
-
-#### Overview
+### Overview
 
 "There is already a small set of primitive types available in JavaScript: `boolean`, `bigint`, `null`, `number`, `string`, `symbol`, and `undefined`, which you can use in an interface. TypeScript extends this list with a few more, such as `any` (allow anything), `unknown` (ensure someone using this type declares what the type is), `never` (it’s not possible that this type could happen), and `void` (a function which returns `undefined` or has no return value)." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
 
@@ -231,7 +226,7 @@ Steps in the process of moving from JavaScript to TypeScript:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
 
-#### `object`
+### `object`
 
 "This is different from the empty object type `{ }`, and also different from the global type `Object`." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html))
 
@@ -245,7 +240,7 @@ Steps in the process of moving from JavaScript to TypeScript:
 
 "If a decision ever comes down to `Object` and `{}`, you should prefer `{}`. While they are mostly the same, technically `{}` is a more general type than `Object` in certain esoteric cases." ([TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html))
 
-#### `Symbol`
+### `Symbol`
 
 > ```ts
 > const firstName = Symbol("name");
@@ -262,7 +257,7 @@ Steps in the process of moving from JavaScript to TypeScript:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
 
-#### `Function`
+### `Function`
 
 > The global type `Function` describes properties like `bind`, `call`, `apply`, and others present on all function values in JavaScript. It also has the special property that values of type `Function` can always be called; these calls return `any`:
 >
@@ -276,7 +271,23 @@ Steps in the process of moving from JavaScript to TypeScript:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
 
-#### `ReadonlyArray`
+### `Promise`
+
+> If you want to annotate the return type of a function which returns a promise, you should use the `Promise` type:
+>
+> ```ts
+> async function getFavoriteNumber(): Promise<number> {
+>   return 26;
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
+
+### `Array`
+
+"you can use the syntax `number[]`; this syntax works for any type (e.g. `string[]` is an array of strings, and so on). You may also see this written as `Array<number>`, which means the same thing." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
+
+### `ReadonlyArray`
 
 "The `ReadonlyArray` is a special type that describes arrays that shouldn’t be changed." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
 
@@ -310,7 +321,7 @@ Steps in the process of moving from JavaScript to TypeScript:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
 
-#### `unknown`
+### `unknown`
 
 > The `unknown` type represents _any_ value. This is similar to the `any` type, but is safer because it’s not legal to do anything with an unknown value:
 >
@@ -361,7 +372,7 @@ Steps in the process of moving from JavaScript to TypeScript:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
 
-#### `never`
+### `never`
 
 > Some functions _never_ return a value:
 >
@@ -426,7 +437,7 @@ Steps in the process of moving from JavaScript to TypeScript:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)
 
-#### `void`
+### `void`
 
 "`void` represents the return value of functions which don’t return a value. It’s the inferred type any time a function doesn’t have any `return` statements, or doesn’t return any explicit value from those `return` statements . . . In JavaScript, a function that doesn’t return any value will implicitly return the value `undefined`. However, `void` and `undefined` are not the same thing in TypeScript." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html))
 
@@ -456,24 +467,6 @@ Steps in the process of moving from JavaScript to TypeScript:
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
-
-### Complex Types
-
-#### Arrays
-
-"you can use the syntax `number[]`; this syntax works for any type (e.g. `string[]` is an array of strings, and so on). You may also see this written as `Array<number>`, which means the same thing." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
-
-#### Promises
-
-> If you want to annotate the return type of a function which returns a promise, you should use the `Promise` type:
->
-> ```ts
-> async function getFavoriteNumber(): Promise<number> {
->   return 26;
-> }
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
 
 ## Type Definition
 
