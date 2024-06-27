@@ -435,6 +435,27 @@ Steps in the process of moving from JavaScript to TypeScript:
 
 "writing to any property of a `readonly` tuple isn’t allowed in TypeScript." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
 
+> Tuples tend to be created and left un-modified in most code, so annotating types as `readonly` tuples when possible is a good default. This is also important given that array literals with const assertions will be inferred with `readonly` tuple types.
+>
+> ```ts
+> let point = [3, 4] as const;
+>
+> function distanceFromOrigin([x, y]: [number, number]) {
+>   return Math.sqrt(x ** 2 + y ** 2);
+> }
+>
+> distanceFromOrigin(point); // Error
+> ```
+>
+> ```ts
+> Argument of type 'readonly [3, 4]' is not assignable to parameter of type '>[number, number]'.
+>   The type 'readonly [3, 4]' is 'readonly' and cannot be assigned to the mutable >type '[number, number]'.
+> ```
+>
+> Here, `distanceFromOrigin` never modifies its elements, but expects a mutable tuple. Since point’s type was inferred as `readonly [3, 4]`, it won’t be compatible with `[number, number]` since that type can’t guarantee point’s elements won’t be mutated.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
 ### `unknown`
 
 > The `unknown` type represents _any_ value. This is similar to the `any` type, but is safer because it’s not legal to do anything with an unknown value:
