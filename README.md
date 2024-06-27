@@ -803,6 +803,56 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
 
+> we can make a _generic_ `Box` type which declares a _type parameter_.
+>
+> ```ts
+> interface Box<Type> {
+>   contents: Type;
+> }
+> ```
+>
+> . . . Later on, when we refer to Box, we have to give a `type argument` in place of `Type`.
+>
+> ```ts
+> let box: Box<string>;
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
+> It is worth noting that type aliases can also be generic. We could have defined our new `Box<Type>` interface, which was:
+>
+> ```ts
+> interface Box<Type> {
+>   contents: Type;
+> }
+> ```
+>
+> by using a type alias instead:
+>
+> ```ts
+> type Box<Type> = {
+>   contents: Type;
+> };
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
+> Since type aliases, unlike interfaces, can describe more than just object types, we can also use them to write other kinds of generic helper types.
+>
+> ```ts
+> type OrNull<Type> = Type | null;
+>
+> type OneOrMany<Type> = Type | Type[];
+>
+> type OneOrManyOrNull<Type> = OrNull<OneOrMany<Type>>;
+> // type OneOrManyOrNull<Type> = OneOrMany<Type> | null
+>
+> type OneOrManyOrNullStrings = OneOrManyOrNull<string>;
+> // type OneOrManyOrNullStrings = OneOrMany<string> | null
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
 ## Function Types
 
 ### Function Type Expression
