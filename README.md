@@ -393,6 +393,27 @@ Steps in the process of moving from JavaScript to TypeScript:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
 
+> Why might optional and rest elements be useful? Well, it allows TypeScript to correspond tuples with parameter lists. Tuples types can be used in rest parameters and arguments, so that the following:
+>
+> ```ts
+> function readButtonInput(...args: [string, number, ...boolean[]]) {
+>   const [name, version, ...input] = args;
+>   // ...
+> }
+> ```
+>
+> is basically equivalent to:
+>
+> ```ts
+> function readButtonInput(name: string, version: number, ...input: boolean[]) {
+>   // ...
+> }
+> ```
+>
+> This is handy when you want to take a variable number of arguments with a rest parameter, and you need a minimum number of elements, but you don’t want to introduce intermediate variables.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
 ### `unknown`
 
 > The `unknown` type represents _any_ value. This is similar to the `any` type, but is safer because it’s not legal to do anything with an unknown value:
