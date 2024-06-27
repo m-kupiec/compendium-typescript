@@ -304,6 +304,28 @@ Steps in the process of moving from JavaScript to TypeScript:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
 
+> We could . . . use `unknown`, but that would mean that in cases where we already know the type of `contents`, we’d need to do precautionary checks, or use error-prone type assertions.
+>
+> ```ts
+> interface Box {
+>   contents: unknown;
+> }
+>
+> let x: Box = {
+>   contents: "hello world",
+> };
+>
+> // we could check 'x.contents'
+> if (typeof x.contents === "string") {
+>   console.log(x.contents.toLowerCase());
+> }
+>
+> // or we could use a type assertion
+> console.log((x.contents as string).toLowerCase());
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
 #### `never`
 
 > Some functions _never_ return a value:
