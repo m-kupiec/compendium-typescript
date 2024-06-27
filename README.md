@@ -477,6 +477,27 @@ Limitations of type aliases:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
 
+> `interface`s can also extend from multiple types.
+>
+> ```ts
+> interface Colorful {
+>   color: string;
+> }
+>
+> interface Circle {
+>   radius: number;
+> }
+>
+> interface ColorfulCircle extends Colorful, Circle {}
+>
+> const cc: ColorfulCircle = {
+>   color: "red",
+>   radius: 42,
+> };
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
 Adding new fields to an existing interface:
 
 > ```ts
