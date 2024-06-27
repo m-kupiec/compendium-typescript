@@ -22,6 +22,8 @@
   - `Array`
   - `ReadonlyArray`
   - Tuples
+    - General
+    - Optional and Rest Elements
   - `unknown`
   - `never`
   - `void`
@@ -324,6 +326,8 @@ Steps in the process of moving from JavaScript to TypeScript:
 
 ### Tuples
 
+#### General
+
 > A tuple type is another sort of `Array` type that knows exactly how many elements it contains, and exactly which types it contains at specific positions.
 >
 > ```ts
@@ -361,6 +365,8 @@ Steps in the process of moving from JavaScript to TypeScript:
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
+#### Optional and Rest Elements
 
 > tuples can have optional properties by writing out a question mark (`?` after an element’s type). Optional tuple elements can only come at the end, and also affect the type of `length`.
 >
