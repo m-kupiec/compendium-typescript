@@ -1247,6 +1247,8 @@ Adding new fields to an existing interface:
 
 "In JavaScript, if you access a property that doesn’t exist, you’ll get the value `undefined` rather than a runtime error. Because of this, when you read from an optional property, you’ll have to check for `undefined` before using it." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
 
+"We can also read from those properties - but when we do under `strictNullChecks`, TypeScript will tell us they’re potentially `undefined`." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
+
 ## Miscellaneous
 
 ### Type Assertion
