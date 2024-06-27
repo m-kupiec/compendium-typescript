@@ -59,6 +59,8 @@
     - Arguments
   - Parameter Destructuring
 - **Object Types**
+  - General
+  - Optional Properties
 - **Miscellaneous**
   - Type Assertion
   - Non-Null Assertion Operator
@@ -1186,6 +1188,8 @@ Adding new fields to an existing interface:
 
 ## Object Types
 
+### General
+
 > they can be anonymous:
 >
 > ```ts
@@ -1225,6 +1229,8 @@ Adding new fields to an existing interface:
 "You can use `,` or `;` to separate the properties, and the last separator is optional either way." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
 
 "The type part of each property is also optional. If you don’t specify a type, it will be assumed to be `any`." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
+
+### Optional Properties
 
 > Object types can also specify that some or all of their properties are optional. To do this, add a `?` after the property name:
 >
