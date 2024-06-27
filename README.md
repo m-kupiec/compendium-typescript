@@ -1186,6 +1186,42 @@ Adding new fields to an existing interface:
 
 ## Object Types
 
+> they can be anonymous:
+>
+> ```ts
+> function greet(person: { name: string; age: number }) {
+>   return "Hello " + person.name;
+> }
+> ```
+>
+> or they can be named by using either an interface:
+>
+> ```ts
+> interface Person {
+>   name: string;
+>   age: number;
+> }
+>
+> function greet(person: Person) {
+>   return "Hello " + person.name;
+> }
+> ```
+>
+> or a type alias:
+>
+> ```ts
+> type Person = {
+>   name: string;
+>   age: number;
+> };
+>
+> function greet(person: Person) {
+>   return "Hello " + person.name;
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
 "You can use `,` or `;` to separate the properties, and the last separator is optional either way." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
 
 "The type part of each property is also optional. If you don’t specify a type, it will be assumed to be `any`." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
