@@ -37,6 +37,7 @@
     - Classes
     - Functions
   - Type Alias
+  - Intersection Type
 - **Type Composition**
   - Overview
   - Unions
@@ -614,6 +615,27 @@ Adding new fields to an existing interface:
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
+
+### Intersection Type
+
+"mainly used to combine existing object types." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
+
+"An intersection type is defined using the `&` operator." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
+
+> ```ts
+> interface Colorful {
+>   color: string;
+> }
+> interface Circle {
+>   radius: number;
+> }
+>
+> type ColorfulCircle = Colorful & Circle;
+> ```
+>
+> Here, we’ve intersected `Colorful` and `Circle` to produce a new type that has all the members of `Colorful` _and_ `Circle`.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
 
 ## Type Composition
 
