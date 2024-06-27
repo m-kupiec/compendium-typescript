@@ -62,6 +62,7 @@
   - General
   - Optional Properties
   - Destructuring
+  - Read-Only Properties
 - **Miscellaneous**
   - Type Assertion
   - Non-Null Assertion Operator
@@ -1271,6 +1272,50 @@ Adding new fields to an existing interface:
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
 
 "Note that there is currently no way to place type annotations within destructuring patterns. This is because the following syntax already means something different in JavaScript. . . . In an object destructuring pattern, `shape: Shape` means “grab the property `shape` and redefine it locally as a variable named `Shape`.” Likewise `xPos: number` creates a variable named `number` whose value is based on the parameter’s `xPos`." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
+
+### Read-Only Properties
+
+> Properties can also be marked as `readonly` for TypeScript. While it won’t change any behavior at runtime, a property marked as `readonly` can’t be written to during type-checking.
+>
+> ```ts
+> interface SomeType {
+>   readonly prop: string;
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
+"Using the `readonly` modifier doesn’t necessarily imply that a value is totally immutable - or in other words, that its internal contents can’t be changed. It just means the property itself can’t be re-written to." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
+
+> `readonly` properties can . . . change via aliasing.
+>
+> ```ts
+> interface Person {
+>   name: string;
+>   age: number;
+> }
+>
+> interface ReadonlyPerson {
+>   readonly name: string;
+>   readonly age: number;
+> }
+>
+> let writablePerson: Person = {
+>   name: "Person McPersonface",
+>   age: 42,
+> };
+>
+> // works
+> let readonlyPerson: ReadonlyPerson = writablePerson;
+>
+> console.log(readonlyPerson.age); // prints '42'
+> writablePerson.age++;
+> console.log(readonlyPerson.age); // prints '43'
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
+"Using mapping modifiers, you can remove `readonly` attributes." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
 
 ## Miscellaneous
 
