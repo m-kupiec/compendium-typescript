@@ -39,16 +39,18 @@
     - Classes
     - Functions
   - Type Alias
-  - Intersection Type
-  - Interfaces vs. Intersections
 - **Type Composition**
   - Overview
   - Unions
     - General
     - Discriminated Unions
+  - Intersections
+    - General
+    - Interfaces vs. Intersections
   - Generics
-  - `keyof` Type Operator
-  - `typeof` Type Operator
+  - Type Operators
+    - `keyof`
+    - `typeof`
 - **Function Types**
   - Function Type Expression
   - Call Signature
@@ -805,31 +807,6 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
 
-### Intersection Type
-
-"mainly used to combine existing object types." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
-
-"An intersection type is defined using the `&` operator." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
-
-> ```ts
-> interface Colorful {
->   color: string;
-> }
-> interface Circle {
->   radius: number;
-> }
->
-> type ColorfulCircle = Colorful & Circle;
-> ```
->
-> Here, we’ve intersected `Colorful` and `Circle` to produce a new type that has all the members of `Colorful` _and_ `Circle`.
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
-
-### Interfaces vs. Intersections
-
-"The principal difference between the two is how conflicts are handled, and that difference is typically one of the main reasons why you’d pick one over the other" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
-
 ## Type Composition
 
 ### Overview
@@ -935,6 +912,33 @@ Adding new fields to an existing interface:
 > . . . The important thing here was the encoding of `Shape`. Communicating the right information to TypeScript - that `Circle` and `Square` were really two separate types with specific `kind` fields - was crucial. Doing that lets us write type-safe TypeScript code
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)
+
+### Intersections
+
+#### General
+
+"mainly used to combine existing object types." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
+
+"An intersection type is defined using the `&` operator." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
+
+> ```ts
+> interface Colorful {
+>   color: string;
+> }
+> interface Circle {
+>   radius: number;
+> }
+>
+> type ColorfulCircle = Colorful & Circle;
+> ```
+>
+> Here, we’ve intersected `Colorful` and `Circle` to produce a new type that has all the members of `Colorful` _and_ `Circle`.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
+#### Interfaces vs. Intersections
+
+"The principal difference between the two is how conflicts are handled, and that difference is typically one of the main reasons why you’d pick one over the other" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
 
 ### Generics
 
@@ -1180,7 +1184,9 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/generics.html)
 
-### `keyof` Type Operator
+### Type Operators
+
+#### `keyof`
 
 > The `keyof` operator takes an object type and produces a `string` or `numeric` literal union of its keys. The following type `P` is the same type as `type P = "x" | "y"`:
 >
@@ -1195,7 +1201,7 @@ Adding new fields to an existing interface:
 
 "`keyof` types become especially useful when combined with mapped types" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/keyof-types.html))
 
-### `typeof` Type Operator
+#### `typeof`
 
 > TypeScript adds a `typeof` operator you can use in a type context to refer to the type of a variable or property:
 >
