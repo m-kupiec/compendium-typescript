@@ -1280,6 +1280,32 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.>html)
 
+> example of indexing with an arbitrary type is using `number` to get the type of an array’s elements. We can combine this with `typeof` to conveniently capture the element type of an array literal:
+>
+> ```ts
+> const MyArray = [
+>   { name: "Alice", age: 15 },
+>   { name: "Bob", age: 23 },
+>   { name: "Eve", age: 38 },
+> ];
+>
+> type Person = (typeof MyArray)[number];
+> /*
+> type Person = {
+>   name: string;
+>   age: number;
+> } */
+>
+> type Age = (typeof MyArray)[number]["age"];
+> //type Age = number
+>
+> // Or
+> type Age2 = Person["age"];
+> // type Age2 = number
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.>>html)
+
 ## Function Types
 
 ### Function Type Expression
