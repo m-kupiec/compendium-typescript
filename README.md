@@ -1119,6 +1119,25 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
 
+> You can declare a type parameter that is constrained by another type parameter. For example, here we’d like to get a property from an object given its name. We’d like to ensure that we’re not accidentally grabbing a property that does not exist on the `obj`, so we’ll place a constraint between the two types:
+>
+> ```ts
+> function getProperty<Type, Key extends keyof Type>(obj: Type, key: Key) {
+>   return obj[key];
+> }
+>
+> let x = { a: 1, b: 2, c: 3, d: 4 };
+>
+> getProperty(x, "a");
+> getProperty(x, "m"); // Error
+> ```
+>
+> ```ts
+> Argument of type '"m"' is not assignable to parameter of type '"a" | "b" | "c" | >"d"'.
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/generics.html)
+
 ## Function Types
 
 ### Function Type Expression
