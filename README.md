@@ -937,6 +937,16 @@ Adding new fields to an existing interface:
 
 "Generics provide variables to types." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
 
+> Here, we will use a _type variable_, a special kind of variable that works on types rather than values.
+>
+> ```ts
+> function identity<Type>(arg: Type): Type {
+>   return arg;
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/generics.html)
+
 > An array with generics can describe the values that the array contains.
 >
 > ```ts
