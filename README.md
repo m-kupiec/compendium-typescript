@@ -47,6 +47,7 @@
     - General
     - Discriminated Unions
   - Generics
+  - `keyof` Type Operator
 - **Function Types**
   - Function Type Expression
   - Call Signature
@@ -1177,6 +1178,21 @@ Adding new fields to an existing interface:
 > - A class or interface declaration that merges with an existing class or interface declaration may introduce a new type parameter as long as it specifies a default.
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/generics.html)
+
+### `keyof` Type Operator
+
+> The `keyof` operator takes an object type and produces a `string` or `numeric` literal union of its keys. The following type `P` is the same type as `type P = "x" | "y"`:
+>
+> ```ts
+> type Point = { x: number; y: number };
+> type P = keyof Point;
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/keyof-types.html)
+
+"If the type has a `string` or `number` index signature, `keyof` will return those types instead" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/keyof-types.html))
+
+"`keyof` types become especially useful when combined with mapped types" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/keyof-types.html))
 
 ## Function Types
 
