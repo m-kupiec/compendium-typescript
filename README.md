@@ -1019,6 +1019,22 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/generics.html)
 
+> we may want to move the generic parameter to be a parameter of the whole interface. This lets us see what type(s) we’re generic over (e.g. `Dictionary<string>` rather than just `Dictionary`). This makes the type parameter visible to all the other members of the interface.
+>
+> ```ts
+> interface GenericIdentityFn<Type> {
+>   (arg: Type): Type;
+> }
+>
+> function identity<Type>(arg: Type): Type {
+>   return arg;
+> }
+>
+> let myIdentity: GenericIdentityFn<number> = identity;
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/generics.html)
+
 > An array with generics can describe the values that the array contains.
 >
 > ```ts
