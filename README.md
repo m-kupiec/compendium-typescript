@@ -1811,6 +1811,24 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
 
+> If the type has a `string` or `number` index signature, `keyof` will return those types instead:
+>
+> ```ts
+> type Arrayish = { [n: number]: unknown };
+> type A = keyof Arrayish;
+>
+> type A = number;
+>
+> type Mapish = { [k: string]: boolean };
+> type M = keyof Mapish;
+>
+> type M = string | number;
+> ```
+>
+> Note that in this example, `M` is `string | number` — this is because JavaScript object keys are always coerced to a `string`, so `obj[0]` is always the same as `obj["0"]`.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/keyof-types.html)
+
 > you can make index signatures `readonly` in order to prevent assignment to their indices:
 >
 > ```ts
