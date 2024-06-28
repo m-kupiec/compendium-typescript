@@ -947,6 +947,22 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/generics.html)
 
+> Once we’ve written the generic identity function, we can call it in one of two ways. The first way is to pass all of the arguments, including the type argument, to the function:
+>
+> ```ts
+> let output = identity<string>("myString");
+> ```
+>
+> The second way is also perhaps the most common. Here we use _type argument inference_ — that is, we want the compiler to set the value of `Type` for us automatically based on the type of the argument we pass in:
+>
+> ```ts
+> let output = identity("myString");
+> ```
+>
+> . . . you may need to explicitly pass in the type arguments . . . when the compiler fails to infer the type, as may happen in more complex examples.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/generics.html)
+
 > An array with generics can describe the values that the array contains.
 >
 > ```ts
