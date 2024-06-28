@@ -1138,6 +1138,34 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/generics.html)
 
+> By declaring a default for a generic type parameter, you make it optional to specify the corresponding type argument. For example, a function which creates a new `HTMLElement`. Calling the function with no arguments generates a `HTMLDivElement`; calling the function with an element as the first argument generates an element of the argument’s type. You can optionally pass a list of children as well. Previously you would have to define the function as:
+>
+> ```ts
+> declare function create(): Container<HTMLDivElement, HTMLDivElement[]>;
+> declare function create<T extends HTMLElement>(element: T): Container<T, T[]>;
+> declare function create<T extends HTMLElement, U extends HTMLElement>(
+>   element: T,
+>   children: U[]
+> ): Container<T, U[]>;
+> ```
+>
+> With generic parameter defaults we can reduce it to:
+>
+> ```ts
+> declare function create<
+>   T extends HTMLElement = HTMLDivElement,
+>   U extends HTMLElement[] = T[]
+> >(element?: T, children?: U): Container<T, U>;
+>
+> const div = create();
+> // const div: Container<HTMLDivElement, HTMLDivElement[]>
+>
+> const p = create(new HTMLParagraphElement());
+> // const p: Container<HTMLParagraphElement, HTMLParagraphElement[]>
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/generics.html)
+
 ## Function Types
 
 ### Function Type Expression
