@@ -53,6 +53,8 @@
     - `typeof`
   - Indexed Access
   - Conditional Types
+    - General
+    - `infer`
 - **Function Types**
   - Function Type Expression
   - Call Signature
@@ -1319,6 +1321,8 @@ Adding new fields to an existing interface:
 
 ### Conditional Types
 
+#### General
+
 > _Conditional types_ help describe the relation between the types of inputs and outputs.
 >
 > ```ts
@@ -1420,6 +1424,8 @@ Adding new fields to an existing interface:
 > . . . We just found ourselves using conditional types to apply constraints and then extract out types. This ends up being such a common operation that conditional types make it easier.
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
+
+#### `infer`
 
 > ```ts
 > type Flatten<T> = T extends any[] ? T[number] : T;
