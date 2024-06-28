@@ -1776,13 +1776,13 @@ Adding new fields to an existing interface:
 > }
 > ```
 >
-> . . . This index signature states that when a StringArray is indexed with a > `number`, it will return a `string`.
+> . . . This index signature states that when a `StringArray` is indexed with a `number`, it will return a `string`.
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
 
 "Only some types are allowed for index signature properties: `string`, `number`, `symbol`, template string patterns, and union types consisting only of these." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
 
-"It is possible to support multiple types of indexers. Note that when using both `number` and `string` indexers, the type returned from a `numeric` indexer must be a subtype of the type returned from the `string` indexer. This is because when indexing with a `number`, JavaScript will actually convert that to a `string` before indexing into an object." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
+"It is possible to support multiple types of indexers. Note that when using both `number` and `string` indexers, the type returned from a numeric indexer must be a subtype of the type returned from the `string` indexer. This is because when indexing with a `number`, JavaScript will actually convert that to a `string` before indexing into an object." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
 
 > While `string` index signatures are a powerful way to describe the “dictionary” pattern, they also enforce that all properties match their return type. This is because a `string` index declares that `obj.property` is also available as `obj["property"]`. In the following example, `name`’s type does not match the `string` index’s type, and the type checker gives an error:
 >
