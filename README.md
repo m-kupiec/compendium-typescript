@@ -52,6 +52,7 @@
     - `keyof`
     - `typeof`
   - Indexed Access
+  - Conditional Types
 - **Function Types**
   - Function Type Expression
   - Call Signature
@@ -1315,6 +1316,27 @@ Adding new fields to an existing interface:
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/play/#code/C4TwDgpgBAChBOBnA9gOygXigbygQwHMIAuKVAVwFsAjBAbjL0pKkWHgEtUCG8AbDgDcW1ZMj4Q86AL50AUAHoFUALRqAxuWBqVc0JCgBrCCExQARIQjn5+6AEEiZuEjQBtYyAC6dIA)
+
+### Conditional Types
+
+> _Conditional types_ help describe the relation between the types of inputs and outputs.
+>
+> ```ts
+> interface Animal {
+>   live(): void;
+> }
+> interface Dog extends Animal {
+>   woof(): void;
+> }
+>
+> type Example1 = Dog extends Animal ? number : string;
+> // type Example1 = number
+>
+> type Example2 = RegExp extends Animal ? number : string;
+> // type Example2 = string
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
 
 ## Function Types
 
