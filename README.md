@@ -981,6 +981,18 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/generics.html)
 
+> We could also have used a different name for the generic type parameter in the type, so long as the number of type variables and how the type variables are used line up.
+>
+> ```ts
+> function identity<Type>(arg: Type): Type {
+>   return arg;
+> }
+>
+> let myIdentity: <Input>(arg: Input) => Input = identity;
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/generics.html)
+
 > An array with generics can describe the values that the array contains.
 >
 > ```ts
