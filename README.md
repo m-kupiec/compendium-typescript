@@ -71,6 +71,7 @@
   - Excess Property Checking
     - General
     - Workarounds
+- **Class Types**
 - **Miscellaneous**
   - Type Assertion
   - Non-Null Assertion Operator
@@ -1819,6 +1820,23 @@ Adding new fields to an existing interface:
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
 
 "Keep in mind that for simple code like above, you probably shouldn’t be trying to “get around” these checks. For more complex object literals that have methods and hold state, you might need to keep these techniques in mind, but a majority of excess property errors are actually bugs." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
+
+## Class Types
+
+### Generic Classes
+
+> ```ts
+> class GenericNumber<NumType> {
+>   zeroValue: NumType;
+>   add: (x: NumType, y: NumType) => NumType;
+> }
+>
+> let myGenericNumber = new GenericNumber<number>();
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/generics.html)
+
+"a class has two sides to its type: the static side and the instance side. Generic classes are only generic over their instance side rather than their static side, so when working with classes, static members can not use the class’s type parameter." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/generics.html))
 
 ## Miscellaneous
 
