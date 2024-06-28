@@ -1440,6 +1440,34 @@ Adding new fields to an existing interface:
 > Here, we used the `infer` keyword to declaratively introduce a new generic type variable named `Item` instead of specifying how to retrieve the element type of `Type` within the true branch. This frees us from having to think about how to dig through and probing apart the structure of the types we’re interested in.
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
 
+> We can write some useful helper type aliases using the `infer` keyword. For example, for simple cases, we can extract the return type out from function types:
+>
+> ```ts
+> type GetReturnType<Type> = Type extends (...args: never[]) => infer Return
+>   ? Return
+>   : never;
+>
+> type Num = GetReturnType<() => number>;
+> // type Num = number;
+>
+> type Str = GetReturnType<(x: string) => string>;
+> // type Str = string;
+>
+> type Bools = GetReturnType<(a: boolean, b: boolean) => boolean[]>;
+> // type Bools = boolean[];
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
+
+- > The reason `never[]` works is because it represents an array of no specific type, meaning the function could have any number of arguments of any type. In TypeScript, `never` is the bottom type that can be assigned to any type, making `never[]` compatible with any function's arguments. When you replace `never[]` with `any[]`, the behavior changes. `any[]` indicates an array of any type, but it implies that arguments are of type `any`. . . .
+  >
+  > - With `never[]`: `(x: string) => string` extends `(...args: never[]) => string`, so `Return` is `string`.
+  > - With `any[]`: `(x: string) => string` does not extend `(...args: any[]) => string` because the argument type `string` is not `any`.
+  >
+  > . . . The use of `never[]` works because it is a type that can fit any function argument list, making it flexible enough to match any function signature in the `extends` clause. When `any[]` is used, it imposes a type constraint that the function arguments must be of type `any`, which is not compatible with specific argument types like `string` or `boolean`. Hence, using `never[]` is the correct way to infer the return type of any function signature.
+  >
+  > ChatGPT
+
 ## Function Types
 
 ### Function Type Expression
