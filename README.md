@@ -963,6 +963,24 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/generics.html)
 
+> Let’s say that we’ve actually intended this function to work on arrays of `Type` rather than `Type` directly. . . .
+>
+> ```ts
+> function loggingIdentity<Type>(arg: Type[]): Type[] {
+>   // . . .
+> }
+> ```
+>
+> We can alternatively write the sample example this way:
+>
+> ```ts
+> function loggingIdentity<Type>(arg: Array<Type>): Array<Type> {
+>   // . . .
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/generics.html)
+
 > An array with generics can describe the values that the array contains.
 >
 > ```ts
