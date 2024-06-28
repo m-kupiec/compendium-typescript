@@ -1338,6 +1338,51 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
 
+> the power of conditional types comes from using them with generics. For example . . .
+>
+> ```ts
+> interface IdLabel {
+>   id: number /* some fields */;
+> }
+> interface NameLabel {
+>   name: string /* other fields */;
+> }
+>
+> function createLabel(id: number): IdLabel;
+> function createLabel(name: string): NameLabel;
+> function createLabel(nameOrId: string | number): IdLabel | NameLabel;
+> function createLabel(nameOrId: string | number): IdLabel | NameLabel {
+>   throw "unimplemented";
+> }
+> ```
+>
+> . . . For every new type `createLabel` can handle, the number of overloads grows exponentially. Instead, we can encode that logic in a conditional type:
+>
+> ```ts
+> type NameOrId<T extends number | string> = T extends number
+>   ? IdLabel
+>   : NameLabel;
+> ```
+>
+> We can then use that conditional type to simplify our overloads down to a single function with no overloads.
+>
+> ```ts
+> function createLabel<T extends number | string>(idOrName: T): NameOrId<T> {
+>   throw "unimplemented";
+> }
+>
+> let a = createLabel("typescript");
+> // let a: NameLabel
+>
+> let b = createLabel(2.8);
+> // let b: IdLabel
+>
+> let c = createLabel(Math.random() ? "hello" : 42);
+> // let c: NameLabel | IdLabel
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
+
 ## Function Types
 
 ### Function Type Expression
