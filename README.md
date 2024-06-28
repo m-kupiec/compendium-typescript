@@ -1421,6 +1421,19 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
 
+> ```ts
+> type Flatten<T> = T extends any[] ? T[number] : T;
+> ```
+>
+> Conditional types provide us with a way to infer from types we compare against in the true branch using the `infer` keyword. For example, we could have inferred the element type in `Flatten` instead of fetching it out “manually” with an indexed access type:
+>
+> ```ts
+> type Flatten<Type> = Type extends Array<infer Item> ? Item : Type;
+> ```
+>
+> Here, we used the `infer` keyword to declaratively introduce a new generic type variable named `Item` instead of specifying how to retrieve the element type of `Type` within the true branch. This frees us from having to think about how to dig through and probing apart the structure of the types we’re interested in.
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
+
 ## Function Types
 
 ### Function Type Expression
