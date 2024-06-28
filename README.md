@@ -1245,6 +1245,8 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/typeof-types.html)
 
+"it’s only legal to use `typeof` on identifiers (i.e. variable names) or their properties" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/typeof-types.html))
+
 ## Function Types
 
 ### Function Type Expression
