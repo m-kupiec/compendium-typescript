@@ -1306,6 +1306,16 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.>>html)
 
+> ```ts
+> type Person = { age: number; name: string; alive: boolean };
+>
+> type key = "age";
+> type Age = Person[key];
+> // type Age = number
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/play/#code/C4TwDgpgBAChBOBnA9gOygXigbygQwHMIAuKVAVwFsAjBAbjL0pKkWHgEtUCG8AbDgDcW1ZMj4Q86AL50AUAHoFUALRqAxuWBqVc0JCgBrCCExQARIQjn5+6AEEiZuEjQBtYyAC6dIA)
+
 ## Function Types
 
 ### Function Type Expression
