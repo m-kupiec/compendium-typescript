@@ -51,6 +51,7 @@
   - Type Operators
     - `keyof`
     - `typeof`
+  - Indexed Access
 - **Function Types**
   - Function Type Expression
   - Call Signature
@@ -1252,6 +1253,32 @@ Adding new fields to an existing interface:
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/typeof-types.html)
 
 "it’s only legal to use `typeof` on identifiers (i.e. variable names) or their properties" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/typeof-types.html))
+
+### Indexed Access
+
+> We can use an _indexed access type_ to look up a specific property on another type:
+>
+> ```ts
+> type Person = { age: number; name: string; alive: boolean };
+> type Age = Person["age"];
+> // type Age = number
+> ```
+>
+> The indexing type is itself a type, so we can use unions, `keyof`, or other types entirely:
+>
+> ```ts
+> type I1 = Person["age" | "name"];
+> // type I1 = string | number
+>
+> type I2 = Person[keyof Person];
+> // type I2 = string | number | boolean
+>
+> type AliveOrName = "alive" | "name";
+> type I3 = Person[AliveOrName];
+> // type I3 = string | boolean
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.>html)
 
 ## Function Types
 
