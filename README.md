@@ -1383,6 +1383,28 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
 
+> what if we wanted `MessageOf` to take any type, and default to something like `never` if a `message` property isn’t available? We can do this by . . .
+>
+> ```ts
+> type MessageOf<T> = T extends { message: unknown } ? T["message"] : never;
+>
+> interface Email {
+>   message: string;
+> }
+>
+> interface Dog {
+>   bark(): void;
+> }
+>
+> type EmailMessageContents = MessageOf<Email>;
+> // type EmailMessageContents = string
+>
+> type DogMessageContents = MessageOf<Dog>;
+> // type DogMessageContents = never
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
+
 ## Function Types
 
 ### Function Type Expression
