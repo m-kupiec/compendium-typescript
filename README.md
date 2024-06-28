@@ -993,6 +993,32 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/generics.html)
 
+> We can also write the generic type as a call signature of an object literal type:
+>
+> ```ts
+> function identity<Type>(arg: Type): Type {
+>   return arg;
+> }
+>
+> let myIdentity: { <Type>(arg: Type): Type } = identity;
+> ```
+>
+> Which leads us to writing . . . generic interface. . . .
+>
+> ```ts
+> interface GenericIdentityFn {
+>   <Type>(arg: Type): Type;
+> }
+>
+> function identity<Type>(arg: Type): Type {
+>   return arg;
+> }
+>
+> let myIdentity: GenericIdentityFn = identity;
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/generics.html)
+
 > An array with generics can describe the values that the array contains.
 >
 > ```ts
