@@ -1468,6 +1468,25 @@ Adding new fields to an existing interface:
   >
   > ChatGPT
 
+> When inferring from a type with multiple call signatures (such as the type of an overloaded function), inferences are made from the last signature (which, presumably, is the most permissive catch-all case). It is not possible to perform overload resolution based on a list of argument types.
+>
+> ```ts
+> type GetReturnType<Type> = Type extends (...args: never[]) => infer Return
+>   ? Return
+>   : never;
+>
+> // . . .
+>
+> declare function stringOrNum(x: string): number;
+> declare function stringOrNum(x: number): string;
+> declare function stringOrNum(x: string | number): string | number;
+>
+> type T1 = GetReturnType<typeof stringOrNum>;
+> // type T1 = strinng | number
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
+
 ## Function Types
 
 ### Function Type Expression
