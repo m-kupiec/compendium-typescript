@@ -1166,6 +1166,18 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/generics.html)
 
+> A generic parameter default follows the following rules:
+>
+> - A type parameter is deemed optional if it has a default.
+> - Required type parameters must not follow optional type parameters.
+> - Default types for a type parameter must satisfy the constraint for the type parameter, if it exists.
+> - When specifying type arguments, you are only required to specify type arguments for the required type parameters. Unspecified type parameters will resolve to their default types.
+> - If a default type is specified and inference cannot choose a candidate, the default type is inferred.
+> - A class or interface declaration that merges with an existing class or interface declaration may introduce a default for an existing type parameter.
+> - A class or interface declaration that merges with an existing class or interface declaration may introduce a new type parameter as long as it specifies a default.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/generics.html)
+
 ## Function Types
 
 ### Function Type Expression
