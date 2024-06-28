@@ -55,6 +55,7 @@
   - Conditional Types
     - General
     - `infer`
+    - Distributive Conditional Types
 - **Function Types**
   - Function Type Expression
   - Call Signature
@@ -1486,6 +1487,42 @@ Adding new fields to an existing interface:
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
+
+#### Distributive Conditional Types
+
+> When conditional types act on a generic type, they become _distributive_ when given a union type. . . . If we plug a union type into `ToArray`, then the conditional type will be applied to each member of that union.
+>
+> ```ts
+> type ToArray<Type> = Type extends any ? Type[] : never;
+>
+> type StrArrOrNumArr = ToArray<string | number>;
+> // type StrArrOrNumArr = string[] | number[]
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
+
+> Typically, distributivity is the desired behavior. To avoid that behavior, you can surround each side of the extends keyword with square brackets.
+>
+> ```ts
+> type ToArrayNonDist<Type> = [Type] extends [any] ? Type[] : never;
+>
+> // 'ArrOfStrOrNum' is no longer a union.
+> type ArrOfStrOrNum = ToArrayNonDist<string | number>;
+> // type ArrOfStrOrNum = (string | number)[]
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
+
+- > By default, TypeScript distributes conditional types over union types. This means if you have a conditional type that checks whether a type `T` extends another type `U`, and `T` is a union type, TypeScript will apply the conditional type check to each member of the union individually. . . . To prevent this distribution and ensure the conditional type is applied to the entire union type as a whole, you can use square brackets around the type in the extends clause. This prevents TypeScript from distributing the conditional type over each member of the union and instead treats the entire union as a single entity. . . . In this case, `ToArrayNonDist<string | number>` is evaluated as:
+  >
+  > ```ts
+  > type ArrOfStrOrNum = [string | number] extends [any]
+  >   ? (string | number)[]
+  >   : never;
+  > ```
+  >
+  > ChatGPT
+- I checked that `[Type] extends any` would also work
 
 ## Function Types
 
