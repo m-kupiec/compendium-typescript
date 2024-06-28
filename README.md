@@ -1405,6 +1405,22 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
 
+> we could also write a type called `Flatten` that flattens array types to their element types, but leaves them alone otherwise:
+>
+> ```ts
+> type Flatten<T> = T extends any[] ? T[number] : T;
+>
+> // Extracts out the element type.
+> type Str = Flatten<string[]>;
+> // type Str = string;
+>
+> // Leaves the type alone.
+> type Num = Flatten<number>;
+> // type Num = number;
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
+
 ## Function Types
 
 ### Function Type Expression
