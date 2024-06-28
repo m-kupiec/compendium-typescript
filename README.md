@@ -1403,9 +1403,7 @@ Adding new fields to an existing interface:
 > // type DogMessageContents = never
 > ```
 >
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
-
-> we could also write a type called `Flatten` that flattens array types to their element types, but leaves them alone otherwise:
+> . . . we could also write a type called `Flatten` that flattens array types to their element types, but leaves them alone otherwise:
 >
 > ```ts
 > type Flatten<T> = T extends any[] ? T[number] : T;
@@ -1418,6 +1416,8 @@ Adding new fields to an existing interface:
 > type Num = Flatten<number>;
 > // type Num = number;
 > ```
+>
+> . . . We just found ourselves using conditional types to apply constraints and then extract out types. This ends up being such a common operation that conditional types make it easier.
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
 
