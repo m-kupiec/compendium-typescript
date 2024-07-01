@@ -56,6 +56,8 @@
     - General
     - `infer`
     - Distributive Conditional Types
+  - Mapped Types
+    - General
 - **Function Types**
   - Function Type Expression
   - Call Signature
@@ -1523,6 +1525,39 @@ Adding new fields to an existing interface:
   >
   > ChatGPT
 - I checked that `[Type] extends any` would also work
+
+### Mapped Types
+
+#### General
+
+"sometimes a type needs to be based on another type." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html))
+
+"Mapped types . . . are used to declare the types of properties which have not been declared ahead of time" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html))
+
+> A mapped type is a generic type which uses a union of `PropertyKey`s (frequently created via a `keyof`) to iterate through keys to create a type:
+>
+> ```ts
+> type OptionsFlags<Type> = {
+>   [Property in keyof Type]: boolean;
+> };
+>
+> // . . .
+>
+> type Features = {
+>   darkMode: () => void;
+>   newUserProfile: () => void;
+> };
+>
+> type FeatureOptions = OptionsFlags<Features>;
+> /*
+> type FeatureOptions = {
+>   darkMode: boolean;
+>   newUserProfile: boolean;
+> };
+> */
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
 
 ## Function Types
 
