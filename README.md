@@ -59,6 +59,7 @@
   - Mapped Types
     - General
     - Mapping Modifiers
+    - Key Remapping
 - **Function Types**
   - Function Type Expression
   - Call Signature
@@ -1605,6 +1606,88 @@ Adding new fields to an existing interface:
 >   name: string;
 >   age: number;
 > };
+> */
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
+
+#### Key Remapping
+
+> In TypeScript 4.1 and onwards, you can re-map keys in mapped types with an `as` clause in a mapped type:
+>
+> ```ts
+> type MappedTypeWithNewProperties<Type> = {
+>   [Properties in keyof Type as NewKeyType]: Type[Properties];
+> };
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
+
+> You can leverage features like template literal types to create new property names from prior ones:
+>
+> ```ts
+> type Getters<Type> = {
+> // prettier-ignore
+>   [Property in keyof Type as `get${Capitalize<string & Property>}`]: () => Type[Property];
+> };
+>
+> interface Person {
+>   name: string;
+>   age: number;
+>   location: string;
+> }
+>
+> type LazyPerson = Getters<Person>;
+> /*
+> type LazyPerson = {
+>   getName: () => string;
+>   getAge: () => number;
+>   getLocation: () => string;
+> }
+> */
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
+
+> You can filter out keys by producing `never` via a conditional type:
+>
+> ```ts
+> // Remove the 'kind' property
+> type RemoveKindField<Type> = {
+>   [Property in keyof Type as Exclude<Property, "kind">]: Type[Property];
+> };
+>
+> interface Circle {
+>   kind: "circle";
+>   radius: number;
+> }
+>
+> type KindlessCircle = RemoveKindField<Circle>;
+> /*
+> type KindlessCircle = {
+>   radius: number;
+> }
+> */
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
+
+> You can map over arbitrary unions, not just unions of `string | number | symbol`, but unions of any type:
+>
+> ```ts
+> type EventConfig<Events extends { kind: string }> = {
+>   [E in Events as E["kind"]]: (event: E) => void;
+> };
+>
+> type SquareEvent = { kind: "square"; x: number; y: number };
+> type CircleEvent = { kind: "circle"; radius: number };
+>
+> type Config = EventConfig<SquareEvent | CircleEvent>;
+> /*
+> type Config = {
+>   square: (event: SquareEvent) => void;
+>   circle: (event: CircleEvent) => void;
+> }
 > */
 > ```
 >
