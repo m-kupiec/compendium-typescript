@@ -1693,6 +1693,31 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
 
+> Mapped types work well with other . . . type manipulation . . . for example here is a mapped type using a conditional type which returns either a `true` or `false` depending on whether an object has the property `pii` set to the literal `true`:
+>
+> ```ts
+> type ExtractPII<Type> = {
+>   [Property in keyof Type]: Type[Property] extends { pii: true }
+>     ? true
+>     : false;
+> };
+>
+> type DBFields = {
+>   id: { format: "incrementing" };
+>   name: { type: string; pii: true };
+> };
+>
+> type ObjectsNeedingGDPRDeletion = ExtractPII<DBFields>;
+> /*
+> type ObjectsNeedingGDPRDeletion = {
+>   id: false;
+>   name: true;
+> }
+> */
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
+
 ## Function Types
 
 ### Function Type Expression
