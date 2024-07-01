@@ -1721,6 +1721,8 @@ Adding new fields to an existing interface:
 
 ### Template Literal Types
 
+"Template literal types build on string literal types, and have the ability to expand into many strings via unions." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/template-literal-types.>html))
+
 > When used with concrete literal types, a template literal produces a new string literal type by concatenating the contents.
 >
 > ```ts
