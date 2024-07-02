@@ -67,6 +67,7 @@
       - `Uppercase<StringType>`
       - `Lowercase<StringType>`
       - `Capitalize<StringType>`
+      - `Uncapitalize<StringType>`
 - **Function Types**
   - Function Type Expression
   - Call Signature
@@ -1887,6 +1888,16 @@ Adding new fields to an existing interface:
 > type LowercaseGreeting = "hello, world";
 > type Greeting = Capitalize<LowercaseGreeting>;
 > // type Greeting = "Hello, world"
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html)
+
+##### `Uncapitalize<StringType>`
+
+> ```ts
+> type UppercaseGreeting = "HELLO WORLD";
+> type UncomfortableGreeting = Uncapitalize<UppercaseGreeting>;
+> // type UncomfortableGreeting = "hELLO WORLD"
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html)
