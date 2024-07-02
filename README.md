@@ -1765,6 +1765,80 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html)
 
+> ```ts
+> type PropEventSource<Type> = {
+>   on(
+>     eventName: `${string & keyof Type}Changed`,
+>     callback: (newValue: any) => void
+>   ): void;
+> };
+>
+> /// Create a "watched object" with an `on` method
+> /// so that you can watch for changes to properties.
+> declare function makeWatchedObject<Type>(
+>   obj: Type
+> ): Type & PropEventSource<Type>;
+>
+> // . . .
+>
+> const person = makeWatchedObject({
+>   firstName: "Saoirse",
+>   lastName: "Ronan",
+>   age: 26,
+> });
+>
+> person.on("firstNameChanged", () => {});
+>
+> // Prevent easy human error (using the key instead of the event name)
+> person.on("firstName", () => {});
+>
+> // It's typo-resistant
+> person.on("frstNameChanged", () => {});
+> ```
+>
+> ```ts
+> Argument of type '"firstName"' is not assignable to parameter of type '"firstNameChanged" | "lastNameChanged" | "ageChanged"'.
+>
+> Argument of type '"frstNameChanged"' is not assignable to parameter of type '"firstNameChanged" | "lastNameChanged" | "ageChanged"'.
+> ```
+>
+> . . .
+>
+> Notice that we did not benefit from all the information provided in the original passed object. Given change of a `firstName` (i.e. a `firstNameChanged` event), we should expect that the callback will receive an argument of type `string`. Similarly, the callback for a change to `age` should receive a `number` argument. We’re naively using `any` to type the callback’s argument.
+>
+> ```ts
+> type PropEventSource<Type> = {
+>   on<Key extends string & keyof Type>(
+>     eventName: `${Key}Changed`,
+>     callback: (newValue: Type[Key]) => void
+>   ): void;
+> };
+>
+> declare function makeWatchedObject<Type>(
+>   obj: Type
+> ): Type & PropEventSource<Type>;
+>
+> const person = makeWatchedObject({
+>   firstName: "Saoirse",
+>   lastName: "Ronan",
+>   age: 26,
+> });
+>
+> person.on("firstNameChanged", (newName) => {
+>   /* (parameter) newName: string */
+>   console.log(`new name is ${newName.toUpperCase()}`);
+> });
+>
+> person.on("ageChanged", (newAge) => {
+>   /* (parameter) newAge: number */
+>   if (newAge < 0) {
+>     console.warn("warning! negative age");
+>   }
+> });
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html)
+
 ## Function Types
 
 ### Function Type Expression
