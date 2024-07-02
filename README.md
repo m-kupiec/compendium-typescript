@@ -61,6 +61,8 @@
     - Mapping Modifiers
     - Key Remapping
   - Template Literal Types
+    - General
+    - String Manipulation Types
 - **Function Types**
   - Function Type Expression
   - Call Signature
@@ -1721,6 +1723,8 @@ Adding new fields to an existing interface:
 
 ### Template Literal Types
 
+#### General
+
 "Template literal types build on string literal types, and have the ability to expand into many strings via unions." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/template-literal-types.>html))
 
 > When used with concrete literal types, a template literal produces a new string literal type by concatenating the contents.
@@ -1838,6 +1842,12 @@ Adding new fields to an existing interface:
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html)
+
+#### String Manipulation Types
+
+##### General
+
+"TypeScript includes a set of types which can be used in string manipulation. These types come built-in to the compiler for performance and can’t be found in the `.d.ts` files included with TypeScript." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html))
 
 ## Function Types
 
