@@ -100,6 +100,7 @@
     - Accessors
     - Index Signatures
     - Member Visibility
+      - General
       - Public
       - Protected
       - Private
@@ -2817,6 +2818,25 @@ Adding new fields to an existing interface:
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
 #### Member Visibility
+
+##### General
+
+> Like other aspects of TypeScript’s type system, `private` and `protected` are only enforced during type checking. This means that JavaScript runtime constructs like `in` or simple property lookup can still access a private or protected member:
+>
+> ```ts
+> class MySafe {
+>   private secretKey = 12345;
+> }
+> ```
+>
+> ```js
+> // In a JavaScript file...
+> const s = new MySafe();
+> // Will print 12345
+> console.log(s.secretKey);
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
 ##### Public
 
