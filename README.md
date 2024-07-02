@@ -1854,6 +1854,22 @@ Adding new fields to an existing interface:
 
 "TypeScript includes a set of types which can be used in string manipulation. These types come built-in to the compiler for performance and can’t be found in the `.d.ts` files included with TypeScript." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html))
 
+> The code, as of TypeScript 4.1, for these intrinsic functions uses the JavaScript string runtime functions directly for manipulation and are not locale aware.
+>
+> ```js
+> function applyStringMapping(symbol: Symbol, str: string) {
+>   switch (intrinsicTypeKinds.get(symbol.escapedName as string)) {
+>     case IntrinsicTypeKind.Uppercase: return str.toUpperCase();
+>     case IntrinsicTypeKind.Lowercase: return str.toLowerCase();
+>     case IntrinsicTypeKind.Capitalize: return str.charAt(0).toUpperCase() + str.slice(1);
+>     case IntrinsicTypeKind.Uncapitalize: return str.charAt(0).toLowerCase() + str.slice(1);
+>   }
+>   return str;
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html)
+
 ##### `Uppercase<StringType>`
 
 > ```ts
