@@ -3021,6 +3021,20 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
+> ```ts
+> class Box<Type> {
+>   static defaultValue: Type;
+> }
+> ```
+>
+> ```ts
+> Static members cannot reference class type parameters.
+> ```
+>
+> . . . The `static` members of a generic class can never refer to the class’s type parameters.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
 ### Inheritance
 
 #### `implements` Clause
