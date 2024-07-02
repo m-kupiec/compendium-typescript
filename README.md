@@ -2978,6 +2978,31 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
+> ```ts
+> "use strict";
+> class Dog {
+>   #barkAmount = 0;
+>   personality = "happy";
+>   constructor() {}
+> }
+> ```
+>
+> When compiling to ES2021 or less, TypeScript will use WeakMaps in place of `#`.
+>
+> ```js
+> "use strict";
+> var _Dog_barkAmount;
+> class Dog {
+>   constructor() {
+>     _Dog_barkAmount.set(this, 0);
+>     this.personality = "happy";
+>   }
+> }
+> _Dog_barkAmount = new WeakMap();
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
 ### Inheritance
 
 #### `implements` Clause
