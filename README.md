@@ -2678,6 +2678,34 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
+> Fields may be prefixed with the `readonly` modifier. This prevents assignments to the field outside of the constructor.
+>
+> ```ts
+> class Greeter {
+>   readonly name: string = "world";
+>
+>   constructor(otherName?: string) {
+>     if (otherName !== undefined) {
+>       this.name = otherName;
+>     }
+>   }
+>
+>   err() {
+>     this.name = "not ok"; // Error
+>   }
+> }
+> const g = new Greeter();
+> g.name = "also not ok"; // Error
+> ```
+>
+> ```ts
+> Cannot assign to 'name' because it is a read-only property.
+>
+> Cannot assign to 'name' because it is a read-only property.
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
 ### Generic Classes
 
 > ```ts
