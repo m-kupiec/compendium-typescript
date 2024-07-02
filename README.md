@@ -101,6 +101,7 @@
     - Index Signatures
     - Member Visibility
       - Public
+      - Protected
   - Inheritance
     - `implements` Clause
     - `extends` Clause
@@ -2833,6 +2834,55 @@ Adding new fields to an existing interface:
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
 "Because `public` is already the default visibility modifier, you don’t ever need to write it on a class member, but might choose to do so for style/readability reasons." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html))
+
+##### Protected
+
+> `protected` members are only visible to subclasses of the class they’re declared in.
+>
+> ```ts
+> class Greeter {
+>   public greet() {
+>     console.log("Hello, " + this.getName());
+>   }
+>   protected getName() {
+>     return "hi";
+>   }
+> }
+>
+> class SpecialGreeter extends Greeter {
+>   public howdy() {
+>     // OK to access protected member here
+>     console.log("Howdy, " + this.getName());
+>   }
+> }
+> const g = new SpecialGreeter();
+> g.greet(); // OK
+> g.getName(); // Error
+> ```
+>
+> ```ts
+> Property 'getName' is protected and only accessible within class 'Greeter' and its subclasses.
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
+> Derived classes need to follow their base class contracts, but may choose to expose a subtype of base class with more capabilities. This includes making `protected` members `public`:
+>
+> ```ts
+> class Base {
+>   protected m = 10;
+> }
+> class Derived extends Base {
+>   // No modifier, so default is 'public'
+>   m = 15;
+> }
+> const d = new Derived();
+> console.log(d.m); // OK
+> ```
+>
+> Note that `Derived` was already able to freely read and write `m`, so this doesn’t meaningfully alter the “security” of this situation. The main thing to note here is that in the derived class, we need to be careful to repeat the `protected` modifier if this exposure isn’t intentional.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
 ### Inheritance
 
