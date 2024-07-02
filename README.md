@@ -95,6 +95,7 @@
 - **Class Types**
   - Fields
   - Constructors
+  - Methods
   - Generic Classes
   - Constructor Functions
 - **Miscellaneous**
@@ -2733,6 +2734,22 @@ Adding new fields to an existing interface:
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
 "Forgetting to call `super` is an easy mistake to make in JavaScript, but TypeScript will tell you when it’s necessary." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html))
+
+### Methods
+
+> ```ts
+> class Point {
+>   x = 10;
+>   y = 10;
+>
+>   scale(n: number): void {
+>     this.x *= n;
+>     this.y *= n;
+>   }
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
 ### Generic Classes
 
