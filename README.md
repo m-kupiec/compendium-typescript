@@ -102,6 +102,7 @@
   - Inheritance
     - `implements` Clause
     - `extends` Clause
+    - Type-Only Field Declarations
   - Generic Classes
   - Constructor Functions
 - **Miscellaneous**
@@ -2951,6 +2952,38 @@ Adding new fields to an existing interface:
 > const b: Base = new Derived();
 > // Crashes because "name" will be undefined
 > b.greet();
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
+#### Type-Only Field Declarations
+
+> When `target >= ES2022` or `useDefineForClassFields` is `true`, class fields are initialized after the parent class constructor completes, overwriting any value set by the parent class. This can be a problem when you only want to re-declare a more accurate type for an inherited field. To handle these cases, you can write `declare` to indicate to TypeScript that there should be no runtime effect for this field declaration.
+>
+> ```ts
+> interface Animal {
+>   dateOfBirth: any;
+> }
+>
+> interface Dog extends Animal {
+>   breed: any;
+> }
+>
+> class AnimalHouse {
+>   resident: Animal;
+>   constructor(animal: Animal) {
+>     this.resident = animal;
+>   }
+> }
+>
+> class DogHouse extends AnimalHouse {
+>   // Does not emit JavaScript code,
+>   // only ensures the types are correct
+>   declare resident: Dog;
+>   constructor(dog: Dog) {
+>     super(dog);
+>   }
+> }
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
