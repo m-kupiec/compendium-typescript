@@ -93,11 +93,12 @@
     - General
     - Workarounds
 - **Class Types**
-  - Fields
-  - Constructors
-  - Methods
-  - Accessors
-  - Index Signatures
+  - Class Memebers
+    - Fields
+    - Constructors
+    - Methods
+    - Accessors
+    - Index Signatures
   - Generic Classes
   - Constructor Functions
 - **Miscellaneous**
@@ -2647,7 +2648,9 @@ Adding new fields to an existing interface:
 
 ## Class Types
 
-### Fields
+### Class Memebers
+
+#### Fields
 
 > The `strictPropertyInitialization` setting controls whether class fields need to be initialized in the constructor.
 >
@@ -2710,7 +2713,7 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
-### Constructors
+#### Constructors
 
 > ```ts
 > class Point {
@@ -2737,7 +2740,7 @@ Adding new fields to an existing interface:
 
 "Forgetting to call `super` is an easy mistake to make in JavaScript, but TypeScript will tell you when it’s necessary." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html))
 
-### Methods
+#### Methods
 
 > ```ts
 > class Point {
@@ -2753,7 +2756,7 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
-### Accessors
+#### Accessors
 
 > TypeScript has some special inference rules for accessors:
 >
@@ -2789,7 +2792,7 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
-### Index Signatures
+#### Index Signatures
 
 > ```ts
 > class MyClass {
