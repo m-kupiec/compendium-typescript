@@ -104,6 +104,7 @@
       - Public
       - Protected
       - Private
+    - Static Members
   - Inheritance
     - `implements` Clause
     - `extends` Clause
@@ -2999,6 +3000,23 @@ Adding new fields to an existing interface:
 >   }
 > }
 > _Dog_barkAmount = new WeakMap();
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
+#### Static Members
+
+> Static members can also use the same `public`, `protected`, and `private` visibility modifiers:
+>
+> ```
+> class MyClass {
+> private static x = 0;
+> }
+> console.log(MyClass.x);
+> ```
+>
+> ```ts
+> Property 'x' is private and only accessible within class 'MyClass'.
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
