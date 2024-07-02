@@ -93,6 +93,8 @@
     - General
     - Workarounds
 - **Class Types**
+  - Generic Classes
+  - Constructor Functions
 - **Miscellaneous**
   - Type Assertion
   - Non-Null Assertion Operator
