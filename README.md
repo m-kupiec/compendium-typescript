@@ -94,6 +94,7 @@
     - Workarounds
 - **Class Types**
   - Fields
+  - Constructors
   - Generic Classes
   - Constructor Functions
 - **Miscellaneous**
@@ -2703,6 +2704,31 @@ Adding new fields to an existing interface:
 >
 > Cannot assign to 'name' because it is a read-only property.
 > ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
+### Constructors
+
+> ```ts
+> class Point {
+>   x: number = 0;
+>   y: number = 0;
+>
+>   // Constructor overloads
+>   constructor(x: number, y: number);
+>   constructor(xy: string);
+>   constructor(x: string | number, y: number = 0) {
+>     // Code logic here
+>   }
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
+> There are just a few differences between class constructor signatures and function signatures:
+>
+> - Constructors can’t have type parameters - these belong on the outer class declaration, which we’ll learn about later
+> - Constructors can’t have return type annotations - the class instance type is always what’s returned
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
