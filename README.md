@@ -102,6 +102,7 @@
     - Member Visibility
       - Public
       - Protected
+      - Private
   - Inheritance
     - `implements` Clause
     - `extends` Clause
@@ -2881,6 +2882,53 @@ Adding new fields to an existing interface:
 > ```
 >
 > Note that `Derived` was already able to freely read and write `m`, so this doesn’t meaningfully alter the “security” of this situation. The main thing to note here is that in the derived class, we need to be careful to repeat the `protected` modifier if this exposure isn’t intentional.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
+##### Private
+
+> `private` is like `protected`, but doesn’t allow access to the member even from subclasses:
+>
+> ```ts
+> class Base {
+>   private x = 0;
+> }
+> const b = new Base();
+> // Can't access from outside the class
+> console.log(b.x);
+> ```
+>
+> ```ts
+> Property 'x' is private and only accessible within class 'Base'.
+> ```
+>
+> ```ts
+> class Derived extends Base {
+>   showX() {
+>     // Can't access in subclasses
+>     console.log(this.x);
+>   }
+> }
+> ```
+>
+> ```ts
+> Property 'x' is private and only accessible within class 'Base'.
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
+> TypeScript does allow cross-instance `private` access:
+>
+> ```ts
+> class A {
+>   private x = 10;
+>
+>   public sameAs(other: A) {
+>     // No error
+>     return other.x === this.x;
+>   }
+> }
+> ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
