@@ -63,6 +63,8 @@
   - Template Literal Types
     - General
     - String Manipulation Types
+      - General
+      - `Uppercase<StringType>`
 - **Function Types**
   - Function Type Expression
   - Call Signature
@@ -1848,6 +1850,20 @@ Adding new fields to an existing interface:
 ##### General
 
 "TypeScript includes a set of types which can be used in string manipulation. These types come built-in to the compiler for performance and can’t be found in the `.d.ts` files included with TypeScript." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html))
+
+##### `Uppercase<StringType>`
+
+> ```ts
+> type Greeting = "Hello, world";
+> type ShoutyGreeting = Uppercase<Greeting>;
+> // type ShoutyGreeting = "HELLO, WORLD"
+>
+> type ASCIICacheKey<Str extends string> = `ID-${Uppercase<Str>}`;
+> type MainID = ASCIICacheKey<"my_app">;
+> // type MainID = "ID-MY_APP"
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html)
 
 ## Function Types
 
