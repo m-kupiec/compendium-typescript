@@ -2952,6 +2952,30 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
+> `private` also allows access using bracket notation during type checking. This makes `private`-declared fields potentially easier to access for things like unit tests, with the drawback that these fields are _soft private_ and don’t strictly enforce privacy.
+>
+> ```ts
+> class MySafe {
+>   private secretKey = 12345;
+> }
+>
+> const s = new MySafe();
+>
+> // Not allowed during type checking
+> console.log(s.secretKey); // Error
+>
+> // OK
+> console.log(s["secretKey"]);
+> ```
+>
+> ```ts
+> Property 'secretKey' is private and only accessible within class 'MySafe'.
+> ```
+>
+> Unlike TypeScripts’s `private`, JavaScript’s private fields (`#`) remain private after compilation and do not provide the previously mentioned escape hatches like bracket notation access, making them _hard private_.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
 ### Inheritance
 
 #### `implements` Clause
