@@ -99,6 +99,8 @@
     - Methods
     - Accessors
     - Index Signatures
+    - Member Visibility
+      - Public
   - Inheritance
     - `implements` Clause
     - `extends` Clause
@@ -2811,6 +2813,26 @@ Adding new fields to an existing interface:
 > Because the index signature type needs to also capture the types of methods, it’s not easy to usefully use these types. Generally it’s better to store indexed data in another place instead of on the class instance itself.
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
+#### Member Visibility
+
+##### Public
+
+> The default visibility of class members is `public`. A `public` member can be accessed anywhere:
+>
+> ```ts
+> class Greeter {
+>   public greet() {
+>     console.log("hi!");
+>   }
+> }
+> const g = new Greeter();
+> g.greet();
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
+"Because `public` is already the default visibility modifier, you don’t ever need to write it on a class member, but might choose to do so for style/readability reasons." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html))
 
 ### Inheritance
 
