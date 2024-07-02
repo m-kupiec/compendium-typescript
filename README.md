@@ -2907,6 +2907,8 @@ Adding new fields to an existing interface:
 
 ##### Private
 
+"If you need to protect values in your class from malicious actors, you should use mechanisms that offer hard runtime privacy, such as closures, WeakMaps, or private fields. Note that these added privacy checks during runtime could affect performance." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html))
+
 > `private` is like `protected`, but doesn’t allow access to the member even from subclasses:
 >
 > ```ts
