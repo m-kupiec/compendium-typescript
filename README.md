@@ -66,6 +66,7 @@
       - General
       - `Uppercase<StringType>`
       - `Lowercase<StringType>`
+      - `Capitalize<StringType>`
 - **Function Types**
   - Function Type Expression
   - Call Signature
@@ -1876,6 +1877,16 @@ Adding new fields to an existing interface:
 > type ASCIICacheKey<Str extends string> = `id-${Lowercase<Str>}`;
 > type MainID = ASCIICacheKey<"MY_APP">;
 > // type MainID = "id-my_app"
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html)
+
+##### `Capitalize<StringType>`
+
+> ```ts
+> type LowercaseGreeting = "hello, world";
+> type Greeting = Capitalize<LowercaseGreeting>;
+> // type Greeting = "Hello, world"
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html)
