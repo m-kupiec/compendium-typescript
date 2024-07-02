@@ -93,6 +93,7 @@
     - General
     - Workarounds
 - **Class Types**
+  - Fields
   - Generic Classes
   - Constructor Functions
 - **Miscellaneous**
@@ -2641,6 +2642,41 @@ Adding new fields to an existing interface:
 "Keep in mind that for simple code like above, you probably shouldn’t be trying to “get around” these checks. For more complex object literals that have methods and hold state, you might need to keep these techniques in mind, but a majority of excess property errors are actually bugs." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
 
 ## Class Types
+
+### Fields
+
+> The `strictPropertyInitialization` setting controls whether class fields need to be initialized in the constructor.
+>
+> ```ts
+> class BadGreeter {
+>   name: string; // Error
+> }
+> ```
+>
+> ```ts
+> Property 'name' has no initializer and is not definitely assigned in the >constructor.
+> ```
+>
+> ```ts
+> class GoodGreeter {
+>   name: string;
+>
+>   constructor() {
+>     this.name = "hello";
+>   }
+> }
+> ```
+>
+> Note that the field needs to be initialized _in the constructor itself_. . . . If you intend to definitely initialize a field through means other than the constructor (for example, maybe an external library is filling in part of your class for you), you can use the _definite assignment assertion operator_, `!`:
+>
+> ```ts
+> class OKGreeter {
+>   // Not initialized, but no error
+>   name!: string;
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
 ### Generic Classes
 
