@@ -96,6 +96,7 @@
   - Fields
   - Constructors
   - Methods
+  - Accessors
   - Generic Classes
   - Constructor Functions
 - **Miscellaneous**
@@ -2745,6 +2746,42 @@ Adding new fields to an existing interface:
 >   scale(n: number): void {
 >     this.x *= n;
 >     this.y *= n;
+>   }
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
+### Accessors
+
+> TypeScript has some special inference rules for accessors:
+>
+> - If get exists but no set, the property is automatically readonly
+> - If the type of the setter parameter is not specified, it is inferred from the return type of the getter
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
+> Since TypeScript 4.3, it is possible to have accessors with different types for getting and setting.
+>
+> ```ts
+> class Thing {
+>   _size = 0;
+>
+>   get size(): number {
+>     return this._size;
+>   }
+>
+>   set size(value: string | number | boolean) {
+>     let num = Number(value);
+>
+>     // Don't allow NaN, Infinity, etc
+>
+>     if (!Number.isFinite(num)) {
+>       this._size = 0;
+>       return;
+>     }
+>
+>     this._size = num;
 >   }
 > }
 > ```
