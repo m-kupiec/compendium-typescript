@@ -4374,6 +4374,67 @@ Cons:
 
 "There is a mis-match in features between CommonJS and ES Modules regarding the distinction between a default import and a module namespace object import. TypeScript has a compiler flag to reduce the friction between the two different sets of constraints with `esModuleInterop`." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/modules.html))
 
+"All communication between modules happens via a module loader, the compiler option `module` determines which one is used. At runtime the module loader is responsible for locating and executing all dependencies of a module before executing it." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/modules.html))
+
+"Why care about TypeScript’s `module` emit with a bundler or with Bun, where you’re likely also setting `noEmit`? TypeScript’s type checking and module resolution behavior are affected by the module format that it would emit. Setting `module` gives TypeScript information about how your bundler or runtime will process imports and exports, which ensures that the types you see on imported values accurately reflect what will happen at runtime or after bundling." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/modules.html))
+
+> `module`:
+>
+> Default: `CommonJS` if target is `ES3` or `ES5`; `ES6`/`ES2015` otherwise.
+>
+> Changing `module` affects `moduleResolution` . . . Here’s some example output for this file:
+>
+> ```ts
+> // @filename: index.ts
+> import { valueOfPi } from "./constants";
+>
+> export const twoPi = valueOfPi * 2;
+> ```
+>
+> `CommonJS`
+>
+> ```js
+> "use strict";
+> Object.defineProperty(exports, "__esModule", { value: true });
+> exports.twoPi = void 0;
+> const constants_1 = require("./constants");
+> exports.twoPi = constants_1.valueOfPi * 2;
+> ```
+>
+> . . .
+>
+> `ESNext`
+>
+> ```js
+> import { valueOfPi } from "./constants";
+> export const twoPi = valueOfPi * 2;
+> ```
+>
+> `ES2015`/`ES6`/`ES2020`/`ES2022`
+>
+> ```js
+> import { valueOfPi } from "./constants";
+> export const twoPi = valueOfPi * 2;
+> ```
+>
+> In addition to the base functionality of `ES2015`/`ES6`, `ES2020` adds support for dynamic imports, and `import.meta` while `ES2022` further adds support for top level `await`.
+>
+> . . .
+>
+> `preserve`
+>
+> In `--module preserve` (added in TypeScript 5.4), ECMAScript imports and exports written in input files are preserved in the output, and CommonJS-style `import x = require("...")` and `export = ...` statements are emitted as CommonJS require and `module.exports`. In other words, the format of each individual import or export statement is preserved, rather than being coerced into a single format for the whole compilation (or even a whole file).
+>
+> ```js
+> import { valueOfPi } from "./constants";
+> const constants = require("./constants");
+> export const piSquared = valueOfPi * constants.valueOfPi;
+> ```
+>
+> While it’s rare to need to mix imports and require calls in the same file, this module mode best reflects the capabilities of most modern bundlers, as well as the Bun runtime.
+>
+> [TypeScript](https://www.typescriptlang.org/tsconfig/#module)
+
 "Module resolution is the process of taking a string from the `import` or `require` statement, and determining what file that string refers to. TypeScript includes two resolution strategies: Classic and Node. Classic, the default when the compiler option `module` is not `commonjs`, is included for backwards compatibility. The Node strategy replicates how Node.js works in CommonJS mode, with additional checks for `.ts` and `.d.ts`. There are many TSConfig flags which influence the module strategy within TypeScript: `moduleResolution`, `baseUrl`, `paths`, `rootDirs`." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/modules.html))
 
 ### Output
