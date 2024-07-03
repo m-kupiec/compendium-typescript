@@ -4442,3 +4442,13 @@ Cons:
 "although there were errors, the . . . file is still created. You can use TypeScript even if there are errors in your code. But in this case, TypeScript is warning that your code will likely not run as expected." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-tooling-in-5-minutes.html))
 
 "If, for instance, you don’t want TypeScript to compile to JavaScript in the face of errors, you can use the `noEmitOnError` option." ([TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html))
+
+> `noEmit`:
+>
+> Do not emit compiler output files like JavaScript source code, source-maps or declarations.
+>
+> This makes room for another tool like Babel, or swc to handle converting the TypeScript file to a file which can run inside a JavaScript environment.
+>
+> You can then use TypeScript as a tool for providing editor integration, and as a source code type-checker.
+>
+> [TypeScript](https://www.typescriptlang.org/tsconfig/#noEmit)
