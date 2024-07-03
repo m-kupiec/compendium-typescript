@@ -3804,6 +3804,26 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#assertion-functions)
 
+> The first type of assertion signature models the way that Node’s `assert` function works. It ensures that whatever condition is being checked must be true for the remainder of the containing scope. . . . `asserts condition` says that whatever gets passed into the `condition` parameter must be `true` if the `assert` returns (because otherwise it would throw an error). That means that for the rest of the scope, that condition must be truthy. As an example, using this assertion function means we do catch our original yell example.
+>
+> ```ts
+> function yell(str) {
+>   assert(typeof str === "string");
+>   return str.toUppercase();
+>   //         ~~~~~~~~~~~
+>   // error: Property 'toUppercase' does not exist on type 'string'.
+>   //        Did you mean 'toUpperCase'?
+> }
+>
+> function assert(condition: any, msg?: string): asserts condition {
+>   if (!condition) {
+>     throw new AssertionError(msg);
+>   }
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#assertion-functions)
+
 ### Type Literals
 
 > ```ts
