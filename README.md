@@ -113,6 +113,7 @@
   - `this` Parameter
   - `this` Type
   - Abstract Classes
+  - Abstract Contruct Signatures
   - Constructor Signatures
   - Constructor Functions
 - **Miscellaneous**
@@ -3522,6 +3523,57 @@ Adding new fields to an existing interface:
 >
 > ```ts
 > Non-abstract class 'Derived' does not implement all abstract members of 'Base'
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
+### Abstract Contruct Signatures
+
+> ```ts
+> abstract class Base {
+>   abstract getName(): string;
+>
+>   printName() {
+>     console.log("Hello, " + this.getName());
+>   }
+> }
+>
+> // . . .
+>
+> class Derived extends Base {
+>   getName() {
+>     return "world";
+>   }
+> }
+> ```
+>
+> . . . Sometimes you want to accept some class constructor function that produces an instance of a class which derives from some abstract class. For example, you might want to write this code:
+>
+> ```ts
+> function greet(ctor: typeof Base) {
+>   const instance = new ctor(); // Error
+>   instance.printName();
+> }
+> ```
+>
+> ```ts
+> Cannot create an instance of an abstract class.
+> ```
+>
+> . . . Instead, you want to write a function that accepts something with a construct signature:
+>
+> ```ts
+> function greet(ctor: new () => Base) {
+>   const instance = new ctor();
+>   instance.printName();
+> }
+> greet(Derived);
+> greet(Base); // Error
+> ```
+>
+> ```ts
+> Argument of type 'typeof Base' is not assignable to parameter of type 'new () => Base'.
+>   Cannot assign an abstract constructor type to a non-abstract constructor type.
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
