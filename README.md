@@ -147,7 +147,7 @@
 - **Configuration**
   - General
   - Modules
-- **Output**
+  - Output
 
 # Overview
 
@@ -4376,7 +4376,7 @@ Cons:
 
 "Module resolution is the process of taking a string from the `import` or `require` statement, and determining what file that string refers to. TypeScript includes two resolution strategies: Classic and Node. Classic, the default when the compiler option `module` is not `commonjs`, is included for backwards compatibility. The Node strategy replicates how Node.js works in CommonJS mode, with additional checks for `.ts` and `.d.ts`. There are many TSConfig flags which influence the module strategy within TypeScript: `moduleResolution`, `baseUrl`, `paths`, `rootDirs`." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/modules.html))
 
-## Output
+### Output
 
 "although there were errors, the . . . file is still created. You can use TypeScript even if there are errors in your code. But in this case, TypeScript is warning that your code will likely not run as expected." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-tooling-in-5-minutes.html))
 
