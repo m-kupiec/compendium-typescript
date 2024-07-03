@@ -111,6 +111,7 @@
     - Type-Only Field Declarations
   - Generic Classes
   - `this` Parameter
+  - `this` Type
   - Constructor Functions
 - **Miscellaneous**
   - Type Assertion
@@ -3301,6 +3302,74 @@ Adding new fields to an existing interface:
 > - JavaScript callers might still use the class method incorrectly without realizing it
 > - Only one function per class definition gets allocated, rather than one per class instance
 > - Base method definitions can still be called via `super`.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
+### `this` Type
+
+"In classes, a special type called `this` refers dynamically to the type of the current class." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html))
+
+> ```ts
+> class Box {
+>   contents: string = "";
+>   set(value: string) {
+>     // (method) Box.set(value: string): this
+>     this.contents = value;
+>     return this;
+>   }
+> }
+> ```
+>
+> Here, TypeScript inferred the return type of `set` to be `this`, rather than `Box`. . . .
+>
+> ```ts
+> class ClearableBox extends Box {
+>   clear() {
+>     this.contents = "";
+>   }
+> }
+>
+> const a = new ClearableBox();
+> const b = a.set("hello");
+> // const b: ClearableBox
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
+> You can also use `this` in a parameter type annotation:
+>
+> ```ts
+> class Box {
+>   content: string = "";
+>   sameAs(other: this) {
+>     return other.content === this.content;
+>   }
+> }
+> ```
+>
+> This is different from writing `other: Box` — if you have a derived class, its `sameAs` method will now only accept other instances of that same derived class:
+>
+> ```ts
+> class Box {
+>   content: string = "";
+>   sameAs(other: this) {
+>     return other.content === this.content;
+>   }
+> }
+>
+> class DerivedBox extends Box {
+>   otherContent: string = "?";
+> }
+>
+> const base = new Box();
+> const derived = new DerivedBox();
+> derived.sameAs(base); // Error
+> ```
+>
+> ```ts
+> Argument of type 'Box' is not assignable to parameter of type 'DerivedBox'.
+> Property 'otherContent' is missing in type 'Box' but required in type 'DerivedBox'.
+> ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
