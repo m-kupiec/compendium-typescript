@@ -3419,6 +3419,31 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
+> A common use-case for a `this`-based type guard is to allow for lazy validation of a particular field. For example, this case removes an `undefined` from the value held inside `box` when `hasValue` has been verified to be `true`:
+>
+> ```ts
+> class Box<T> {
+>   value?: T;
+>
+>   hasValue(): this is { value: T } {
+>     return this.value !== undefined;
+>   }
+> }
+>
+> const box = new Box<string>();
+> box.value = "Gameboy";
+>
+> box.value;
+> // (property) Box<string>.value?: string
+>
+> if (box.hasValue()) {
+>   box.value;
+>   // (property) value: string
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
 ### Constructor Functions
 
 > When creating factories in TypeScript using generics, it is necessary to refer to class types by their constructor functions. For example,
