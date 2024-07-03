@@ -93,6 +93,7 @@
     - General
     - Workarounds
 - **Class Types**
+  - Structural Comparison
   - Class Memebers
     - Fields
     - Constructors
@@ -2662,6 +2663,66 @@ Adding new fields to an existing interface:
 "Keep in mind that for simple code like above, you probably shouldn’t be trying to “get around” these checks. For more complex object literals that have methods and hold state, you might need to keep these techniques in mind, but a majority of excess property errors are actually bugs." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
 
 ## Class Types
+
+### Structural Comparison
+
+"In most cases, classes in TypeScript are compared structurally, the same as other types." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html))
+
+> these two classes can be used in place of each other because they’re identical:
+>
+> ```ts
+> class Point1 {
+>   x = 0;
+>   y = 0;
+> }
+>
+> class Point2 {
+>   x = 0;
+>   y = 0;
+> }
+>
+> // OK
+> const p: Point1 = new Point2();
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
+> subtype relationships between classes exist even if there’s no explicit inheritance:
+>
+> ```ts
+> class Person {
+>   name: string;
+>   age: number;
+> }
+>
+> class Employee {
+>   name: string;
+>   age: number;
+>   salary: number;
+> }
+>
+> // OK
+> const p: Person = new Employee();
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
+> Empty classes have no members. In a structural type system, a type with no members is generally a supertype of anything else. So if you write an empty class (don’t!), anything can be used in place of it:
+>
+> ```ts
+> class Empty {}
+>
+> function fn(x: Empty) {
+>   // can't do anything with 'x', so I won't
+> }
+>
+> // All OK!
+> fn(window);
+> fn({});
+> fn(fn);
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
 ### Class Memebers
 
