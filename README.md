@@ -3864,6 +3864,20 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/>typescript-3-7.html#assertion-functions)
 
+> We can express some fairly sophisticated ideas with these.
+>
+> ```ts
+> function assertIsDefined<T>(val: T): asserts val is NonNullable<T> {
+>   if (val === undefined || val === null) {
+>     throw new AssertionError(
+>       `Expected 'val' to be defined, but received ${val}`
+>     );
+>   }
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/>typescript-3-7.html#assertion-functions)
+
 ### Type Literals
 
 > ```ts
