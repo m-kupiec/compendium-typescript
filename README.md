@@ -123,6 +123,7 @@
   - Type Literals
   - Type Predicate
   - Modules
+    - General
     - Importing Modules
     - Exporting from Modules
     - Using Libraries
@@ -3890,6 +3891,20 @@ Cons:
 "classes can use `this is Type` to narrow their type." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/narrowing.html))
 
 ### Modules
+
+#### General
+
+> In TypeScript, just as in ECMAScript 2015, any file containing a top-level `import` or `export` is considered a module. . . . The JavaScript specification declares that any JavaScript files without an `import` declaration, `export`, or top-level `await` should be considered a script and not a module. . . . If you have a file that doesn’t currently have any `import`s or `export`s, but you want to be treated as a module, add the line:
+>
+> ```ts
+> export {};
+> ```
+>
+> which will change the file to be a module exporting nothing. This syntax works regardless of your module target.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/modules.html)
+
+"Inside a script file variables and types are declared to be in the shared global scope, and it’s assumed that you’ll either use the `outFile` compiler option to join multiple input files into one output file, or use multiple `<script>` tags in your HTML to load these files (in the correct order!)." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/modules.html))
 
 #### Importing Modules
 
