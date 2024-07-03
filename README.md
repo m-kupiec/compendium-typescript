@@ -124,6 +124,7 @@
   - Type Predicate
   - Modules
     - General
+    - Using Types in Modules
     - Importing Modules
     - Exporting from Modules
     - Using Libraries
@@ -3905,6 +3906,63 @@ Cons:
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/modules.html)
 
 "Inside a script file variables and types are declared to be in the shared global scope, and it’s assumed that you’ll either use the `outFile` compiler option to join multiple input files into one output file, or use multiple `<script>` tags in your HTML to load these files (in the correct order!)." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/modules.html))
+
+#### Using Types in Modules
+
+> Types can be exported and imported using the same syntax as JavaScript values:
+>
+> ```ts
+> // @filename: animal.ts
+> export type Cat = { breed: string; yearOfBirth: number };
+>
+> export interface Dog {
+>   breeds: string[];
+>   yearOfBirth: number;
+> }
+>
+> // @filename: app.ts
+> import { Cat, Dog } from "./animal.js";
+> type Animals = Cat | Dog;
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/modules.html)
+
+> TypeScript has extended the `import` syntax with two concepts for declaring an import of a type:
+>
+> `import type` | Which is an import statement which can only import types:
+>
+> ```ts
+> // @filename: animal.ts
+> export type Cat = { breed: string; yearOfBirth: number };
+> export type Dog = { breeds: string[]; yearOfBirth: number };
+> export const createCatName = () => "fluffy";
+>
+> // @filename: valid.ts
+> import type { Cat, Dog } from "./animal.js";
+> export type Animals = Cat | Dog;
+>
+> // @filename: app.ts
+> import type { createCatName } from "./animal.js";
+> const name = createCatName();
+> ```
+>
+> ```ts
+> 'createCatName' cannot be used as a value because it was imported using 'import type'.
+> ```
+>
+> Inline `type` imports | TypeScript 4.5 also allows for individual imports to be prefixed with `type` to indicate that the imported reference is a type:
+>
+> ```ts
+> // @filename: app.ts
+> import { createCatName, type Cat, type Dog } from "./animal.js";
+>
+> export type Animals = Cat | Dog;
+> const name = createCatName();
+> ```
+>
+> Together these allow a non-TypeScript transpiler like Babel, swc or esbuild to know what imports can be safely removed.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/modules.html)
 
 #### Importing Modules
 
