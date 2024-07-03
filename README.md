@@ -120,6 +120,7 @@
 - **Miscellaneous**
   - Type Assertion
   - Non-Null Assertion Operator
+  - Assertion Signatures
   - Type Literals
   - Type Predicate
   - Modules
@@ -3778,6 +3779,30 @@ Adding new fields to an existing interface:
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
+
+### Assertion Signatures
+
+> There’s a specific set of functions that throw an error if something unexpected happened. They’re called “assertion” functions. As an example, Node.js has a dedicated function for this called assert.
+>
+> ```js
+> assert(someValue === 42);
+> ```
+>
+> In this example if `someValue` isn’t equal to `42`, then `assert` will throw an `AssertionError`.
+>
+> Assertions in JavaScript are often used to guard against improper types being passed in. For example,
+>
+> ```js
+> function multiply(x, y) {
+>   assert(typeof x === "number");
+>   assert(typeof y === "number");
+>   return x * y;
+> }
+> ```
+>
+> Unfortunately in TypeScript these checks could never be properly encoded. . . TypeScript 3.7 introduces a new concept called “assertion signatures” which model these assertion functions.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#assertion-functions)
 
 ### Type Literals
 
