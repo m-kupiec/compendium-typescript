@@ -124,6 +124,7 @@
   - Type Predicate
   - Modules
     - General
+    - `namespaces`
     - Using Types in Modules
     - Importing Modules
     - Exporting from Modules
@@ -3908,6 +3909,10 @@ Cons:
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/modules.html)
 
 "Inside a script file variables and types are declared to be in the shared global scope, and it’s assumed that you’ll either use the `outFile` compiler option to join multiple input files into one output file, or use multiple `<script>` tags in your HTML to load these files (in the correct order!)." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/modules.html))
+
+#### `namespaces`
+
+"TypeScript has its own module format called `namespaces` which pre-dates the ES Modules standard. This syntax has a lot of useful features for creating complex definition files, and still sees active use in DefinitelyTyped. While not deprecated, the majority of the features in namespaces exist in ES Modules and we recommend you use that to align with JavaScript’s direction." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/modules.html))
 
 #### Using Types in Modules
 
