@@ -112,6 +112,7 @@
   - Generic Classes
   - `this` Parameter
   - `this` Type
+  - Abstract Classes
   - Constructor Signatures
   - Constructor Functions
 - **Miscellaneous**
@@ -3468,6 +3469,59 @@ Adding new fields to an existing interface:
 >   box.value;
 >   // (property) value: string
 > }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
+### Abstract Classes
+
+"Classes, methods, and fields in TypeScript may be _abstract_. An _abstract method_ or _abstract field_ is one that hasn’t had an implementation provided. These members must exist inside an _abstract class_" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html))
+
+"When a class doesn’t have any abstract members, it is said to be _concrete_." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html))
+
+"The role of abstract classes is to serve as a base class for subclasses which do implement all the abstract members." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html))
+
+> an _abstract class_ . . . cannot be directly instantiated. . . .
+>
+> ```ts
+> abstract class Base {
+>   abstract getName(): string;
+>
+>   printName() {
+>     console.log("Hello, " + this.getName());
+>   }
+> }
+>
+> const b = new Base(); // Error
+> ```
+>
+> ```ts
+> Cannot create an instance of an abstract class.
+> ```
+>
+> . . . we need to make a derived class and implement the abstract members:
+>
+> ```ts
+> class Derived extends Base {
+>   getName() {
+>     return "world";
+>   }
+> }
+>
+> const d = new Derived();
+> d.printName();
+> ```
+>
+> Notice that if we forget to implement the base class’s abstract members, we’ll get an error:
+>
+> ```ts
+> class Derived extends Base {
+>   // forgot to do anything
+> }
+> ```
+>
+> ```ts
+> Non-abstract class 'Derived' does not implement all abstract members of 'Base'
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
