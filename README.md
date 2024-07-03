@@ -3824,6 +3824,46 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#assertion-functions)
 
+> The other type of assertion signature doesn’t check for a condition, but instead tells TypeScript that a specific variable or property has a different type.
+>
+> ```ts
+> function assertIsString(val: any): asserts val is string {
+>   if (typeof val !== "string") {
+>     throw new AssertionError("Not a string!");
+>   }
+> }
+> ```
+>
+> Here `asserts val is string` ensures that after any call to `assertIsString`, any variable passed in will be known to be a `string`.
+>
+> ```ts
+> function yell(str: any) {
+>   assertIsString(str);
+>   // Now TypeScript knows that 'str' is a 'string'.
+>   return str.toUppercase();
+>   //         ~~~~~~~~~~~
+>   // error: Property 'toUppercase' does not exist on type 'string'.
+>   //        Did you mean 'toUpperCase'?
+> }
+> ```
+>
+> These assertion signatures are very similar to writing type predicate signatures:
+>
+> ```ts
+> function isString(val: any): val is string {
+>   return typeof val === "string";
+> }
+>
+> function yell(str: any) {
+>   if (isString(str)) {
+>     return str.toUppercase();
+>   }
+>   throw "Oops!";
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/>typescript-3-7.html#assertion-functions)
+
 ### Type Literals
 
 > ```ts
