@@ -2752,6 +2752,33 @@ Adding new fields to an existing interface:
 
 "Forgetting to call `super` is an easy mistake to make in JavaScript, but TypeScript will tell you when it’s necessary." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html))
 
+> TypeScript offers special syntax for turning a constructor parameter into a class property with the same name and value. These are called _parameter properties_ and are created by prefixing a constructor argument with one of the visibility modifiers `public`, `private`, `protected`, or `readonly`. The resulting field gets those modifier(s):
+>
+> ```ts
+> class Params {
+>   constructor(
+>     public readonly x: number,
+>     protected y: number,
+>     private z: number
+>   ) {
+>     // No body necessary
+>   }
+> }
+>
+> const a = new Params(1, 2, 3);
+>
+> console.log(a.x);
+> // (property) Params.x: number
+>
+> console.log(a.z); // Error
+> ```
+>
+> ```ts
+> Property 'z' is private and only accessible within class 'Params'.
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
 #### Methods
 
 > ```ts
