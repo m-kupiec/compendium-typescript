@@ -112,6 +112,7 @@
   - Generic Classes
   - `this` Parameter
   - `this` Type
+  - Constructor Signatures
   - Constructor Functions
 - **Miscellaneous**
   - Type Assertion
@@ -3467,6 +3468,34 @@ Adding new fields to an existing interface:
 >   box.value;
 >   // (property) value: string
 > }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
+### Constructor Signatures
+
+> JavaScript classes are instantiated with the `new` operator. Given the type of a class itself, the `InstanceType` utility type models this operation.
+>
+> ```ts
+> class Point {
+>   createdAt: number;
+>   x: number;
+>   y: number;
+>   constructor(x: number, y: number) {
+>     this.createdAt = Date.now();
+>     this.x = x;
+>     this.y = y;
+>   }
+> }
+> type PointInstance = InstanceType<typeof Point>;
+>
+> function moveRight(point: PointInstance) {
+>   point.x += 5;
+> }
+>
+> const point = new Point(3, 4);
+> moveRight(point);
+> point.x; // => 8
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
