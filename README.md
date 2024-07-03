@@ -145,6 +145,8 @@
 ### Compiler
 
 - **Configuration**
+  - General
+  - Modules
 - **Output**
 
 # Overview
@@ -4335,6 +4337,8 @@ Cons:
 
 ## Configuration
 
+### General
+
 > TypeScript uses a file called `tsconfig.json` for managing your project’s options, such as which files you want to include, and what sorts of checking you want to perform. Let’s create a bare-bones one for our project:
 >
 > ```json
@@ -4365,6 +4369,12 @@ Cons:
 >   TypeScript will also warn about unreachable code and labels, which you can disable with `allowUnreachableCode` and `allowUnusedLabels` respectively.
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
+
+### Modules
+
+"There is a mis-match in features between CommonJS and ES Modules regarding the distinction between a default import and a module namespace object import. TypeScript has a compiler flag to reduce the friction between the two different sets of constraints with `esModuleInterop`." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/modules.html))
+
+"Module resolution is the process of taking a string from the `import` or `require` statement, and determining what file that string refers to. TypeScript includes two resolution strategies: Classic and Node. Classic, the default when the compiler option `module` is not `commonjs`, is included for backwards compatibility. The Node strategy replicates how Node.js works in CommonJS mode, with additional checks for `.ts` and `.d.ts`. There are many TSConfig flags which influence the module strategy within TypeScript: `moduleResolution`, `baseUrl`, `paths`, `rootDirs`." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/modules.html))
 
 ## Output
 
