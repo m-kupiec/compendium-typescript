@@ -78,7 +78,7 @@
     - Specifying Type Arguments
   - Optional & Default Parameters
   - Overloads
-  - Using `this`
+  - `this` Parameter
   - Rest Parameters & Arguments
     - Parameters
     - Arguments
@@ -110,7 +110,7 @@
     - `extends` Clause
     - Type-Only Field Declarations
   - Generic Classes
-  - Using `this`
+  - `this` Parameter
   - Constructor Functions
 - **Miscellaneous**
   - Type Assertion
@@ -2309,7 +2309,7 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
 
-### Using `this`
+### `this` Parameter
 
 > ```ts
 > interface User {
@@ -3229,7 +3229,7 @@ Adding new fields to an existing interface:
 
 "a class has two sides to its type: the static side and the instance side. Generic classes are only generic over their instance side rather than their static side, so when working with classes, static members can not use the class’s type parameter." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/generics.html))
 
-### Using `this`
+### `this` Parameter
 
 > JavaScript’s handling of this is indeed unusual:
 >
