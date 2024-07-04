@@ -122,6 +122,7 @@
   - Constructor Functions
   - Decorators
     - General
+    - Basic Usage
     - Legacy Decorators
     - Using with `export` Statements
 - **Miscellaneous**
@@ -3791,6 +3792,49 @@ Comparison:
 "Decorators are an upcoming ECMAScript feature that allow us to customize classes and their members in a reusable way. . . . Decorators can be used on more than just methods! They can be used on properties/fields, getters, setters, and auto-accessors. Even classes themselves can be decorated for things like subclassing and registration." ([TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators))
 
 "One of the most powerful features of TypeScript is decorators. Decorators allow developers to add metadata or modify the behavior of classes, methods, properties, and parameters, making it easier to write and maintain large-scale applications." ([DEV](https://dev.to/pipaliyachirag/mastering-typescript-50-decorators-the-ultimate-guide-26f0))
+
+#### Basic Usage
+
+> ```ts
+> class Person {
+>   name: string;
+>   constructor(name: string) {
+>     this.name = name;
+>   }
+>
+>   @loggedMethod
+>   greet() {
+>     console.log(`Hello, my name is ${this.name}.`);
+>   }
+> }
+>
+> const p = new Person("Ray");
+> p.greet();
+>
+> // . . .
+>
+> function loggedMethod(originalMethod: any, _context: any) {
+>   function replacementMethod(this: any, ...args: any[]) {
+>     console.log("LOG: Entering method.");
+>     const result = originalMethod.call(this, ...args);
+>     console.log("LOG: Exiting method.");
+>     return result;
+>   }
+>   return replacementMethod;
+> }
+>
+> // . . .
+>
+> // Output:
+> //
+> //   LOG: Entering method.
+> //   Hello, my name is Ray.
+> //   LOG: Exiting method.
+> ```
+>
+> We just used `loggedMethod` as a decorator above `greet` - and notice that we wrote it as `@loggedMethod`. When we did that, it got called with the method _target_ and a _context object_. Because `loggedMethod` returned a new function, that function replaced the original definition of `greet`.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators)
 
 #### Legacy Decorators
 
