@@ -28,6 +28,7 @@
   - `unknown`
   - `never`
   - `void`
+  - Type Literals
 - **Type Definition**
   - Overview
   - Type Annotation
@@ -119,10 +120,11 @@
   - Constructor Functions
 - **Miscellaneous**
   - Type Assertion
-  - Non-Null Assertion Operator
-  - Assertion Signatures
-  - Type Literals
-  - Type Predicate
+    - `as` Keyword
+    - Non-Null Assertion Operator
+  - Custom Control Flow Analysis
+    - Type Predicates
+    - Assertion Signatures
   - Modules
     - General
     - `namespaces`
@@ -654,6 +656,43 @@ Steps in the process of moving from JavaScript to TypeScript:
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
+
+### Type Literals
+
+> ```ts
+> declare function handleRequest(url: string, method: "GET" | "POST"): void;
+>
+> const req = { url: "https://example.com", method: "GET" };
+> handleRequest(req.url, req.method);
+> ```
+>
+> ```ts
+> Argument of type 'string' is not assignable to parameter of type '"GET" | "POST"'.
+> ```
+>
+> In the above example `req.method` is inferred to be string, not `"GET"`.
+>
+> There are two ways to work around this.
+>
+> 1.  You can change the inference by adding a type assertion in either location:
+>
+>     ```ts
+>     // Change 1:
+>     const req = { url: "https://example.com", method: "GET" as "GET" };
+>     // Change 2
+>     handleRequest(req.url, req.method as "GET");
+>     ```
+>
+>     Change 1 means “I intend for req.method to always have the _literal_ type `"GET"`”, preventing the possible assignment of `"GUESS"` to that field after. Change 2 means >“I know for other reasons that `req.method` has the value `"GET"`“.
+>
+> 2.  You can use `as const` to convert the entire object to be type literals:
+>
+>     ```ts
+>     const req = { url: "https://example.com", method: "GET" } as const;
+>     handleRequest(req.url, req.method);
+>     ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
 
 ## Type Definition
 
@@ -3725,6 +3764,8 @@ Adding new fields to an existing interface:
 
 ### Type Assertion
 
+#### `as` Keyword
+
 > Sometimes you will have information about the type of a value that TypeScript can’t know about. For example, if you’re using `document.getElementById`, TypeScript only knows that this will return _some_ kind of `HTMLElement`, but you might know that your page will always have an `HTMLCanvasElement` with a given ID. In this situation, you can use a _type assertion_ to specify a more specific type:
 >
 > ```ts
@@ -3766,7 +3807,7 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
 
-### Non-Null Assertion Operator
+#### Non-Null Assertion Operator
 
 "a special syntax for removing `null` and `undefined` from a type without doing any explicit checking. Writing `!` after any expression is effectively a type assertion that the value isn’t `null` or `undefined`" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
 
@@ -3780,7 +3821,87 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
 
-### Assertion Signatures
+### Custom Control Flow Analysis
+
+#### Type Predicates
+
+"To define a user-defined type guard, we simply need to define a function whose return type is a _type predicate_" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/narrowing.html))
+
+"_Type Predicate Functions_ are functions that return a `boolean` value and have a particular return type syntax. A _type predicate_ is a type assertion that checks if an object has a specific property or set of properties. This allows TypeScript to narrow (or refine) the type of an object based on the result of the function." ([Matias Hernández](https://matiashernandez.dev/blog/post/what-are-type-predicates-in-typescript))
+
+Pros:
+
+> One of the major advantages of type predicate functions is that they provide a way to express complex type relationships in a readable and understandable way. They allow you to define custom functions that not only perform a specific task but also return a boolean value that tells TypeScript whether a variable is of a particular type. This can make your code more expressive and self-documenting.
+>
+> They can also be useful when you need to perform dynamic type checks on an object. For example, imagine you have a function that takes an object as an argument, but you’re not sure whether the object has a specific property. With a type predicate function, you can check for the presence of that property and narrow the type of the object to include that property.
+>
+> [Matias Hernández](https://matiashernandez.dev/blog/post/>>what-are-type-predicates-in-typescript)
+
+Cons:
+
+> the most important problem of this functions is a risk, there is an easy way to introduce bugs to the process. You can wirte incorrect predicates leading to unexpected or undesired type narrowing. This can result in runtime errors or unexpected behavior, which can be difficult to diagnose and fix.
+>
+> Type predicates ressembles the use (and pitfalls) of using `as` for type assertions, you can lie to the type system, it equals to say “I know more about this type than the compiler” and force the type to be the desired one, as an example:
+>
+> ```ts
+> function isString(x: unknown): x is string {
+>   return typeof x === "number";
+> }
+> ```
+>
+> The above example check if `x` is a `number`, and if that is `true` then the predicate say that the variable is a `string`. If later you use that type predicate, TS assume that the variable is an `string` and the type safety will be lost.
+>
+> [Matias Hernández](https://matiashernandez.dev/blog/post/>what-are-type-predicates-in-typescript)
+
+> ```ts
+> function isFish(pet: Fish | Bird): pet is Fish {
+>   return (pet as Fish).swim !== undefined;
+> }
+> ```
+>
+> `pet is Fish` is our type predicate in this example. A predicate takes the form `parameterName is Type`, where `parameterName` must be the name of a parameter from the current function signature. Any time `isFish` is called with some variable, TypeScript will narrow that variable to that specific type if the original type is compatible.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)
+
+> ```ts
+> // Both calls to 'swim' and 'fly' are now okay.
+> let pet = getSmallPet();
+>
+> if (isFish(pet)) {
+>   pet.swim();
+> } else {
+>   pet.fly();
+> }
+> ```
+>
+> Notice that TypeScript not only knows that `pet` is a `Fish` in the `if` branch; it also knows that in the `else` branch, you don’t have a `Fish`, so you must have a `Bird`.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)
+
+> You may use the type guard `isFish` to filter an array of `Fish | Bird` and obtain an array of `Fish`:
+>
+> ```ts
+> const zoo: (Fish | Bird)[] = [getSmallPet(), getSmallPet(), getSmallPet()];
+> const underWater1: Fish[] = zoo.filter(isFish);
+> // or, equivalently
+> const underWater2: Fish[] = zoo.filter(isFish) as Fish[];
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)
+
+> ```ts
+> // The predicate may need repeating for more complex examples
+> const underWater3: Fish[] = zoo.filter((pet): pet is Fish => {
+>   if (pet.name === "sharkey") return false;
+>   return isFish(pet);
+> });
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)
+
+"classes can use `this is Type` to narrow their type." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/narrowing.html))
+
+#### Assertion Signatures
 
 > There’s a specific set of functions that throw an error if something unexpected happened. They’re called “assertion” functions. As an example, Node.js has a dedicated function for this called assert.
 >
@@ -3921,121 +4042,6 @@ Comparison of type predicates and assertion signatures:
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/cheatsheets/)
-
-### Type Literals
-
-> ```ts
-> declare function handleRequest(url: string, method: "GET" | "POST"): void;
->
-> const req = { url: "https://example.com", method: "GET" };
-> handleRequest(req.url, req.method);
-> ```
->
-> ```ts
-> Argument of type 'string' is not assignable to parameter of type '"GET" | "POST"'.
-> ```
->
-> In the above example `req.method` is inferred to be string, not `"GET"`.
->
-> There are two ways to work around this.
->
-> 1.  You can change the inference by adding a type assertion in either location:
->
->     ```ts
->     // Change 1:
->     const req = { url: "https://example.com", method: "GET" as "GET" };
->     // Change 2
->     handleRequest(req.url, req.method as "GET");
->     ```
->
->     Change 1 means “I intend for req.method to always have the _literal_ type `"GET"`”, preventing the possible assignment of `"GUESS"` to that field after. Change 2 means >“I know for other reasons that `req.method` has the value `"GET"`“.
->
-> 2.  You can use `as const` to convert the entire object to be type literals:
->
->     ```ts
->     const req = { url: "https://example.com", method: "GET" } as const;
->     handleRequest(req.url, req.method);
->     ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
-
-### Type Predicate
-
-"To define a user-defined type guard, we simply need to define a function whose return type is a _type predicate_" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/narrowing.html))
-
-"_Type Predicate Functions_ are functions that return a `boolean` value and have a particular return type syntax. A _type predicate_ is a type assertion that checks if an object has a specific property or set of properties. This allows TypeScript to narrow (or refine) the type of an object based on the result of the function." ([Matias Hernández](https://matiashernandez.dev/blog/post/what-are-type-predicates-in-typescript))
-
-Pros:
-
-> One of the major advantages of type predicate functions is that they provide a way to express complex type relationships in a readable and understandable way. They allow you to define custom functions that not only perform a specific task but also return a boolean value that tells TypeScript whether a variable is of a particular type. This can make your code more expressive and self-documenting.
->
-> They can also be useful when you need to perform dynamic type checks on an object. For example, imagine you have a function that takes an object as an argument, but you’re not sure whether the object has a specific property. With a type predicate function, you can check for the presence of that property and narrow the type of the object to include that property.
->
-> [Matias Hernández](https://matiashernandez.dev/blog/post/>>what-are-type-predicates-in-typescript)
-
-Cons:
-
-> the most important problem of this functions is a risk, there is an easy way to introduce bugs to the process. You can wirte incorrect predicates leading to unexpected or undesired type narrowing. This can result in runtime errors or unexpected behavior, which can be difficult to diagnose and fix.
->
-> Type predicates ressembles the use (and pitfalls) of using `as` for type assertions, you can lie to the type system, it equals to say “I know more about this type than the compiler” and force the type to be the desired one, as an example:
->
-> ```ts
-> function isString(x: unknown): x is string {
->   return typeof x === "number";
-> }
-> ```
->
-> The above example check if `x` is a `number`, and if that is `true` then the predicate say that the variable is a `string`. If later you use that type predicate, TS assume that the variable is an `string` and the type safety will be lost.
->
-> [Matias Hernández](https://matiashernandez.dev/blog/post/>what-are-type-predicates-in-typescript)
-
-> ```ts
-> function isFish(pet: Fish | Bird): pet is Fish {
->   return (pet as Fish).swim !== undefined;
-> }
-> ```
->
-> `pet is Fish` is our type predicate in this example. A predicate takes the form `parameterName is Type`, where `parameterName` must be the name of a parameter from the current function signature. Any time `isFish` is called with some variable, TypeScript will narrow that variable to that specific type if the original type is compatible.
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)
-
-> ```ts
-> // Both calls to 'swim' and 'fly' are now okay.
-> let pet = getSmallPet();
->
-> if (isFish(pet)) {
->   pet.swim();
-> } else {
->   pet.fly();
-> }
-> ```
->
-> Notice that TypeScript not only knows that `pet` is a `Fish` in the `if` branch; it also knows that in the `else` branch, you don’t have a `Fish`, so you must have a `Bird`.
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)
-
-> You may use the type guard `isFish` to filter an array of `Fish | Bird` and obtain an array of `Fish`:
->
-> ```ts
-> const zoo: (Fish | Bird)[] = [getSmallPet(), getSmallPet(), getSmallPet()];
-> const underWater1: Fish[] = zoo.filter(isFish);
-> // or, equivalently
-> const underWater2: Fish[] = zoo.filter(isFish) as Fish[];
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)
-
-> ```ts
-> // The predicate may need repeating for more complex examples
-> const underWater3: Fish[] = zoo.filter((pet): pet is Fish => {
->   if (pet.name === "sharkey") return false;
->   return isFish(pet);
-> });
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)
-
-"classes can use `this is Type` to narrow their type." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/narrowing.html))
 
 ### Modules
 
