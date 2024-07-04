@@ -1419,6 +1419,8 @@ Comparison:
 
 #### General
 
+"great for building libraries, describing existing JavaScript code . . . you may find you rarely reach for them in mostly TypeScript applications." ([TypeScript](https://www.typescriptlang.org/cheatsheets/))
+
 > _Conditional types_ help describe the relation between the types of inputs and outputs.
 >
 > ```ts
