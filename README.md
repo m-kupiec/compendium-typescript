@@ -1623,6 +1623,8 @@ Comparison:
 
 #### General
 
+"great for building libraries, describing existing JavaScript code . . . you may find you rarely reach for them in mostly TypeScript applications." ([TypeScript](https://www.typescriptlang.org/cheatsheets/))
+
 "sometimes a type needs to be based on another type." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html))
 
 "Mapped types . . . are used to declare the types of properties which have not been declared ahead of time" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html))
