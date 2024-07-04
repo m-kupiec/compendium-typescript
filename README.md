@@ -120,6 +120,8 @@
   - Abstract Contruct Signatures
   - Constructor Signatures
   - Constructor Functions
+  - Decorators
+    - General
 - **Miscellaneous**
   - Type Assertion
     - `as` Keyword
@@ -3779,6 +3781,14 @@ Comparison:
 > This pattern is used to power the mixins design pattern.
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/generics.html)
+
+### Decorators
+
+#### General
+
+"Decorators are an upcoming ECMAScript feature that allow us to customize classes and their members in a reusable way. . . . Decorators can be used on more than just methods! They can be used on properties/fields, getters, setters, and auto-accessors. Even classes themselves can be decorated for things like subclassing and registration." ([TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators))
+
+"One of the most powerful features of TypeScript is decorators. Decorators allow developers to add metadata or modify the behavior of classes, methods, properties, and parameters, making it easier to write and maintain large-scale applications." ([DEV](https://dev.to/pipaliyachirag/mastering-typescript-50-decorators-the-ultimate-guide-26f0))
 
 ## Miscellaneous
 
