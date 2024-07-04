@@ -893,6 +893,14 @@ Limitations of type aliases:
 - "Type aliases may not participate in declaration merging, but interfaces can." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
 - "Using interfaces with extends can often be more performant for the compiler than type aliases with intersections" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
 
+Comparison:
+
+> **Interface**: Used to describe the shape of objects, and can be extended by others.
+>
+> **Type**: . . . used to provide names to type literals / Supports more rich type-system features than interfaces.
+>
+> [TypeScript](https://www.typescriptlang.org/cheatsheets/)
+
 #### Choice
 
 "You should prefer `interface`. Use `type` when you need specific features." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
