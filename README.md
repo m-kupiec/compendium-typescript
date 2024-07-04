@@ -12,23 +12,25 @@
 ### Language
 
 - **Types**
-  - Overview
-  - `null`/`undefined`
-  - `object`
-  - `Object`/`{}`/`any`
-  - `Symbol`
-  - `Function`
-  - `Promise`
-  - `Array`
-  - `ReadonlyArray`
-  - Tuples
-    - General
-    - Optional and Rest Elements
-    - Read-Only Tuples
-  - `unknown`
-  - `never`
-  - `void`
-  - Type Literals
+  - Built-In Type Primitives
+    - Overview
+    - `null`/`undefined`
+    - `unknown`
+    - `never`
+    - `void`
+  - Built-In Objects
+    - `Object`/`{}`/`object`
+    - `Symbol`
+    - `Function`
+    - `Promise`
+    - `Array`
+    - `ReadonlyArray`
+  - Miscellaneous
+    - Type Literals
+    - Tuples
+      - General
+      - Optional and Rest Elements
+      - Read-Only Tuples
 - **Type Definition**
   - Overview
   - Type Annotation
@@ -260,11 +262,13 @@ Steps in the process of moving from JavaScript to TypeScript:
 
 ## Types
 
-### Overview
+### Built-In Type Primitives
+
+#### Overview
 
 "There is already a small set of primitive types available in JavaScript: `boolean`, `bigint`, `null`, `number`, `string`, `symbol`, and `undefined`, which you can use in an interface. TypeScript extends this list with a few more, such as `any` (allow anything), `unknown` (ensure someone using this type declares what the type is), `never` (it’s not possible that this type could happen), and `void` (a function which returns `undefined` or has no return value)." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
 
-### `null`/`undefined`
+#### `null`/`undefined`
 
 "By default, TypeScript assumes that `null` and `undefined` are in the domain of every type. That means anything declared with the type `number` could be `null` or `undefined`." ([TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html))
 
@@ -284,233 +288,7 @@ Steps in the process of moving from JavaScript to TypeScript:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
 
-### `object`
-
-"This is different from the empty object type `{ }`, and also different from the global type `Object`." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html))
-
-"in JavaScript, function values are objects . . . For this reason, function types are considered to be `object`s in TypeScript."
-
-### `Object`/`{}`/`any`
-
-"You might be tempted to use `Object` or `{}` to say that a value can have any property on it . . . However `any` is actually the type you want to use in those situations, since it’s the most flexible type. For instance, if you have something that’s typed as `Object` you won’t be able to call methods like `toLowerCase()` on it. . . . `any` is special in that it is the most general type while still allowing you to do anything with it. That means you can call it, construct it, access properties on it, etc." ([TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html))
-
-"whenever you use `any`, you lose out on most of the error checking and editor support that TypeScript gives you." ([TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html))
-
-"If a decision ever comes down to `Object` and `{}`, you should prefer `{}`. While they are mostly the same, technically `{}` is a more general type than `Object` in certain esoteric cases." ([TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html))
-
-### `Symbol`
-
-> ```ts
-> const firstName = Symbol("name");
-> const secondName = Symbol("name");
->
-> if (firstName === secondName) {
->   // Can't ever happen
-> }
-> ```
->
-> ```ts
-> This comparison appears to be unintentional because the types 'typeof firstName' and 'typeof secondName' have no overlap.
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
-
-### `Function`
-
-> The global type `Function` describes properties like `bind`, `call`, `apply`, and others present on all function values in JavaScript. It also has the special property that values of type `Function` can always be called; these calls return `any`:
->
-> ```ts
-> function doSomething(f: Function) {
->   return f(1, 2, 3);
-> }
-> ```
->
-> This is an _untyped function call_ and is generally best avoided because of the unsafe `any` return type. If you need to accept an arbitrary function but don’t intend to call it, the type `() => void` is generally safer.
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
-
-### `Promise`
-
-> If you want to annotate the return type of a function which returns a promise, you should use the `Promise` type:
->
-> ```ts
-> async function getFavoriteNumber(): Promise<number> {
->   return 26;
-> }
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
-
-### `Array`
-
-"you can use the syntax `number[]`; this syntax works for any type (e.g. `string[]` is an array of strings, and so on). You may also see this written as `Array<number>`, which means the same thing." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
-
-### `ReadonlyArray`
-
-"The `ReadonlyArray` is a special type that describes arrays that shouldn’t be changed." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
-
-"Much like the `readonly` modifier for properties, it’s mainly a tool we can use for intent. When we see a function that returns `ReadonlyArray`s, it tells us we’re not meant to change the contents at all, and when we see a function that consumes `ReadonlyArray`s, it tells us that we can pass any array into that function without worrying that it will change its contents." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
-
-"Unlike `Array`, there isn’t a `ReadonlyArray` constructor that we can use." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
-
-> Just as TypeScript provides a shorthand syntax for `Array<Type>` with `Type[]`, it also provides a shorthand syntax for `ReadonlyArray<Type>` with `readonly Type[]`.
->
-> ```ts
-> function doStuff(values: readonly string[]) {
->   // ...
-> }
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
-
-> unlike the `readonly` property modifier, assignability isn’t bidirectional between regular `Array`s and `ReadonlyArray`s.
->
-> ```ts
-> let x: readonly string[] = [];
-> let y: string[] = [];
->
-> x = y;
-> y = x; // Error
-> ```
->
-> ```ts
-> The type 'readonly string[]' is 'readonly' and cannot be assigned to the mutable type 'string[]'.
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
-
-### Tuples
-
-#### General
-
-> A tuple type is another sort of `Array` type that knows exactly how many elements it contains, and exactly which types it contains at specific positions.
->
-> ```ts
-> type StringNumberPair = [string, number];
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
-
-"If we try to index past the number of elements, we’ll get an error." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
-
-> We can also destructure tuples using JavaScript’s array destructuring.
->
-> ```ts
-> function doSomething(stringHash: [string, number]) {
->   const [inputString, hash] = stringHash;
-> }
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
-
-"Tuple types are useful in heavily convention-based APIs, where each element’s meaning is “obvious”. This gives us flexibility in whatever we want to name our variables when we destructure them. . . . However, since not every user holds the same view of what’s obvious, it may be worth reconsidering whether using objects with descriptive property names may be better for your API." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
-
-> Other than those length checks, simple tuple types like these are equivalent to types which are versions of `Array`s that declare properties for specific indexes, and that declare `length` with a numeric literal type.
->
-> ```ts
-> interface StringNumberPair {
->   // specialized properties
->   length: 2;
->   0: string;
->   1: number;
->
->   // Other 'Array<string | number>' members...
->   slice(start?: number, end?: number): Array<string | number>;
-> }
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
-
-#### Optional and Rest Elements
-
-> tuples can have optional properties by writing out a question mark (`?` after an element’s type). Optional tuple elements can only come at the end, and also affect the type of `length`.
->
-> ```ts
-> type Either2dOr3d = [number, number, number?];
->
-> function setCoordinate(coord: Either2dOr3d) {
->   const [x, y, z] = coord;
->   // const z: number | undefined
->
->   console.log(`Provided coordinates had ${coord.length} dimensions`);
->   // (property) length: 2 | 3
-> }
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
-
-> Tuples can also have rest elements, which have to be an array/tuple type.
->
-> ```ts
-> type StringNumberBooleans = [string, number, ...boolean[]];
-> type StringBooleansNumber = [string, ...boolean[], number];
-> type BooleansStringNumber = [...boolean[], string, number];
-> ```
->
-> - `StringNumberBooleans` describes a tuple whose first two elements are `string` and `number` respectively, but which may have any number of `booleans` following.
-> - `StringBooleansNumber` describes a tuple whose first element is `string` and then any number of `booleans` and ending with a `number`.
-> - `BooleansStringNumber` describes a tuple whose starting elements are any number of `booleans` and ending with a `string` then a `number`.
->   A tuple with a rest element has no set “length” - it only has a set of well-known elements in different positions.
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
-
-> Why might optional and rest elements be useful? Well, it allows TypeScript to correspond tuples with parameter lists. Tuples types can be used in rest parameters and arguments, so that the following:
->
-> ```ts
-> function readButtonInput(...args: [string, number, ...boolean[]]) {
->   const [name, version, ...input] = args;
->   // ...
-> }
-> ```
->
-> is basically equivalent to:
->
-> ```ts
-> function readButtonInput(name: string, version: number, ...input: boolean[]) {
->   // ...
-> }
-> ```
->
-> This is handy when you want to take a variable number of arguments with a rest parameter, and you need a minimum number of elements, but you don’t want to introduce intermediate variables.
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
-
-#### Read-Only Tuples
-
-> tuple types have `readonly` variants, and can be specified by sticking a `readonly` modifier in front of them - just like with array shorthand syntax.
->
-> ```ts
-> function doSomething(pair: readonly [string, number]) {
->   // ...
-> }
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
-
-"writing to any property of a `readonly` tuple isn’t allowed in TypeScript." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
-
-> Tuples tend to be created and left un-modified in most code, so annotating types as `readonly` tuples when possible is a good default. This is also important given that array literals with const assertions will be inferred with `readonly` tuple types.
->
-> ```ts
-> let point = [3, 4] as const;
->
-> function distanceFromOrigin([x, y]: [number, number]) {
->   return Math.sqrt(x ** 2 + y ** 2);
-> }
->
-> distanceFromOrigin(point); // Error
-> ```
->
-> ```ts
-> Argument of type 'readonly [3, 4]' is not assignable to parameter of type '>[number, number]'.
->   The type 'readonly [3, 4]' is 'readonly' and cannot be assigned to the mutable >type '[number, number]'.
-> ```
->
-> Here, `distanceFromOrigin` never modifies its elements, but expects a mutable tuple. Since point’s type was inferred as `readonly [3, 4]`, it won’t be compatible with `[number, number]` since that type can’t guarantee point’s elements won’t be mutated.
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
-
-### `unknown`
+#### `unknown`
 
 > The `unknown` type represents _any_ value. This is similar to the `any` type, but is safer because it’s not legal to do anything with an unknown value:
 >
@@ -561,7 +339,7 @@ Steps in the process of moving from JavaScript to TypeScript:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
 
-### `never`
+#### `never`
 
 > Some functions _never_ return a value:
 >
@@ -626,7 +404,7 @@ Steps in the process of moving from JavaScript to TypeScript:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)
 
-### `void`
+#### `void`
 
 "`void` represents the return value of functions which don’t return a value. It’s the inferred type any time a function doesn’t have any `return` statements, or doesn’t return any explicit value from those `return` statements . . . In JavaScript, a function that doesn’t return any value will implicitly return the value `undefined`. However, `void` and `undefined` are not the same thing in TypeScript." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html))
 
@@ -657,7 +435,104 @@ Steps in the process of moving from JavaScript to TypeScript:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
 
-### Type Literals
+### Built-In Objects
+
+#### `Object`/`{}`/`object`
+
+"You might be tempted to use `Object` or `{}` to say that a value can have any property on it . . . However `any` is actually the type you want to use in those situations, since it’s the most flexible type. For instance, if you have something that’s typed as `Object` you won’t be able to call methods like `toLowerCase()` on it. . . . `any` is special in that it is the most general type while still allowing you to do anything with it. That means you can call it, construct it, access properties on it, etc." ([TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html))
+
+"whenever you use `any`, you lose out on most of the error checking and editor support that TypeScript gives you." ([TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html))
+
+"If a decision ever comes down to `Object` and `{}`, you should prefer `{}`. While they are mostly the same, technically `{}` is a more general type than `Object` in certain esoteric cases." ([TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html))
+
+`object` "is different from the empty object type `{ }`, and also different from the global type `Object`." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html))
+
+"in JavaScript, function values are objects . . . For this reason, function types are considered to be `object`s in TypeScript." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html))
+
+#### `Symbol`
+
+> ```ts
+> const firstName = Symbol("name");
+> const secondName = Symbol("name");
+>
+> if (firstName === secondName) {
+>   // Can't ever happen
+> }
+> ```
+>
+> ```ts
+> This comparison appears to be unintentional because the types 'typeof firstName' and 'typeof secondName' have no overlap.
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
+
+#### `Function`
+
+> The global type `Function` describes properties like `bind`, `call`, `apply`, and others present on all function values in JavaScript. It also has the special property that values of type `Function` can always be called; these calls return `any`:
+>
+> ```ts
+> function doSomething(f: Function) {
+>   return f(1, 2, 3);
+> }
+> ```
+>
+> This is an _untyped function call_ and is generally best avoided because of the unsafe `any` return type. If you need to accept an arbitrary function but don’t intend to call it, the type `() => void` is generally safer.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
+
+#### `Promise`
+
+> If you want to annotate the return type of a function which returns a promise, you should use the `Promise` type:
+>
+> ```ts
+> async function getFavoriteNumber(): Promise<number> {
+>   return 26;
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
+
+#### `Array`
+
+"you can use the syntax `number[]`; this syntax works for any type (e.g. `string[]` is an array of strings, and so on). You may also see this written as `Array<number>`, which means the same thing." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html))
+
+#### `ReadonlyArray`
+
+"The `ReadonlyArray` is a special type that describes arrays that shouldn’t be changed." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
+
+"Much like the `readonly` modifier for properties, it’s mainly a tool we can use for intent. When we see a function that returns `ReadonlyArray`s, it tells us we’re not meant to change the contents at all, and when we see a function that consumes `ReadonlyArray`s, it tells us that we can pass any array into that function without worrying that it will change its contents." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
+
+"Unlike `Array`, there isn’t a `ReadonlyArray` constructor that we can use." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
+
+> Just as TypeScript provides a shorthand syntax for `Array<Type>` with `Type[]`, it also provides a shorthand syntax for `ReadonlyArray<Type>` with `readonly Type[]`.
+>
+> ```ts
+> function doStuff(values: readonly string[]) {
+>   // ...
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
+> unlike the `readonly` property modifier, assignability isn’t bidirectional between regular `Array`s and `ReadonlyArray`s.
+>
+> ```ts
+> let x: readonly string[] = [];
+> let y: string[] = [];
+>
+> x = y;
+> y = x; // Error
+> ```
+>
+> ```ts
+> The type 'readonly string[]' is 'readonly' and cannot be assigned to the mutable type 'string[]'.
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
+### Miscellaneous
+
+#### Type Literals
 
 > ```ts
 > declare function handleRequest(url: string, method: "GET" | "POST"): void;
@@ -693,6 +568,137 @@ Steps in the process of moving from JavaScript to TypeScript:
 >     ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
+
+#### Tuples
+
+##### General
+
+> A tuple type is another sort of `Array` type that knows exactly how many elements it contains, and exactly which types it contains at specific positions.
+>
+> ```ts
+> type StringNumberPair = [string, number];
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
+"If we try to index past the number of elements, we’ll get an error." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
+
+> We can also destructure tuples using JavaScript’s array destructuring.
+>
+> ```ts
+> function doSomething(stringHash: [string, number]) {
+>   const [inputString, hash] = stringHash;
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
+"Tuple types are useful in heavily convention-based APIs, where each element’s meaning is “obvious”. This gives us flexibility in whatever we want to name our variables when we destructure them. . . . However, since not every user holds the same view of what’s obvious, it may be worth reconsidering whether using objects with descriptive property names may be better for your API." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
+
+> Other than those length checks, simple tuple types like these are equivalent to types which are versions of `Array`s that declare properties for specific indexes, and that declare `length` with a numeric literal type.
+>
+> ```ts
+> interface StringNumberPair {
+>   // specialized properties
+>   length: 2;
+>   0: string;
+>   1: number;
+>
+>   // Other 'Array<string | number>' members...
+>   slice(start?: number, end?: number): Array<string | number>;
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
+##### Optional and Rest Elements
+
+> tuples can have optional properties by writing out a question mark (`?` after an element’s type). Optional tuple elements can only come at the end, and also affect the type of `length`.
+>
+> ```ts
+> type Either2dOr3d = [number, number, number?];
+>
+> function setCoordinate(coord: Either2dOr3d) {
+>   const [x, y, z] = coord;
+>   // const z: number | undefined
+>
+>   console.log(`Provided coordinates had ${coord.length} dimensions`);
+>   // (property) length: 2 | 3
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
+> Tuples can also have rest elements, which have to be an array/tuple type.
+>
+> ```ts
+> type StringNumberBooleans = [string, number, ...boolean[]];
+> type StringBooleansNumber = [string, ...boolean[], number];
+> type BooleansStringNumber = [...boolean[], string, number];
+> ```
+>
+> - `StringNumberBooleans` describes a tuple whose first two elements are `string` and `number` respectively, but which may have any number of `booleans` following.
+> - `StringBooleansNumber` describes a tuple whose first element is `string` and then any number of `booleans` and ending with a `number`.
+> - `BooleansStringNumber` describes a tuple whose starting elements are any number of `booleans` and ending with a `string` then a `number`.
+>   A tuple with a rest element has no set “length” - it only has a set of well-known elements in different positions.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
+> Why might optional and rest elements be useful? Well, it allows TypeScript to correspond tuples with parameter lists. Tuples types can be used in rest parameters and arguments, so that the following:
+>
+> ```ts
+> function readButtonInput(...args: [string, number, ...boolean[]]) {
+>   const [name, version, ...input] = args;
+>   // ...
+> }
+> ```
+>
+> is basically equivalent to:
+>
+> ```ts
+> function readButtonInput(name: string, version: number, ...input: boolean[]) {
+>   // ...
+> }
+> ```
+>
+> This is handy when you want to take a variable number of arguments with a rest parameter, and you need a minimum number of elements, but you don’t want to introduce intermediate variables.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
+##### Read-Only Tuples
+
+> tuple types have `readonly` variants, and can be specified by sticking a `readonly` modifier in front of them - just like with array shorthand syntax.
+>
+> ```ts
+> function doSomething(pair: readonly [string, number]) {
+>   // ...
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
+"writing to any property of a `readonly` tuple isn’t allowed in TypeScript." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
+
+> Tuples tend to be created and left un-modified in most code, so annotating types as `readonly` tuples when possible is a good default. This is also important given that array literals with const assertions will be inferred with `readonly` tuple types.
+>
+> ```ts
+> let point = [3, 4] as const;
+>
+> function distanceFromOrigin([x, y]: [number, number]) {
+>   return Math.sqrt(x ** 2 + y ** 2);
+> }
+>
+> distanceFromOrigin(point); // Error
+> ```
+>
+> ```ts
+> Argument of type 'readonly [3, 4]' is not assignable to parameter of type '>[number, number]'.
+>   The type 'readonly [3, 4]' is 'readonly' and cannot be assigned to the mutable >type '[number, number]'.
+> ```
+>
+> Here, `distanceFromOrigin` never modifies its elements, but expects a mutable tuple. Since point’s type was inferred as `readonly [3, 4]`, it won’t be compatible with `[number, number]` since that type can’t guarantee point’s elements won’t be mutated.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
 
 ## Type Definition
 
