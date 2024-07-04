@@ -126,6 +126,7 @@
     - Context Object
       - Metadata
       - `addInitializer`
+    - Stacking Decorators
     - Legacy Decorators
     - Using with `export` Statements
 - **Miscellaneous**
@@ -3950,6 +3951,43 @@ Example use case:
 >
 > // Works!
 > greet();
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators)
+
+#### Stacking Decorators
+
+> ```ts
+> class Person {
+>   name: string;
+>   constructor(name: string) {
+>     this.name = name;
+>   }
+>
+>   @bound
+>   @loggedMethod
+>   greet() {
+>     console.log(`Hello, my name is ${this.name}.`);
+>   }
+> }
+>
+> const p = new Person("Ray");
+> const greet = p.greet;
+>
+> // Works!
+> greet();
+> ```
+>
+> Notice that we stacked two decorators - `@bound` and `@loggedMethod`. These decorations run in “reverse order”. That is, `@loggedMethod` decorates the original method `greet`, and `@bound` decorates the result of `@loggedMethod`. In this example, it doesn’t matter - but it could if your decorators have side-effects or expect a certain order.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators)
+
+> if you’d prefer stylistically, you can put these decorators on the same line.
+>
+> ```ts
+> @bound @loggedMethod greet() {
+>   console.log(`Hello, my name is ${this.name}.`);
+> }
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators)
