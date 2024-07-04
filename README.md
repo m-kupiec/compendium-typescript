@@ -125,6 +125,7 @@
     - Basic Usage
     - Context Object
       - Metadata
+      - `addInitializer`
     - Legacy Decorators
     - Using with `export` Statements
 - **Miscellaneous**
@@ -3861,6 +3862,95 @@ Comparison:
 > ```
 >
 > We’re now using the `context` parameter . . . TypeScript provides a type called `ClassMethodDecoratorContext` that models the context object that method decorators take.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators)
+
+##### `addInitializer`
+
+"Apart from metadata, the context object for methods also has a useful function called `addInitializer`. It’s a way to hook into the beginning of the constructor (or the initialization of the class itself if we’re working with `static`s)." ([TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators))
+
+Example use case:
+
+> in JavaScript, it’s common to write something like the following pattern:
+>
+> ```ts
+> class Person {
+>   name: string;
+>   constructor(name: string) {
+>     this.name = name;
+>     this.greet = this.greet.bind(this);
+>   }
+>
+>   greet() {
+>     console.log(`Hello, my name is ${this.name}.`);
+>   }
+> }
+> ```
+>
+> Alternatively, `greet` might be declared as a property initialized to an arrow function.
+>
+> ```ts
+> class Person {
+>   name: string;
+>   constructor(name: string) {
+>     this.name = name;
+>   }
+>
+>   greet = () => {
+>     console.log(`Hello, my name is ${this.name}.`);
+>   };
+> }
+> ```
+>
+> This code is written to ensure that this isn’t re-bound if `greet` is called as a stand-alone function or passed as a callback.
+>
+> ```ts
+> const greet = new Person("Ray").greet;
+> // We don't want this to fail!
+> greet();
+> ```
+>
+> We can write a decorator that uses addInitializer to call bind in the constructor for us.
+>
+> ```ts
+> function bound(originalMethod: any, context: ClassMethodDecoratorContext) {
+>   const methodName = context.name;
+>   if (context.private) {
+>     throw new Error(
+>       `'bound' cannot decorate private properties like ${
+>         methodName as string
+>       }.`
+>     );
+>   }
+>
+>   context.addInitializer(function () {
+>     this[methodName] = this[methodName].bind(this);
+>   });
+> }
+> ```
+>
+> `bound` isn’t returning anything - so when it decorates a method, it leaves the original alone. Instead, it will add logic before any other fields are initialized.
+>
+> ```ts
+> class Person {
+>   name: string;
+>   constructor(name: string) {
+>     this.name = name;
+>   }
+>
+>   @bound
+>   @loggedMethod
+>   greet() {
+>     console.log(`Hello, my name is ${this.name}.`);
+>   }
+> }
+>
+> const p = new Person("Ray");
+> const greet = p.greet;
+>
+> // Works!
+> greet();
+> ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators)
 
