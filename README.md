@@ -122,6 +122,7 @@
   - Constructor Functions
   - Decorators
     - General
+    - Legacy Decorators
 - **Miscellaneous**
   - Type Assertion
     - `as` Keyword
@@ -3789,6 +3790,12 @@ Comparison:
 "Decorators are an upcoming ECMAScript feature that allow us to customize classes and their members in a reusable way. . . . Decorators can be used on more than just methods! They can be used on properties/fields, getters, setters, and auto-accessors. Even classes themselves can be decorated for things like subclassing and registration." ([TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators))
 
 "One of the most powerful features of TypeScript is decorators. Decorators allow developers to add metadata or modify the behavior of classes, methods, properties, and parameters, making it easier to write and maintain large-scale applications." ([DEV](https://dev.to/pipaliyachirag/mastering-typescript-50-decorators-the-ultimate-guide-26f0))
+
+#### Legacy Decorators
+
+"While these experimental decorators have been incredibly useful, they modeled a much older version of the decorators proposal, and always required an opt-in compiler flag called `--experimentalDecorators`. Any attempt to use decorators in TypeScript without this flag used to prompt an error message. `--experimentalDecorators` will continue to exist for the foreseeable future; however, without the flag, decorators will now be valid syntax for all new code. Outside of `--experimentalDecorators`, they will be type-checked and emitted differently. The type-checking rules and emit are sufficiently different that while decorators can be written to support both the old and new decorators behavior, any existing decorator functions are not likely to do so." ([TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators))
+
+"This new decorators proposal is not compatible with `--emitDecoratorMetadata`, and it does not allow decorating parameters. Future ECMAScript proposals may be able to help bridge that gap." ([TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators))
 
 ## Miscellaneous
 
