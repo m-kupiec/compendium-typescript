@@ -77,12 +77,12 @@
     - Constraints
     - Specifying Type Arguments
   - Optional & Default Parameters
-  - Overloads
   - `this` Parameter
   - Rest Parameters & Arguments
     - Parameters
     - Arguments
   - Parameter Destructuring
+  - Overloads
 - **Object Types**
   - General
   - Optional Properties
@@ -2269,57 +2269,6 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
 
-### Overloads
-
-> In TypeScript, we can specify a function that can be called in different ways by writing _overload signatures_. To do this, write some number of function signatures (usually two or more), followed by the body of the function:
->
-> ```ts
-> function makeDate(timestamp: number): Date;
-> function makeDate(m: number, d: number, y: number): Date;
-> function makeDate(mOrTimestamp: number, d?: number, y?: number): Date {
->   if (d !== undefined && y !== undefined) {
->     return new Date(y, mOrTimestamp, d);
->   } else {
->     return new Date(mOrTimestamp);
->   }
-> }
-> const d1 = makeDate(12345678);
-> const d2 = makeDate(5, 5, 5);
-> const d3 = makeDate(1, 3);
-> ```
->
-> ```ts
-> No overload expects 2 arguments, but overloads do exist that expect either 1 or 3 arguments.
-> ```
->
-> These first two signatures are called the _overload signatures_. Then, we wrote a function implementation with a compatible signature. Functions have an _implementation signature_, but this signature can’t be called directly. Even though we wrote a function with two optional parameters after the required one, it can’t be called with two parameters!
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
-
-> ```ts
-> function len(s: string): number;
-> function len(arr: any[]): number;
-> function len(x: any) {
->   return x.length;
-> }
-> ```
->
-> This function is fine; we can invoke it with strings or arrays. However, we can’t invoke it with a value that might be a string _or_ an array, because TypeScript can only resolve a function call to a single overload . . .
->
-> Because both overloads have the same argument count and same return type, we can instead write a non-overloaded version of the function:
->
-> ```ts
-> function len(x: any[] | string) {
->   return x.length;
-> }
-> ```
->
-> This is much better! Callers can invoke this with either sort of value, and as an added bonus, we don’t have to figure out a correct implementation signature.
->
-> _Always prefer parameters with union types instead of overloads when possible_
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
-
 ### `this` Parameter
 
 > ```ts
@@ -2404,6 +2353,57 @@ Adding new fields to an existing interface:
 >   console.log(a + b + c);
 > }
 > ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
+
+### Overloads
+
+> In TypeScript, we can specify a function that can be called in different ways by writing _overload signatures_. To do this, write some number of function signatures (usually two or more), followed by the body of the function:
+>
+> ```ts
+> function makeDate(timestamp: number): Date;
+> function makeDate(m: number, d: number, y: number): Date;
+> function makeDate(mOrTimestamp: number, d?: number, y?: number): Date {
+>   if (d !== undefined && y !== undefined) {
+>     return new Date(y, mOrTimestamp, d);
+>   } else {
+>     return new Date(mOrTimestamp);
+>   }
+> }
+> const d1 = makeDate(12345678);
+> const d2 = makeDate(5, 5, 5);
+> const d3 = makeDate(1, 3);
+> ```
+>
+> ```ts
+> No overload expects 2 arguments, but overloads do exist that expect either 1 or 3 arguments.
+> ```
+>
+> These first two signatures are called the _overload signatures_. Then, we wrote a function implementation with a compatible signature. Functions have an _implementation signature_, but this signature can’t be called directly. Even though we wrote a function with two optional parameters after the required one, it can’t be called with two parameters!
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
+
+> ```ts
+> function len(s: string): number;
+> function len(arr: any[]): number;
+> function len(x: any) {
+>   return x.length;
+> }
+> ```
+>
+> This function is fine; we can invoke it with strings or arrays. However, we can’t invoke it with a value that might be a string _or_ an array, because TypeScript can only resolve a function call to a single overload . . .
+>
+> Because both overloads have the same argument count and same return type, we can instead write a non-overloaded version of the function:
+>
+> ```ts
+> function len(x: any[] | string) {
+>   return x.length;
+> }
+> ```
+>
+> This is much better! Callers can invoke this with either sort of value, and as an added bonus, we don’t have to figure out a correct implementation signature.
+>
+> _Always prefer parameters with union types instead of overloads when possible_
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
 
