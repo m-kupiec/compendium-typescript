@@ -123,6 +123,8 @@
   - Decorators
     - General
     - Basic Usage
+    - Context Object
+      - Metadata
     - Legacy Decorators
     - Using with `export` Statements
 - **Miscellaneous**
@@ -3833,6 +3835,32 @@ Comparison:
 > ```
 >
 > We just used `loggedMethod` as a decorator above `greet` - and notice that we wrote it as `@loggedMethod`. When we did that, it got called with the method _target_ and a _context object_. Because `loggedMethod` returned a new function, that function replaced the original definition of `greet`.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators)
+
+#### Context Object
+
+##### Metadata
+
+"it has some useful information about how the decorated method was declared - like whether it was a `#private` member, or `static`, or what the name of the method was." ([TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators))
+
+> ```ts
+> function loggedMethod(
+>   originalMethod: any,
+>   context: ClassMethodDecoratorContext
+> ) {
+>   const methodName = String(context.name);
+>   function replacementMethod(this: any, ...args: any[]) {
+>     console.log(`LOG: Entering method '${methodName}'.`);
+>     const result = originalMethod.call(this, ...args);
+>     console.log(`LOG: Exiting method '${methodName}'.`);
+>     return result;
+>   }
+>   return replacementMethod;
+> }
+> ```
+>
+> We’re now using the `context` parameter . . . TypeScript provides a type called `ClassMethodDecoratorContext` that models the context object that method decorators take.
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators)
 
