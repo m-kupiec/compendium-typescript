@@ -3878,6 +3878,50 @@ Adding new fields to an existing interface:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/>typescript-3-7.html#assertion-functions)
 
+Comparison of type predicates and assertion signatures:
+
+> **Type Gurads**: A function with a return type describing the CFA [(control flow analysis)] change for a new scope when it is `true`.
+>
+> ```ts
+> function isErrorResponse(obj: Response): obj is APIErrorResponse {
+>   return obj instanceof APIErrorResponse;
+> }
+> ```
+>
+> Usage:
+>
+> ```ts
+> const response = getResponse();
+> // response: Response | APIErrorResponse
+>
+> if (isErrorResponse(response)) {
+>   // response: APIErrorResponse
+> }
+> ```
+>
+> **Assertionn Functions**: A function describing CFA changes affecting the current scope, because it throws instead of returning `false`.
+>
+> ```ts
+> function assertResponse(obj: any): asserts obj is SuccessResponse {
+>   if (!(obj instanceof SuccessResponse)) {
+>     throw new Error("Not a success!");
+>   }
+> }
+> ```
+>
+> Usage:
+>
+> ```ts
+> const reponse = getResponse();
+> // reponse: SuccessResponse | ErrorResponse
+>
+> assertResponse(response);
+>
+> // response: SuccessResponse
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/cheatsheets/)
+
 ### Type Literals
 
 > ```ts
