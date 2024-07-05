@@ -127,6 +127,7 @@
       - Metadata
       - `addInitializer`
     - Stacking Decorators
+    - Returning Decorators
     - Legacy Decorators
     - Using with `export` Statements
 - **Miscellaneous**
@@ -3988,6 +3989,55 @@ Example use case:
 > @bound @loggedMethod greet() {
 >   console.log(`Hello, my name is ${this.name}.`);
 > }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators)
+
+#### Returning Decorators
+
+> Something that might not be obvious is that we can even make functions that _return_ decorator functions. That makes it possible to customize the final decorator just a little. If we wanted, we could have made `loggedMethod` return a decorator and customize how it logs its messages.
+>
+> ```ts
+> function loggedMethod(headMessage = "LOG:") {
+>   return function actualDecorator(
+>     originalMethod: any,
+>     context: ClassMethodDecoratorContext
+>   ) {
+>     const methodName = String(context.name);
+>     function replacementMethod(this: any, ...args: any[]) {
+>       console.log(`${headMessage} Entering method '${methodName}'.`);
+>       const result = originalMethod.call(this, ...args);
+>       console.log(`${headMessage} Exiting method '${methodName}'.`);
+>       return result;
+>     }
+>     return replacementMethod;
+>   };
+> }
+> ```
+>
+> If we did that, we’d have to call `loggedMethod` before using it as a decorator. We could then pass in any string as the prefix for messages that get logged to the console.
+>
+> ```ts
+> class Person {
+>   name: string;
+>   constructor(name: string) {
+>     this.name = name;
+>   }
+>
+>   @loggedMethod("⚠️")
+>   greet() {
+>     console.log(`Hello, my name is ${this.name}.`);
+>   }
+> }
+>
+> const p = new Person("Ray");
+> p.greet();
+>
+> // Output:
+> //
+> //   ⚠️ Entering method 'greet'.
+> //   Hello, my name is Ray.
+> //   ⚠️ Exiting method 'greet'.
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators)
