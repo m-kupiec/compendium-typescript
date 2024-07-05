@@ -290,6 +290,20 @@ Steps in the process of moving from JavaScript to TypeScript:
 
 "In a `.js` file, types can often be inferred. When types can’t be inferred, they can be specified using JSDoc syntax." ([TypeScript](https://www.typescriptlang.org/docs/handbook/intro-to-js-ts.html))
 
+> ```js
+> /** @type {number} */
+> var x;
+>
+> x = 0; // OK
+> x = false; // OK?!
+> ```
+>
+> . . . The last line of the previous code sample would raise an error in TypeScript, but it doesn’t by default in a JS project. To enable errors in your JavaScript files add: `// @ts-check` to the first line in your `.js` files to have TypeScript raise it as an error. . . . If you have a lot of JavaScript files you want to add errors to then you can switch to using a `jsconfig.json`. You can skip checking some files by adding a `// @ts-nocheck` comment to files.
+>
+> TypeScript may offer you errors which you disagree with, in those cases you can ignore errors on specific lines by adding `// @ts-ignore` or `// @ts-expect-error` on the preceding line.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/intro-to-js-ts.html)
+
 > To make the first step in moving from JavaScript to TypeScript without adding a complex build step in the process you could:
 >
 > 1.  Define all your types in `types.ts`
