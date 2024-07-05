@@ -5125,6 +5125,8 @@ Comparison of type predicates and assertion signatures:
 
 ### General
 
+"The `"compilerOptions"` property can be omitted, in which case the compiler’s defaults are used." ([TypeScript](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html))
+
 > TypeScript uses a file called `tsconfig.json` for managing your project’s options, such as which files you want to include, and what sorts of checking you want to perform. Let’s create a bare-bones one for our project:
 >
 > ```json
