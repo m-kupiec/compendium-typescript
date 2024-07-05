@@ -122,7 +122,7 @@
   - Constructor Functions
   - Decorators
     - General
-    - Basic Usage
+    - Basic Usage: Logging
     - Context Object
       - Metadata
       - `addInitializer`
@@ -3799,7 +3799,7 @@ Comparison:
 
 "One of the most powerful features of TypeScript is decorators. Decorators allow developers to add metadata or modify the behavior of classes, methods, properties, and parameters, making it easier to write and maintain large-scale applications." ([DEV](https://dev.to/pipaliyachirag/mastering-typescript-50-decorators-the-ultimate-guide-26f0))
 
-#### Basic Usage
+#### Basic Usage: Logging
 
 > ```ts
 > class Person {
@@ -3841,6 +3841,23 @@ Comparison:
 > We just used `loggedMethod` as a decorator above `greet` - and notice that we wrote it as `@loggedMethod`. When we did that, it got called with the method _target_ and a _context object_. Because `loggedMethod` returned a new function, that function replaced the original definition of `greet`.
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators)
+
+> Here's an example of a simple decorator:
+>
+> ```ts
+> function log(target: any, key: string, descriptor: PropertyDescriptor) {
+>   console.log(`Called ${key}()`);
+> }
+>
+> // . . .
+>
+> class Example {
+>   @log
+>   foo() {}
+> }
+> ```
+>
+> [DEV](https://dev.to/pipaliyachirag/mastering-typescript-50-decorators-the-ultimate-guide-26f0)
 
 #### Context Object
 
