@@ -126,6 +126,8 @@
     - Context Object
       - Metadata
       - `addInitializer`
+    - Use Cases
+      - Validation
     - Typing Decorators
     - Stacking Decorators
     - Returning Decorators
@@ -3973,6 +3975,40 @@ Example use case:
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators)
+
+#### Use Cases
+
+##### Validation
+
+"Decorators can be used to validate method parameters or object properties before they're set." ([DEV](https://dev.to/pipaliyachirag/mastering-typescript-50-decorators-the-ultimate-guide-26f0))
+
+> Here's an example of a decorator that validates the arguments passed to a function:
+>
+> ```ts
+> function validate(target: any, key: string, descriptor: PropertyDescriptor) {
+>   const originalMethod = descriptor.value;
+>   descriptor.value = function (...args: any[]) {
+>     if (args.length < 2) {
+>       throw new Error("Expected at least two arguments");
+>     }
+>     originalMethod.apply(this, args);
+>   };
+>   return descriptor;
+> }
+> ```
+>
+> This decorator checks that any function it is applied to has at least two arguments. If not, it throws an error. To use it, we can apply the `@validate` decorator to a method like this:
+>
+> ```ts
+> class Example {
+>   @validate
+>   foo(a: number, b: number) {
+>     console.log(a + b);
+>   }
+> }
+> ```
+>
+> [DEV](https://dev.to/pipaliyachirag/mastering-typescript-50-decorators-the-ultimate-guide-26f0)
 
 #### Typing Decorators
 
