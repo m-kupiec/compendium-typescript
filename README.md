@@ -210,6 +210,18 @@ npx tsc index.ts
 
 ## Migrating from JavaScript
 
+> The type system in TypeScript has different levels of strictness when working with a codebase:
+>
+> - A type-system based only on inference with JavaScript code
+> - Incremental typing in JavaScript via JSDoc
+> - Using // @ts-check in a JavaScript file
+> - TypeScript code
+> - TypeScript with strict enabled
+>
+> Each step represents a move towards a safer type-system, but not every project needs that level of verification.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/intro-to-js-ts.html)
+
 "Visual Studio Code uses TypeScript under the hood to make it easier to work with JavaScript." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
 
 Steps in the process of moving from JavaScript to TypeScript:
