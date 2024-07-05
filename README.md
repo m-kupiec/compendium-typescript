@@ -128,6 +128,7 @@
       - `addInitializer`
     - Use Cases
       - Validation
+      - Caching
     - Typing Decorators
     - Stacking Decorators
     - Returning Decorators
@@ -4004,6 +4005,51 @@ Example use case:
 >   @validate
 >   foo(a: number, b: number) {
 >     console.log(a + b);
+>   }
+> }
+> ```
+>
+> [DEV](https://dev.to/pipaliyachirag/mastering-typescript-50-decorators-the-ultimate-guide-26f0)
+
+##### Caching
+
+> You can also create custom decorators to fit your specific needs:
+>
+> ```ts
+> function memoize() {
+>   const cache: Map<string, any> = new Map();
+>
+>   return function (target: any, key: string, descriptor: PropertyDescriptor) {
+>     const originalMethod = descriptor.value;
+>
+>     descriptor.value = function (...args: any[]) {
+>       const cacheKey = `${key}:${args.join(",")}`;
+>
+>       if (cache.has(cacheKey)) {
+>         return cache.get(cacheKey);
+>       }
+>
+>       const result = originalMethod.apply(this, args);
+>       cache.set(cacheKey, result);
+>
+>       return result;
+>     };
+>
+>     return descriptor;
+>   };
+> }
+> ```
+>
+> This decorator caches the results of function calls by storing them in a `Map`. To use it, we can apply the `@memoize` decorator to a method like this:
+>
+> ```ts
+> class Example {
+>   @memoize
+>   fib(n: number): number {
+>     if (n < 2) {
+>       return n;
+>     }
+>     return this.fib(n - 1) + this.fib(n - 2);
 >   }
 > }
 > ```
