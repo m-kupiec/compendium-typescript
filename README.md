@@ -128,8 +128,8 @@
       - `addInitializer`
     - Stacking Decorators
     - Returning Decorators
-    - Legacy Decorators
     - Using with `export` Statements
+    - Legacy Decorators
 - **Miscellaneous**
   - Type Assertion
     - `as` Keyword
@@ -4042,12 +4042,6 @@ Example use case:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators)
 
-#### Legacy Decorators
-
-"While these experimental decorators have been incredibly useful, they modeled a much older version of the decorators proposal, and always required an opt-in compiler flag called `--experimentalDecorators`. Any attempt to use decorators in TypeScript without this flag used to prompt an error message. `--experimentalDecorators` will continue to exist for the foreseeable future; however, without the flag, decorators will now be valid syntax for all new code. Outside of `--experimentalDecorators`, they will be type-checked and emitted differently. The type-checking rules and emit are sufficiently different that while decorators can be written to support both the old and new decorators behavior, any existing decorator functions are not likely to do so." ([TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators))
-
-"This new decorators proposal is not compatible with `--emitDecoratorMetadata`, and it does not allow decorating parameters. Future ECMAScript proposals may be able to help bridge that gap." ([TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators))
-
 #### Using with `export` Statements
 
 > in addition to allowing decorators to be placed before the `export` keyword, the proposal for decorators now provides the option of placing decorators after `export` or `export default`. The only exception is that mixing the two styles is not allowed.
@@ -4075,6 +4069,12 @@ Example use case:
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators)
+
+#### Legacy Decorators
+
+"While these experimental decorators have been incredibly useful, they modeled a much older version of the decorators proposal, and always required an opt-in compiler flag called `--experimentalDecorators`. Any attempt to use decorators in TypeScript without this flag used to prompt an error message. `--experimentalDecorators` will continue to exist for the foreseeable future; however, without the flag, decorators will now be valid syntax for all new code. Outside of `--experimentalDecorators`, they will be type-checked and emitted differently. The type-checking rules and emit are sufficiently different that while decorators can be written to support both the old and new decorators behavior, any existing decorator functions are not likely to do so." ([TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators))
+
+"This new decorators proposal is not compatible with `--emitDecoratorMetadata`, and it does not allow decorating parameters. Future ECMAScript proposals may be able to help bridge that gap." ([TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators))
 
 ## Miscellaneous
 
