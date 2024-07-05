@@ -5119,6 +5119,8 @@ Comparison of type predicates and assertion signatures:
 
 ## Usage
 
+"Running `tsc` locally will compile the closest project defined by a `tsconfig.json`, or you can compile a set of TypeScript files by passing in a glob of files you want." ([TypeScript](https://www.typescriptlang.org/docs/handbook/compiler-options.html))
+
 "When input files are specified on the command line, `tsconfig.json` files are ignored." ([TypeScript](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html))
 
 ## Configuration
