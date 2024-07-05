@@ -168,6 +168,7 @@
 
 ### Compiler
 
+- **Usage**
 - **Configuration**
   - General
   - Modules
@@ -5114,6 +5115,10 @@ Comparison of type predicates and assertion signatures:
 "when using `strictNullChecks`, your dependencies may need to be updated to use `strictNullChecks` as well." ([TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html))
 
 # Compiler
+
+## Usage
+
+"When input files are specified on the command line, `tsconfig.json` files are ignored." ([TypeScript](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html))
 
 ## Configuration
 
