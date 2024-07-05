@@ -25,6 +25,7 @@
     - `Promise`
     - `Array`
     - `ReadonlyArray`
+  - DOM API Types
   - Miscellaneous
     - Type Literals
     - Tuples
@@ -543,6 +544,78 @@ Steps in the process of moving from JavaScript to TypeScript:
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
+### DOM API Types
+
+"TypeScript . . . ships type definitions for the DOM API. These definitions are readily available in any default TypeScript project." ([TypeScript](https://www.typescriptlang.org/docs/handbook/dom-manipulation.html))
+
+"20,000+ lines of definitions in _lib.dom.d.ts_ . . . You can explore the source code for the [DOM type definitions](https://github.com/microsoft/TypeScript/blob/main/src/lib/dom.generated.d.ts) . . . The best part about the _lib.dom.d.ts_ type definitions is that they are reflective of the types annotated in the Mozilla Developer Network (MDN) documentation site." ([TypeScript](https://www.typescriptlang.org/docs/handbook/dom-manipulation.html))
+
+> Given a simplified `index.html` file:
+>
+> ```html
+> <!DOCTYPE html>
+> <html lang="en">
+>   <head>
+>     <title>TypeScript Dom Manipulation</title>
+>   </head>
+>   <body>
+>     <div id="app"></div>
+>     <!-- Assume index.js is the compiled output of index.ts -->
+>     <script src="index.js"></script>
+>   </body>
+> </html>
+> ```
+>
+> Let’s explore a TypeScript script that adds a `<p>Hello, World!</p>` element to the `#app` element.
+>
+> ```ts
+> // 1. Select the div element using the id property
+> const app = document.getElementById("app");
+> // 2. Create a new <p></p> element programmatically
+> const p = document.createElement("p");
+> // 3. Add the text content
+> p.textContent = "Hello, World!";
+> // 4. Append the p element to the div element
+> app?.appendChild(p);
+> ```
+>
+> After compiling and running the `index.html` page, the resulting HTML will be:
+>
+> ```html
+> <div id="app">
+>   <p>Hello, World!</p>
+> </div>
+> ```
+>
+> . . .
+>
+> ```ts
+> getElementById(elementId: string): HTMLElement | null;
+> ```
+>
+> Pass it an element `id` `string` and it will return either `HTMLElement` or `null`. This method introduces one of the most important types, `HTMLElement`. It serves as the base interface for every other element interface. For example, the `p` variable in the code example is of type `HTMLParagraphElement`. Also, take note that this method can return `null`. This is because the method can’t be certain pre-runtime if it will be able to actually find the specified element or not. In the last line of the code snippet, the new optional chaining operator is used to call `appendChild`.
+>
+> . . .
+>
+> ```ts
+> createElement<K extends keyof HTMLElementTagNameMap>(tagName: K, options?: ElementCreationOptions): HTMLElementTagNameMap[K];
+> createElement(tagName: string, options?: ElementCreationOptions): HTMLElement;
+> ```
+>
+> This is an overloaded function definition. The second overload is simplest . . . For the first definition of `createElement`, it is using some advanced generic patterns. It is best understood broken down into chunks, starting with the generic expression: `<K extends keyof HTMLElementTagNameMap>`. This expression defines a generic parameter `K` that is constrained to the keys of the interface `HTMLElementTagNameMap`. The map interface contains every specified HTML tag name and its corresponding type interface. For example here are the first 5 mapped values:
+>
+> ```ts
+> interface HTMLElementTagNameMap {
+>   a: HTMLAnchorElement;
+>   abbr: HTMLElement;
+>   address: HTMLElement;
+>   applet: HTMLAppletElement;
+>   area: HTMLAreaElement;
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/dom-manipulation.html)
 
 ### Miscellaneous
 
