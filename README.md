@@ -171,6 +171,7 @@
 - **Usage**
 - **Configuration**
   - General
+  - TSConfig Bases
   - Modules
   - Output
 
@@ -5154,6 +5155,10 @@ Comparison of type predicates and assertion signatures:
 >   TypeScript will also warn about unreachable code and labels, which you can disable with `allowUnreachableCode` and `allowUnusedLabels` respectively.
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
+
+### TSConfig Bases
+
+"Depending on the JavaScript runtime environment which you intend to run your code in, there may be a base configuration which you can use at [github.com/tsconfig/bases](https://github.com/tsconfig/bases/). These are `tsconfig.json` files which your project extends from which simplifies your `tsconfig.json` by handling the runtime support. . . . This lets your `tsconfig.json` focus on the unique choices for your project, and not all of the runtime mechanics." ([TypeScript](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html))
 
 ### Modules
 
