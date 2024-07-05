@@ -4056,6 +4056,45 @@ Example use case:
 >
 > [DEV](https://dev.to/pipaliyachirag/mastering-typescript-50-decorators-the-ultimate-guide-26f0)
 
+##### Authentication
+
+> Suppose we're building a web application that requires authentication for certain routes. We could create an `@auth` decorator that checks if the user is authenticated before allowing access to a route:
+>
+> ```ts
+> function auth(target: any, key: string, descriptor: PropertyDescriptor) {
+>   const originalMethod = descriptor.value;
+>   descriptor.value = function (...args: any[]) {
+>     const isAuthenticated = checkIfUserIsAuthenticated();
+>     if (!isAuthenticated) {
+>       // Redirect to login page or show error message
+>       return;
+>     }
+>     originalMethod.apply(this, args);
+>   };
+>   return descriptor;
+> }
+> ```
+>
+> Now, we can apply the `@auth` decorator to any method that requires authentication:
+>
+> ```ts
+> class MyRoutes {
+>   @auth
+>   getProfile() {
+>     // Return user profile data
+>   }
+>
+>   @auth
+>   updateProfile(profileData: any) {
+>     // Update user profile data
+>   }
+> }
+> ```
+>
+> With this setup, the `@auth` decorator will automatically check if the user is authenticated before allowing access to the `getProfile()` and `updateProfile()` methods.
+>
+> [DEV](https://dev.to/pipaliyachirag/mastering-typescript-50-decorators-the-ultimate-guide-26f0)
+
 #### Typing Decorators
 
 > Typing decorators can be fairly complex. For example, a well-typed version of `loggedMethod` from above might look something like this:
