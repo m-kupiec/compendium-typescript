@@ -8,6 +8,9 @@
 - **Benefits**
 - **Installation**
 - **Migrating from JavaScript**
+  - Overview
+  - No TypeScript Support
+  - Intermediate TypeScript Support
 
 ### Language
 
@@ -210,6 +213,8 @@ npx tsc index.ts
 
 ## Migrating from JavaScript
 
+### Overview
+
 > The type system in TypeScript has different levels of strictness when working with a codebase:
 >
 > - A type-system based only on inference with JavaScript code
@@ -221,8 +226,6 @@ npx tsc index.ts
 > Each step represents a move towards a safer type-system, but not every project needs that level of verification.
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/intro-to-js-ts.html)
-
-"Visual Studio Code uses TypeScript under the hood to make it easier to work with JavaScript." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
 
 Steps in the process of moving from JavaScript to TypeScript:
 
@@ -276,6 +279,12 @@ Steps in the process of moving from JavaScript to TypeScript:
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org)
+
+### No TypeScript Support
+
+"Visual Studio Code uses TypeScript under the hood to make it easier to work with JavaScript." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
+
+### Intermediate TypeScript Support
 
 > To make the first step in moving from JavaScript to TypeScript without adding a complex build step in the process you could:
 >
