@@ -126,6 +126,7 @@
     - Context Object
       - Metadata
       - `addInitializer`
+    - Typing Decorators
     - Stacking Decorators
     - Returning Decorators
     - Using with `export` Statements
@@ -3955,6 +3956,33 @@ Example use case:
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators)
+
+#### Typing Decorators
+
+> Typing decorators can be fairly complex. For example, a well-typed version of `loggedMethod` from above might look something like this:
+>
+> ```ts
+> function loggedMethod<This, Args extends any[], Return>(
+>   target: (this: This, ...args: Args) => Return,
+>   context: ClassMethodDecoratorContext<
+>     This,
+>     (this: This, ...args: Args) => Return
+>   >
+> ) {
+>   const methodName = String(context.name);
+>   function replacementMethod(this: This, ...args: Args): Return {
+>     console.log(`LOG: Entering method '${methodName}'.`);
+>     const result = target.call(this, ...args);
+>     console.log(`LOG: Exiting method '${methodName}'.`);
+>     return result;
+>   }
+>   return replacementMethod;
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators)
+
+"Exactly how complex your decorators functions are defined depends on what you want to guarantee. Just keep in mind, your decorators will be used more than they’re written, so a well-typed version will usually be preferable - but there’s clearly a trade-off with readability, so try to keep things simple." ([TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators))
 
 #### Stacking Decorators
 
