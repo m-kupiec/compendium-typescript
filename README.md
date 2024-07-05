@@ -288,6 +288,8 @@ Steps in the process of moving from JavaScript to TypeScript:
 
 ### Intermediate TypeScript Support
 
+"In a `.js` file, types can often be inferred. When types can’t be inferred, they can be specified using JSDoc syntax." ([TypeScript](https://www.typescriptlang.org/docs/handbook/intro-to-js-ts.html))
+
 > To make the first step in moving from JavaScript to TypeScript without adding a complex build step in the process you could:
 >
 > 1.  Define all your types in `types.ts`
