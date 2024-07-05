@@ -4169,6 +4169,38 @@ Example use case:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators)
 
+> you can use decorator factories to create decorators with configurable options:
+>
+> ```ts
+> function logWithPrefix(prefix: string) {
+>  return function (target: any, key:: string, descriptor: PropertyDescriptor) {
+>    const originalMethod = descriptor.value;
+>
+>    descriptor.value = function (...args: any[]) {
+>      console.log(`[${prefix}] Before ${key}()`);
+>
+>      const result = originalMethod.apply(this, args);
+>      console.log(`[${prefix}] After ${key}()`);
+>
+>      return result;
+>    };
+>
+>    return descriptor;
+>  };
+> }
+> ```
+>
+> In this example, the `logWithPrefix()` decorator factory returns a new decorator function that logs method calls with a prefix specified as an argument. To use it, we can create a new instance of the decorator with a specific prefix and apply it to a method like this:
+>
+> ```ts
+> class Example {
+>   @logWithPrefix("MyClass")
+>   foo() {}
+> }
+> ```
+>
+> [DEV](https://dev.to/pipaliyachirag/mastering-typescript-50-decorators-the-ultimate-guide-26f0)
+
 #### Using with `export` Statements
 
 > in addition to allowing decorators to be placed before the `export` keyword, the proposal for decorators now provides the option of placing decorators after `export` or `export default`. The only exception is that mixing the two styles is not allowed.
