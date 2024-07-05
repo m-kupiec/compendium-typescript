@@ -282,6 +282,8 @@ Steps in the process of moving from JavaScript to TypeScript:
 
 ### No TypeScript Support
 
+"TypeScript with JavaScript . . . This is when you use an editor which uses TypeScript to provide tooling like auto-complete, jump to symbol and refactoring tools like rename." ([TypeScript](https://www.typescriptlang.org/docs/handbook/intro-to-js-ts.html))
+
 "Visual Studio Code uses TypeScript under the hood to make it easier to work with JavaScript." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
 
 ### Intermediate TypeScript Support
