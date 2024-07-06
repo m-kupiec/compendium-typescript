@@ -5027,6 +5027,31 @@ Comparison of type predicates and assertion signatures:
 
 "Every file containing JSX must use the `.tsx` file extension. This is a TypeScript-specific extension that tells TypeScript that this file contains JSX." ([React](https://react.dev/learn/typescript))
 
+Usage:
+
+> ```ts
+> function MyButton({ title }: { title: string }) {
+>   return <button>{title}</button>;
+> }
+> ```
+>
+> [React](https://react.dev/learn/typescript)
+
+Alternatively:
+
+> ```ts
+> interface MyButtonProps {
+>   title: string;
+>   disabled: boolean;
+> }
+>
+> function MyButton({ title, disabled }: MyButtonProps) {
+>   return <button disabled={disabled}>{title}</button>;
+> }
+> ```
+>
+> [React](https://react.dev/learn/typescript)
+
 # Type Checker
 
 ## Overview
