@@ -153,6 +153,9 @@
     - Exporting from Modules
     - Using Libraries
   - JSX
+    - Usage
+    - Type Assertion
+    - Intrinsic vs. Value-Based Elements
 
 ### Type Checker
 
@@ -4881,6 +4884,8 @@ Comparison of type predicates and assertion signatures:
 
 ### JSX
 
+#### Usage
+
 "JSX is an embeddable XML-like syntax. It is meant to be transformed into valid JavaScript, though the semantics of that transformation are implementation-specific. JSX rose to popularity with the React framework, but has since seen other implementations as well." ([TypeScript](https://www.typescriptlang.org/docs/handbook/jsx.html))
 
 "TypeScript supports embedding, type checking, and compiling JSX directly to JavaScript." ([TypeScript](https://www.typescriptlang.org/docs/handbook/jsx.html))
@@ -4904,6 +4909,8 @@ Comparison of type predicates and assertion signatures:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/jsx.html)
 
+#### Type Assertion
+
 > Recall how to write a type assertion:
 >
 > ```ts
@@ -4921,6 +4928,8 @@ Comparison of type predicates and assertion signatures:
 > The `as` operator is available in both `.ts` and `.tsx` files, and is identical in behavior to the angle-bracket type assertion style.
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/jsx.html)
+
+#### Intrinsic vs. Value-Based Elements
 
 > In order to understand type checking with JSX, you must first understand the difference between intrinsic elements and value-based elements. Given a JSX expression `<expr />`, expr may either refer to something intrinsic to the environment (e.g. a `div` or `span` in a DOM environment) or to a custom component that you’ve created. This is important for two reasons:
 >
