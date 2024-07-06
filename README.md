@@ -152,6 +152,7 @@
     - Importing Modules
     - Exporting from Modules
     - Using Libraries
+  - JSX
 
 ### Type Checker
 
@@ -4877,6 +4878,19 @@ Comparison of type predicates and assertion signatures:
 "If TypeScript complains about a package like `lodash`, you can just write `npm install -S @types/lodash`" ([TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html))
 
 "If you’re using a module option other than `commonjs`, you’ll need to set your `moduleResolution` option to `node`." ([TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html))
+
+### JSX
+
+"JSX is an embeddable XML-like syntax. It is meant to be transformed into valid JavaScript, though the semantics of that transformation are implementation-specific. JSX rose to popularity with the React framework, but has since seen other implementations as well." ([TypeScript](https://www.typescriptlang.org/docs/handbook/jsx.html))
+
+"TypeScript supports embedding, type checking, and compiling JSX directly to JavaScript." ([TypeScript](https://www.typescriptlang.org/docs/handbook/jsx.html))
+
+> In order to use JSX you must do two things.
+>
+> 1.  Name your files with a .tsx extension
+> 2.  Enable the jsx option
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/jsx.html)
 
 # Type Checker
 
