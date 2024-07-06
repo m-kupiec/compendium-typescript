@@ -158,6 +158,9 @@
     - Intrinsic vs. Value-Based Elements
     - Result Type
     - React Integration
+      - Installation
+      - Usage
+        - General
 
 ### Type Checker
 
@@ -5000,6 +5003,8 @@ Comparison of type predicates and assertion signatures:
 
 #### React Integration
 
+##### Installation
+
 "To use JSX with React you should use the [React typings](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react). These typings define the JSX namespace appropriately for use with React." ([TypeScript](https://www.typescriptlang.org/docs/handbook/jsx.html))
 
 > Out of the box, TypeScript supports JSX and you can get full React Web support by adding `@types/react` and `@types/react-dom` to your project.
@@ -5024,6 +5029,10 @@ Comparison of type predicates and assertion signatures:
 > - `jsxImportSource`
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/jsx.html)
+
+##### Usage
+
+###### General
 
 "Every file containing JSX must use the `.tsx` file extension. This is a TypeScript-specific extension that tells TypeScript that this file contains JSX." ([React](https://react.dev/learn/typescript))
 
