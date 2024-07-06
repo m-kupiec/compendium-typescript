@@ -4945,6 +4945,44 @@ Comparison of type predicates and assertion signatures:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/jsx.html)
 
+> Value-based elements are simply looked up by identifiers that are in scope.
+>
+> ```ts
+> import MyComponent from "./myComponent";
+>
+> <MyComponent />; // ok
+> <SomeOtherComponent />; // error
+> ```
+>
+> There are two ways to define a value-based element:
+>
+> 1.  Function Component (FC)
+> 2.  Class Component
+>
+> . . . [Function component] is defined as a JavaScript function where its first argument is a `props` object. TS enforces that its return type must be assignable to `JSX.Element`. . . . Because a Function Component is simply a JavaScript function, function overloads may be used here as well:
+>
+> ```ts
+> interface ClickableProps {
+>   children: JSX.Element[] | JSX.Element;
+> }
+>
+> interface HomeProps extends ClickableProps {
+>   home: JSX.Element;
+> }
+>
+> interface SideProps extends ClickableProps {
+>   side: JSX.Element | string;
+> }
+>
+> function MainButton(prop: HomeProps): JSX.Element;
+> function MainButton(prop: SideProps): JSX.Element;
+> function MainButton(prop: ClickableProps): JSX.Element {
+>   // ...
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/jsx.html)
+
 # Type Checker
 
 ## Overview
