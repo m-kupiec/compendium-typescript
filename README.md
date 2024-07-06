@@ -157,6 +157,7 @@
     - Type Assertion
     - Intrinsic vs. Value-Based Elements
     - Result Type
+    - React Integration
 
 ### Type Checker
 
@@ -4996,6 +4997,18 @@ Comparison of type predicates and assertion signatures:
 #### Result Type
 
 "By default the result of a JSX expression is typed as `any`. You can customize the type by specifying the `JSX.Element` interface. However, it is not possible to retrieve type information about the element, attributes or children of the JSX from this interface. It is a black box." ([TypeScript](https://www.typescriptlang.org/docs/handbook/jsx.html))
+
+#### React Integration
+
+"To use JSX with React you should use the [React typings](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react). These typings define the JSX namespace appropriately for use with React." ([TypeScript](https://www.typescriptlang.org/docs/handbook/jsx.html))
+
+> There are multiple compiler flags which can be used to customize your JSX, which work as both a compiler flag and via inline per-file pragmas. To learn more see their tsconfig reference pages:
+>
+> - `jsxFactory`
+> - `jsxFragmentFactory`
+> - `jsxImportSource`
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/jsx.html)
 
 # Type Checker
 
