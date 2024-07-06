@@ -4931,6 +4931,20 @@ Comparison of type predicates and assertion signatures:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/jsx.html)
 
+> Intrinsic elements are looked up on the special interface `JSX.IntrinsicElements`. By default, if this interface is not specified, then anything goes and intrinsic elements will not be type checked. However, if this interface is present, then the name of the intrinsic element is looked up as a property on the `JSX.IntrinsicElements` interface. For example:
+>
+> ```ts
+> declare namespace JSX {
+>   interface IntrinsicElements {
+>     foo: any;
+>   }
+> }
+> <foo />; // ok
+> <bar />; // error
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/jsx.html)
+
 # Type Checker
 
 ## Overview
