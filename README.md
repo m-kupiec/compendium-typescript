@@ -5002,6 +5002,21 @@ Comparison of type predicates and assertion signatures:
 
 "To use JSX with React you should use the [React typings](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react). These typings define the JSX namespace appropriately for use with React." ([TypeScript](https://www.typescriptlang.org/docs/handbook/jsx.html))
 
+> Out of the box, TypeScript supports JSX and you can get full React Web support by adding `@types/react` and `@types/react-dom` to your project.
+>
+> ```bash
+> npm install @types/react @types/react-dom
+> ```
+>
+> [React](https://react.dev/learn/typescript)
+
+> The following compiler options need to be set in your `tsconfig.json`:
+>
+> - `dom` must be included in `lib` (Note: If no `lib` option is specified, `dom` is included by default).
+> - `jsx` must be set to one of the valid options. `preserve` should suffice for most applications. If you’re publishing a library, consult the [`jsx` documentation](https://www.typescriptlang.org/tsconfig/#jsx) on what value to choose.
+>
+> [React](https://react.dev/learn/typescript)
+
 > There are multiple compiler flags which can be used to customize your JSX, which work as both a compiler flag and via inline per-file pragmas. To learn more see their tsconfig reference pages:
 >
 > - `jsxFactory`
