@@ -161,6 +161,7 @@
       - Installation
       - Usage
         - General
+        - `useState`
 
 ### Type Checker
 
@@ -5062,6 +5063,45 @@ Alternatively:
 > [React](https://react.dev/learn/typescript)
 
 "The type definitions from `@types/react` include types for the built-in Hooks, so you can use them in your components without any additional setup. They are built to take into account the code you write in your component, so you will get inferred types a lot of the time and ideally do not need to handle the minutiae of providing the types." ([React](https://react.dev/learn/typescript))
+
+###### `useState`
+
+> The `useState` Hook will re-use the value passed in as the initial state to determine what the type of the value should be. For example:
+>
+> ```ts
+> // Infer the type as "boolean"
+> const [enabled, setEnabled] = useState(false);
+> ```
+>
+> This will assign the type of `boolean` to `enabled`, and `setEnabled` will be a function accepting either a `boolean` argument, or a function that returns a `boolean`.
+>
+> [React](https://react.dev/learn/typescript)
+
+> If you want to explicitly provide a type for the state, you can do so by providing a type argument to the `useState` call . . .
+>
+> a common case where you may want to provide a type is when you have a union type. For example, status here can be one of a few different strings:
+>
+> ```ts
+> type Status = "idle" | "loading" | "success" | "error";
+>
+> const [status, setStatus] = useState<Status>("idle");
+> ```
+>
+> Or, as recommended . . . you can group related state as an object and describe the different possibilities via object types:
+>
+> ```ts
+> type RequestState =
+>   | { status: "idle" }
+>   | { status: "loading" }
+>   | { status: "success"; data: any }
+>   | { status: "error"; error: Error };
+>
+> const [requestState, setRequestState] = useState<RequestState>({
+>   status: "idle",
+> });
+> ```
+>
+> [React](https://react.dev/learn/typescript)
 
 # Type Checker
 
