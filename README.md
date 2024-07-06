@@ -5052,6 +5052,8 @@ Alternatively:
 >
 > [React](https://react.dev/learn/typescript)
 
+"The type definitions from `@types/react` include types for the built-in Hooks, so you can use them in your components without any additional setup. They are built to take into account the code you write in your component, so you will get inferred types a lot of the time and ideally do not need to handle the minutiae of providing the types." ([React](https://react.dev/learn/typescript))
+
 # Type Checker
 
 ## Overview
