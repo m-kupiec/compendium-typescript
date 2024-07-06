@@ -5025,6 +5025,8 @@ Comparison of type predicates and assertion signatures:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/jsx.html)
 
+"Every file containing JSX must use the `.tsx` file extension. This is a TypeScript-specific extension that tells TypeScript that this file contains JSX." ([React](https://react.dev/learn/typescript))
+
 # Type Checker
 
 ## Overview
