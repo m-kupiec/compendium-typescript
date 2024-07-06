@@ -4892,6 +4892,18 @@ Comparison of type predicates and assertion signatures:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/jsx.html)
 
+> TypeScript ships with three JSX modes: `preserve`, `react`, and `react-native`. These modes only affect the emit stage - type checking is unaffected. The `preserve` mode will keep the JSX as part of the output to be further consumed by another transform step (e.g. Babel). Additionally the output will have a `.jsx` file extension. The `react` mode will emit `React.createElement`, does not need to go through a JSX transformation before use, and the output will have a `.js` file extension. The react-native mode is the equivalent of `preserve` in that it keeps all JSX, but the output will instead have a `.js` file extension.
+>
+> | Mode           | Input     | Output                                            | Output File Extension |
+> | -------------- | --------- | ------------------------------------------------- | --------------------- |
+> | `preserve`     | `<div />` | `<div />`                                         | `.jsx`                |
+> | `react`        | `<div />` | `React.createElement("div")`                      | `.js`                 |
+> | `react-native` | `<div />` | `<div />`                                         | `.js`                 |
+> | `react-jsx`    | `<div />` | `_jsx("div", {}, void 0);`                        | `.js`                 |
+> | `react-jsxdev` | `<div />` | `_jsxDEV("div", {}, void 0, false, {...}, this);` | `.js`                 |
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/jsx.html)
+
 # Type Checker
 
 ## Overview
