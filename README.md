@@ -4898,8 +4898,8 @@ Comparison of type predicates and assertion signatures:
 
 > In order to use JSX you must do two things.
 >
-> 1.  Name your files with a .tsx extension
-> 2.  Enable the jsx option
+> 1.  Name your files with a `.tsx` extension
+> 2.  Enable the `jsx` option
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/jsx.html)
 
