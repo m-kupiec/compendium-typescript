@@ -289,6 +289,8 @@ Steps in the process of moving from JavaScript to TypeScript:
 
 "Visual Studio Code uses TypeScript under the hood to make it easier to work with JavaScript." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
 
+"As you hover over symbols in VSCode, you'll see inferred type information: for constants and so on you'll see `string` and `number`. This is the type that TS can safely guess. (If you see `any`, this means that TS can't work out what type you're using.) You can fill in the gaps here with JSDoc comments which add types. . . . So—this is fine, but all it gets you is helpful information when you hover over a type or you're trying to autocomplete." ([Sam Thorogood](https://samthor.au/2021/check-js-with-ts/))
+
 ### Intermediate TypeScript Support
 
 "In a `.js` file, types can often be inferred. When types can’t be inferred, they can be specified using JSDoc syntax." ([TypeScript](https://www.typescriptlang.org/docs/handbook/intro-to-js-ts.html))
