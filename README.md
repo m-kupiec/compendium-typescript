@@ -9,7 +9,7 @@
 - **Installation**
 - **Migrating from JavaScript**
   - Overview
-  - No TypeScript Support
+  - Basic TypeScript Support
   - Intermediate TypeScript Support
 
 ### Language
@@ -283,7 +283,7 @@ Steps in the process of moving from JavaScript to TypeScript:
 >
 > [TypeScript](https://www.typescriptlang.org)
 
-### No TypeScript Support
+### Basic TypeScript Support
 
 "TypeScript with JavaScript . . . This is when you use an editor which uses TypeScript to provide tooling like auto-complete, jump to symbol and refactoring tools like rename." ([TypeScript](https://www.typescriptlang.org/docs/handbook/intro-to-js-ts.html))
 
