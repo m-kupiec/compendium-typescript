@@ -5180,6 +5180,12 @@ Comparison of type predicates and assertion signatures:
 
 "The `"compilerOptions"` property can be omitted, in which case the compiler’s defaults are used." ([TypeScript](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html))
 
+"The most challenging part of using TypeScript is setting it up correctly." ([web.dev](https://web.dev/learn/testing/get-started/static-analysis))
+
+"Every project needs a `tsconfig.json` file, which, while primarily used by the `tsc` command-line tool itself, is also read by IDEs like VSCode along with many other build tools and tooling, including Vitest." ([web.dev](https://web.dev/learn/testing/get-started/static-analysis))
+
+"Make sure your source files are actually included and checked. If a file mysteriously "has no errors", that's probably because it's not being checked." ([web.dev](https://web.dev/learn/testing/get-started/static-analysis))
+
 > TypeScript uses a file called `tsconfig.json` for managing your project’s options, such as which files you want to include, and what sorts of checking you want to perform. Let’s create a bare-bones one for our project:
 >
 > ```json
