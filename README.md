@@ -5053,6 +5053,8 @@ Comparison of type predicates and assertion signatures:
 
 #### `noImplicitAny`
 
+"Callers of this function will be able to pass through a value of type `any` (a type which allows any other type), not just a `number`. By enabling the `noImplicitAny` flag, you can safeguard this kind of code during development, without needing to write extensive business logic tests for your code passing the wrong data types in specific places. . . . TypeScript can't prevent invalid data being entered by users, or from a network request. Tests that confirm correct behavior if a user submits malformed data—even though your TS types say it should look a certain way—can still be useful, but not so much for code which you expect to be entirely under your control." ([web.dev](https://web.dev/learn/testing/get-started/static-analysis))
+
 "if you never want TypeScript to silently infer `any` for a type without you explicitly saying so, you can use `noImplicitAny` before you start modifying your files. While it might feel somewhat overwhelming, the long-term gains become apparent much more quickly." ([TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html))
 
 "There are certain cases where TypeScript can’t figure out what certain types should be. To be as lenient as possible, it will decide to use the type `any` in its place. While this is great for migration, using `any` means that you’re not getting any type safety, and you won’t get the same tooling support you’d get elsewhere. You can tell TypeScript to flag these locations down and give an error with the `noImplicitAny` option." ([TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html))
