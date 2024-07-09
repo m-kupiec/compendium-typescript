@@ -293,6 +293,8 @@ Steps in the process of moving from JavaScript to TypeScript:
 
 ### Intermediate TypeScript Support
 
+"If you create a custom "`tsconfig.json`" file in the root of your project, you can enable warnings and errors for your project. . . . You can also use a base config . . . VSCode will now just start warning you about problems. To be clear: I didn't install any TypeScript tooling to make this happen, it was just implicitly part of VSCode. . . . You can also now run TypeScript via the command-line to get warnings and errors for your whole project, even if it's not compiling your code. Install the NPM package and run its command-line compiler (which will just check, since we set `noEmit` . . .)" ([Sam Thorogood](https://samthor.au/2021/check-js-with-ts/))
+
 "In a `.js` file, types can often be inferred. When types can’t be inferred, they can be specified using JSDoc syntax." ([TypeScript](https://www.typescriptlang.org/docs/handbook/intro-to-js-ts.html))
 
 > ```js
