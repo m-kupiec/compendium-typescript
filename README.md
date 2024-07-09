@@ -331,6 +331,8 @@ Steps in the process of moving from JavaScript to TypeScript:
 >
 > [Stack Overflow](https://stackoverflow.com/a/29197665)
 
+"Explicitly describing types and interfaces inside `.d.ts` files, rather than having them implicitly described as you write functions, can make your codebase easier to test. It's easier to write mocks and 'fake' versions of code when the interfaces involved are clear." ([web.dev](https://web.dev/learn/testing/get-started/static-analysis))
+
 > To make the first step in moving from JavaScript to TypeScript without adding a complex build step in the process you could:
 >
 > 1.  Define all your types in `types.ts`
