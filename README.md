@@ -2030,8 +2030,8 @@ Comparison:
 >   ): void;
 > };
 >
-> /// Create a "watched object" with an `on` method
-> /// so that you can watch for changes to properties.
+> // Create a "watched object" with an `on` method
+> // so that you can watch for changes to properties.
 > declare function makeWatchedObject<Type>(
 >   obj: Type
 > ): Type & PropEventSource<Type>;
