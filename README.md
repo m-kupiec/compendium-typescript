@@ -295,6 +295,67 @@ Steps in the process of moving from JavaScript to TypeScript:
 
 "If you create a custom "`tsconfig.json`" file in the root of your project, you can enable warnings and errors for your project. . . . You can also use a base config . . . VSCode will now just start warning you about problems. To be clear: I didn't install any TypeScript tooling to make this happen, it was just implicitly part of VSCode. . . . You can also now run TypeScript via the command-line to get warnings and errors for your whole project, even if it's not compiling your code. Install the NPM package and run its command-line compiler (which will just check, since we set `noEmit` . . .)" ([Sam Thorogood](https://samthor.au/2021/check-js-with-ts/))
 
+> what if you'd like to define your own types—such as a complex interface type with many properties? . . .
+>
+> - You can use the triple-slash syntax to bring in or reference other types
+> - You're able to `import` type files, although this only makes sense to TS: not your browser
+>
+> While the first approach is useful for say, external types—you might depend on something in NPM's @types repo or a built-in library—the second is my preferred option for your ESM [i.e. ES Modules] projects.
+>
+> If you create a file like "`types.d.ts`", you can actually import it as "`types.js`" (and VSCode can suggest this in an autocomplete). TypeScript actually prevents you from importing the "`.d.ts`" directly-you must pretend that it is a JS file. But the JS file doesn't actually exist—how can this interop with other tools and loading in your browser?
+>
+> Turns out, we can just create two files: one "`types.d.ts`" for types, and one "`types.js`" that's actually just empty. These two files might look like:
+>
+> ```ts
+> //
+> // @file types.js
+> //
+> // This is an empty file so that browsers and tooling doesn't complain.
+>
+> //
+> // @file types.d.ts
+> //
+> /**
+>  * This isn't a real class, it just defines an expected object type.
+>  */
+> export interface ArgForSomething {
+>   foo: string;
+>   bar?: number;
+> }
+>
+> /**
+>  * We can define functions, too.
+>  */
+> export function exportedFunction(arg: ArgForSomething): void;
+> ```
+>
+> And to use the code, in a regular JS file:
+>
+> ```js
+> import types from "./types.js";
+>
+> /**
+>  * @param {types.ArgForSomething} arg
+>  */
+> export function foo(arg) {
+>   // ...
+> }
+>
+> /**
+>  * If you export a function from your types, you can also just reference it
+>  * wholesale: this might be useful if you're publishing to NPM.
+>  *
+>  * @type {types.exportedFunction}
+>  */
+> export function exportedFunction(arg) {
+>   // ...
+> }
+> ```
+>
+> Voila—type information! Importantly, when you're bundling or compiling, tools will hide the dummy, empty file. And during development, the file technically exists, but is ignored since it's empty anyway and is only referenced inside your comments.
+>
+> [Sam Thorogood](https://samthor.au/2021/check-js-with-ts/)
+
 "In a `.js` file, types can often be inferred. When types can’t be inferred, they can be specified using JSDoc syntax." ([TypeScript](https://www.typescriptlang.org/docs/handbook/intro-to-js-ts.html))
 
 > ```js
