@@ -356,6 +356,25 @@ Steps in the process of moving from JavaScript to TypeScript:
 >
 > [Sam Thorogood](https://samthor.au/2021/check-js-with-ts/)
 
+> you can reference other files in your own project using the triple-slash syntax. However, it doesn't mesh well with modules: you can't see anything that had `export` on it in that referenced file, and everything else will be brought into the global namespace. (There's exceptions here too, and it's just more complex than treating it as an ES Module.)
+>
+> By default, TypeScript looks for the "`index.d.ts`" file in your project's root directory to provide types for the users of your package. . . . I like specifically calling it "`types`". You can specify a path to your types in "`package.json`". (Turns out, TypeScript recommends you do this anyway, even if the file is the default name.) This looks like:
+>
+> ```json
+> {
+>   "name": "your-awesome-package",
+>   "types": "path/to/types.d.ts",
+>   "exports": {
+>     "import": "./main-module.js",
+>     "require": "./main-require.cjs"
+>   }
+> }
+> ```
+>
+> This types file should match your top-level export file. It can import further "`.d.ts`" files (and these don't need a dummy peer JS file) and even re-export them.
+>
+> [Sam Thorogood](https://samthor.au/2021/check-js-with-ts/)
+
 "In a `.js` file, types can often be inferred. When types can’t be inferred, they can be specified using JSDoc syntax." ([TypeScript](https://www.typescriptlang.org/docs/handbook/intro-to-js-ts.html))
 
 > ```js
