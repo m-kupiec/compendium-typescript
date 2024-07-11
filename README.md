@@ -118,6 +118,7 @@
     - `extends` Clause
     - Type-Only Field Declarations
   - Generic Classes
+  - Class Expressions
   - `this` Parameter
   - `this` Type
   - Abstract Classes
@@ -3624,6 +3625,24 @@ Comparison:
 "When a generic class is instantiated with `new`, its type parameters are inferred the same way as in a function call" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html))
 
 "a class has two sides to its type: the static side and the instance side. Generic classes are only generic over their instance side rather than their static side, so when working with classes, static members can not use the class’s type parameter." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/generics.html))
+
+### Class Expressions
+
+> Class expressions are very similar to class declarations. The only real difference is that class expressions don’t need a name, though we can refer to them via whatever identifier they ended up bound to:
+>
+> ```ts
+> const someClass = class<Type> {
+>   content: Type;
+>   constructor(value: Type) {
+>     this.content = value;
+>   }
+> };
+>
+> const m = new someClass("Hello, world");
+> // const m: someClass<string>
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
 ### `this` Parameter
 
