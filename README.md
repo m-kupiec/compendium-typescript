@@ -1797,6 +1797,7 @@ Comparison:
 > ```
 >
 > Here, we used the `infer` keyword to declaratively introduce a new generic type variable named `Item` instead of specifying how to retrieve the element type of `Type` within the true branch. This frees us from having to think about how to dig through and probing apart the structure of the types we’re interested in.
+>
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
 
 > We can write some useful helper type aliases using the `infer` keyword. For example, for simple cases, we can extract the return type out from function types:
