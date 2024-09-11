@@ -939,8 +939,8 @@ Steps in the process of moving from JavaScript to TypeScript:
 > ```
 >
 > ```ts
-> Argument of type 'readonly [3, 4]' is not assignable to parameter of type '>[number, number]'.
->   The type 'readonly [3, 4]' is 'readonly' and cannot be assigned to the mutable >type '[number, number]'.
+> Argument of type 'readonly [3, 4]' is not assignable to parameter of type '[number, number]'.
+>   The type 'readonly [3, 4]' is 'readonly' and cannot be assigned to the mutable type '[number, number]'.
 > ```
 >
 > Here, `distanceFromOrigin` never modifies its elements, but expects a mutable tuple. Since point’s type was inferred as `readonly [3, 4]`, it won’t be compatible with `[number, number]` since that type can’t guarantee point’s elements won’t be mutated.
