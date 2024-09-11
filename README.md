@@ -56,6 +56,9 @@
     - Interfaces vs. Intersections
   - Generics
     - General
+    - Using in Functions
+      - General
+      - Call Signatures
     - Generic Type Aliases
     - Type Parameter Constraint
     - Generic Type Parameter Default
@@ -1339,6 +1342,10 @@ Comparison:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
 
+#### Using in Functions
+
+##### General
+
 > Here, we will use a _type variable_, a special kind of variable that works on types rather than values.
 >
 > ```ts
@@ -1394,6 +1401,8 @@ Comparison:
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/generics.html)
+
+##### Call Signatures
 
 > We can also write the generic type as a call signature of an object literal type:
 >
