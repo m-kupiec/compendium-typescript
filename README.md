@@ -56,6 +56,7 @@
     - Interfaces vs. Intersections
   - Generics
     - General
+    - Type Parameter Constraint
     - Generic Type Parameter Default
   - Type Operators
     - `keyof`
@@ -1468,6 +1469,8 @@ Comparison:
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
+#### Type Parameter Constraint
 
 > You can declare a type parameter that is constrained by another type parameter. For example, here we’d like to get a property from an object given its name. We’d like to ensure that we’re not accidentally grabbing a property that does not exist on the `obj`, so we’ll place a constraint between the two types:
 >
