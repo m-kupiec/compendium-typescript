@@ -56,6 +56,7 @@
     - Interfaces vs. Intersections
   - Generics
     - General
+    - Generic Type Aliases
     - Type Parameter Constraint
     - Generic Type Parameter Default
   - Type Operators
@@ -1435,6 +1436,8 @@ Comparison:
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+
+#### Generic Type Aliases
 
 > It is worth noting that type aliases can also be generic. We could have defined our new `Box<Type>` interface, which was:
 >
