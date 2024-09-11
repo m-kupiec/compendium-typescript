@@ -75,7 +75,7 @@
     - Mapping Modifiers
     - Key Remapping
   - Template Literal Types
-    - General
+  - Utility Types
     - String Manipulation Types
       - General
       - `Uppercase<StringType>`
@@ -2077,8 +2077,6 @@ Comparison:
 
 ### Template Literal Types
 
-#### General
-
 "great for building libraries, describing existing JavaScript code . . . you may find you rarely reach for them in mostly TypeScript applications." ([TypeScript](https://www.typescriptlang.org/cheatsheets/))
 
 "Template literal types build on string literal types, and have the ability to expand into many strings via unions." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/template-literal-types.>html))
@@ -2198,6 +2196,8 @@ Comparison:
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html)
+
+### Utility Types
 
 #### String Manipulation Types
 
