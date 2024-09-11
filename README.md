@@ -55,6 +55,8 @@
     - General
     - Interfaces vs. Intersections
   - Generics
+    - General
+    - Generic Type Parameter Default
   - Type Operators
     - `keyof`
     - `typeof`
@@ -1282,6 +1284,8 @@ Comparison:
 
 ### Generics
 
+#### General
+
 "Generics provide variables to types." ([TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html))
 
 > Here, we will use a _type variable_, a special kind of variable that works on types rather than values.
@@ -1483,6 +1487,8 @@ Comparison:
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/generics.html)
+
+#### Generic Type Parameter Default
 
 > By declaring a default for a generic type parameter, you make it optional to specify the corresponding type argument. For example, a function which creates a new `HTMLElement`. Calling the function with no arguments generates a `HTMLDivElement`; calling the function with an element as the first argument generates an element of the argument’s type. You can optionally pass a list of children as well. Previously you would have to define the function as:
 >
