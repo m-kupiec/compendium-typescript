@@ -1029,7 +1029,7 @@ Adding new fields to an existing interface:
 > }
 > ```
 >
-> You can then declare that a JavaScript object conforms to the shape of your new >interface by using syntax like : TypeName after a variable declaration:
+> You can then declare that a JavaScript object conforms to the shape of your new interface by using syntax like `: TypeName` after a variable declaration:
 >
 > ```ts
 > const user: User = {
