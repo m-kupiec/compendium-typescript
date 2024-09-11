@@ -805,7 +805,7 @@ Steps in the process of moving from JavaScript to TypeScript:
 >     handleRequest(req.url, req.method as "GET");
 >     ```
 >
->     Change 1 means “I intend for req.method to always have the _literal_ type `"GET"`”, preventing the possible assignment of `"GUESS"` to that field after. Change 2 means >“I know for other reasons that `req.method` has the value `"GET"`“.
+>     Change 1 means “I intend for req.method to always have the _literal_ type `"GET"`”, preventing the possible assignment of `"GUESS"` to that field after. Change 2 means “I know for other reasons that `req.method` has the value `"GET"`“.
 >
 > 2.  You can use `as const` to convert the entire object to be type literals:
 >
