@@ -82,7 +82,7 @@
       - `Lowercase<StringType>`
       - `Capitalize<StringType>`
       - `Uncapitalize<StringType>`
-- **Function Types**
+- **Describing Functions**
   - Function Type Expression
   - Call Signature
   - Construct Signature
@@ -97,7 +97,7 @@
     - Arguments
   - Parameter Destructuring
   - Overloads
-- **Object Types**
+- **Describing Objects**
   - General
   - Optional Properties
   - Destructuring
@@ -106,7 +106,7 @@
   - Excess Property Checking
     - General
     - Workarounds
-- **Class Types**
+- **Describing Classes**
   - General
     - Class Expressions
     - Structural Comparison
@@ -2277,7 +2277,7 @@ Comparison:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html)
 
-## Function Types
+## Describing Functions
 
 ### Function Type Expression
 
@@ -2736,7 +2736,7 @@ Comparison:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/functions.html)
 
-## Object Types
+## Describing Objects
 
 ### General
 
@@ -2997,7 +2997,7 @@ Comparison:
 
 "Keep in mind that for simple code like above, you probably shouldn’t be trying to “get around” these checks. For more complex object literals that have methods and hold state, you might need to keep these techniques in mind, but a majority of excess property errors are actually bugs." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/objects.html))
 
-## Class Types
+## Describing Classes
 
 ### General
 
