@@ -3064,7 +3064,7 @@ Comparison:
 > ```
 >
 > ```ts
-> Property 'name' has no initializer and is not definitely assigned in the >constructor.
+> Property 'name' has no initializer and is not definitely assigned in the constructor.
 > ```
 >
 > ```ts
