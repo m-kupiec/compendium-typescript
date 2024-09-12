@@ -111,6 +111,8 @@
   - Class Memebers
     - Fields
     - Constructors
+      - General
+      - Constructor Overloads
     - Methods
     - Accessors
     - Index Signatures
@@ -3118,21 +3120,7 @@ Comparison:
 
 #### Constructors
 
-> ```ts
-> class Point {
->   x: number = 0;
->   y: number = 0;
->
->   // Constructor overloads
->   constructor(x: number, y: number);
->   constructor(xy: string);
->   constructor(x: string | number, y: number = 0) {
->     // Code logic here
->   }
-> }
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+##### General
 
 > There are just a few differences between class constructor signatures and function signatures:
 >
@@ -3166,6 +3154,24 @@ Comparison:
 >
 > ```ts
 > Property 'z' is private and only accessible within class 'Params'.
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
+##### Constructor Overloads
+
+> ```ts
+> class Point {
+>   x: number = 0;
+>   y: number = 0;
+>
+>   // Constructor overloads
+>   constructor(x: number, y: number);
+>   constructor(xy: string);
+>   constructor(x: string | number, y: number = 0) {
+>     // Code logic here
+>   }
+> }
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
