@@ -14,7 +14,7 @@
 
 ### Language
 
-- **Types**
+- **Basic Types**
   - Built-In Type Primitives
     - Overview
     - `null`/`undefined`
@@ -443,7 +443,7 @@ Steps in the process of moving from JavaScript to TypeScript:
 
 # Language
 
-## Types
+## Basic Types
 
 ### Built-In Type Primitives
 
