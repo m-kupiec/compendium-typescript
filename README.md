@@ -112,6 +112,7 @@
     - Fields
     - Constructors
       - General
+      - Constructor Signatures
       - Constructor Overloads
     - Methods
     - Accessors
@@ -3122,13 +3123,6 @@ Comparison:
 
 ##### General
 
-> There are just a few differences between class constructor signatures and function signatures:
->
-> - Constructors can’t have type parameters - these belong on the outer class declaration, which we’ll learn about later
-> - Constructors can’t have return type annotations - the class instance type is always what’s returned
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
-
 "Forgetting to call `super` is an easy mistake to make in JavaScript, but TypeScript will tell you when it’s necessary." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html))
 
 > TypeScript offers special syntax for turning a constructor parameter into a class property with the same name and value. These are called _parameter properties_ and are created by prefixing a constructor argument with one of the visibility modifiers `public`, `private`, `protected`, or `readonly`. The resulting field gets those modifier(s):
@@ -3155,6 +3149,15 @@ Comparison:
 > ```ts
 > Property 'z' is private and only accessible within class 'Params'.
 > ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
+##### Constructor Signatures
+
+> There are just a few differences between class constructor signatures and function signatures:
+>
+> - Constructors can’t have type parameters - these belong on the outer class declaration, which we’ll learn about later
+> - Constructors can’t have return type annotations - the class instance type is always what’s returned
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
