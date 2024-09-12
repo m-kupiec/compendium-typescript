@@ -5009,7 +5009,7 @@ Cons:
 
 #### Exporting from Modules
 
-"Typically, exporting from a module involves adding properties to a value like exports or module.exports. TypeScript allows you to use top-level export statements." ([TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html))
+"Typically, exporting from a module involves adding properties to a value like `exports` or `module.exports`. TypeScript allows you to use top-level export statements." ([TypeScript](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html))
 
 > if you exported a function like so:
 >
