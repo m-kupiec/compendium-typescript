@@ -107,7 +107,9 @@
     - General
     - Workarounds
 - **Class Types**
-  - Structural Comparison
+  - General
+    - Structural Comparison
+    - Implementing Interfaces
   - Class Members
     - Fields
     - Constructors
@@ -125,7 +127,6 @@
       - Private
     - Static Members
   - Inheritance
-    - `implements` Clause
     - `extends` Clause
     - Type-Only Field Declarations
   - Generic Classes
@@ -2995,7 +2996,9 @@ Comparison:
 
 ## Class Types
 
-### Structural Comparison
+### General
+
+#### Structural Comparison
 
 "In most cases, classes in TypeScript are compared structurally, the same as other types." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html))
 
@@ -3051,6 +3054,79 @@ Comparison:
 > fn(window);
 > fn({});
 > fn(fn);
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
+#### Implementing Interfaces
+
+> You can use an `implements` clause to check that a class satisfies a particular interface. An error will be issued if a class fails to correctly implement it:
+>
+> ```ts
+> interface Pingable {
+>   ping(): void;
+> }
+>
+> class Sonar implements Pingable {
+>   ping() {
+>     console.log("ping!");
+>   }
+> }
+>
+> class Ball implements Pingable {
+>   // Error
+>   pong() {
+>     console.log("pong!");
+>   }
+> }
+> ```
+>
+> ```ts
+> Class 'Ball' incorrectly implements interface 'Pingable'.
+> Property 'ping' is missing in type 'Ball' but required in type 'Pingable'.
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
+"Classes may also implement multiple interfaces, e.g. `class C implements A, B {`." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html))
+
+> It’s important to understand that an `implements` clause is only a check that the class can be treated as the interface type. It doesn’t change the type of the class or its methods _at all_.
+>
+> ```ts
+> interface Checkable {
+>   check(name: string): boolean;
+> }
+>
+> class NameChecker implements Checkable {
+>   check(s) {
+>     // Error
+>     // Notice no error here
+>     return s.toLowerCase() === "ok";
+>     // any
+>   }
+> }
+> ```
+>
+> ```ts
+> Parameter 's' implicitly has an 'any' type.
+> ```
+>
+> . . . Similarly, implementing an interface with an optional property doesn’t create that property:
+>
+> ```ts
+> interface A {
+>   x: number;
+>   y?: number;
+> }
+> class C implements A {
+>   x = 0;
+> }
+> const c = new C();
+> c.y = 10;
+> ```
+>
+> ```ts
+> Property 'y' does not exist on type 'C'.
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
@@ -3468,79 +3544,6 @@ Comparison:
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
 ### Inheritance
-
-#### `implements` Clause
-
-> You can use an `implements` clause to check that a class satisfies a particular interface. An error will be issued if a class fails to correctly implement it:
->
-> ```ts
-> interface Pingable {
->   ping(): void;
-> }
->
-> class Sonar implements Pingable {
->   ping() {
->     console.log("ping!");
->   }
-> }
->
-> class Ball implements Pingable {
->   // Error
->   pong() {
->     console.log("pong!");
->   }
-> }
-> ```
->
-> ```ts
-> Class 'Ball' incorrectly implements interface 'Pingable'.
-> Property 'ping' is missing in type 'Ball' but required in type 'Pingable'.
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
-
-"Classes may also implement multiple interfaces, e.g. `class C implements A, B {`." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html))
-
-> It’s important to understand that an `implements` clause is only a check that the class can be treated as the interface type. It doesn’t change the type of the class or its methods _at all_.
->
-> ```ts
-> interface Checkable {
->   check(name: string): boolean;
-> }
->
-> class NameChecker implements Checkable {
->   check(s) {
->     // Error
->     // Notice no error here
->     return s.toLowerCase() === "ok";
->     // any
->   }
-> }
-> ```
->
-> ```ts
-> Parameter 's' implicitly has an 'any' type.
-> ```
->
-> . . . Similarly, implementing an interface with an optional property doesn’t create that property:
->
-> ```ts
-> interface A {
->   x: number;
->   y?: number;
-> }
-> class C implements A {
->   x = 0;
-> }
-> const c = new C();
-> c.y = 10;
-> ```
->
-> ```ts
-> Property 'y' does not exist on type 'C'.
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
 #### `extends` Clause
 
