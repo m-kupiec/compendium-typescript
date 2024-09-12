@@ -4845,7 +4845,7 @@ Comparison of type predicates and assertion signatures:
 > }
 > ```
 >
-> **Assertionn Functions**: A function describing CFA changes affecting the current scope, because it throws instead of returning `false`.
+> **Assertion Functions**: A function describing CFA changes affecting the current scope, because it throws instead of returning `false`.
 >
 > ```ts
 > function assertResponse(obj: any): asserts obj is SuccessResponse {
