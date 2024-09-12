@@ -114,6 +114,9 @@
     - Inheritance
       - General
       - Type-Only Field Declarations
+    - `this` Type
+      - General
+      - `this`-Based Type Guard
     - Generic Classes
   - Class Members
     - Fields
@@ -133,7 +136,6 @@
       - Protected
       - Private
     - Static Members
-  - `this` Type
   - Abstract Classes
   - Abstract Contruct Signatures
   - Constructor Signatures
@@ -3253,6 +3255,149 @@ Comparison:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
+#### `this` Type
+
+##### General
+
+"In classes, a special type called `this` refers dynamically to the type of the current class." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html))
+
+> ```ts
+> class Box {
+>   contents: string = "";
+>   set(value: string) {
+>     // (method) Box.set(value: string): this
+>     this.contents = value;
+>     return this;
+>   }
+> }
+> ```
+>
+> Here, TypeScript inferred the return type of `set` to be `this`, rather than `Box`. . . .
+>
+> ```ts
+> class ClearableBox extends Box {
+>   clear() {
+>     this.contents = "";
+>   }
+> }
+>
+> const a = new ClearableBox();
+> const b = a.set("hello");
+> // const b: ClearableBox
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
+> You can also use `this` in a parameter type annotation:
+>
+> ```ts
+> class Box {
+>   content: string = "";
+>   sameAs(other: this) {
+>     return other.content === this.content;
+>   }
+> }
+> ```
+>
+> This is different from writing `other: Box` — if you have a derived class, its `sameAs` method will now only accept other instances of that same derived class:
+>
+> ```ts
+> class Box {
+>   content: string = "";
+>   sameAs(other: this) {
+>     return other.content === this.content;
+>   }
+> }
+>
+> class DerivedBox extends Box {
+>   otherContent: string = "?";
+> }
+>
+> const base = new Box();
+> const derived = new DerivedBox();
+> derived.sameAs(base); // Error
+> ```
+>
+> ```ts
+> Argument of type 'Box' is not assignable to parameter of type 'DerivedBox'.
+> Property 'otherContent' is missing in type 'Box' but required in type 'DerivedBox'.
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
+##### `this`-Based Type Guard
+
+> You can use `this is Type` in the return position for methods in classes and interfaces. When mixed with a type narrowing (e.g. `if` statements) the type of the target object would be narrowed to the specified `Type`.
+>
+> ```ts
+> class FileSystemObject {
+>   isFile(): this is FileRep {
+>     return this instanceof FileRep;
+>   }
+>   isDirectory(): this is Directory {
+>     return this instanceof Directory;
+>   }
+>   isNetworked(): this is Networked & this {
+>     return this.networked;
+>   }
+>   constructor(public path: string, private networked: boolean) {}
+> }
+>
+> class FileRep extends FileSystemObject {
+>   constructor(path: string, public content: string) {
+>     super(path, false);
+>   }
+> }
+>
+> class Directory extends FileSystemObject {
+>   children: FileSystemObject[];
+> }
+>
+> interface Networked {
+>   host: string;
+> }
+>
+> const fso: FileSystemObject = new FileRep("foo/bar.txt", "foo");
+>
+> if (fso.isFile()) {
+>   fso.content;
+>   // const fso: FileRep
+> } else if (fso.isDirectory()) {
+>   fso.children;
+>   // const fso: Directory
+> } else if (fso.isNetworked()) {
+>   fso.host;
+>   // const fso: Networked & FileSystemObject
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
+> A common use-case for a `this`-based type guard is to allow for lazy validation of a particular field. For example, this case removes an `undefined` from the value held inside `box` when `hasValue` has been verified to be `true`:
+>
+> ```ts
+> class Box<T> {
+>   value?: T;
+>
+>   hasValue(): this is { value: T } {
+>     return this.value !== undefined;
+>   }
+> }
+>
+> const box = new Box<string>();
+> box.value = "Gameboy";
+>
+> box.value;
+> // (property) Box<string>.value?: string
+>
+> if (box.hasValue()) {
+>   box.value;
+>   // (property) value: string
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
 #### Generic Classes
 
 > ```ts
@@ -3756,145 +3901,6 @@ Comparison:
 > ```
 >
 > . . . The `static` members of a generic class can never refer to the class’s type parameters.
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
-
-### `this` Type
-
-"In classes, a special type called `this` refers dynamically to the type of the current class." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html))
-
-> ```ts
-> class Box {
->   contents: string = "";
->   set(value: string) {
->     // (method) Box.set(value: string): this
->     this.contents = value;
->     return this;
->   }
-> }
-> ```
->
-> Here, TypeScript inferred the return type of `set` to be `this`, rather than `Box`. . . .
->
-> ```ts
-> class ClearableBox extends Box {
->   clear() {
->     this.contents = "";
->   }
-> }
->
-> const a = new ClearableBox();
-> const b = a.set("hello");
-> // const b: ClearableBox
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
-
-> You can also use `this` in a parameter type annotation:
->
-> ```ts
-> class Box {
->   content: string = "";
->   sameAs(other: this) {
->     return other.content === this.content;
->   }
-> }
-> ```
->
-> This is different from writing `other: Box` — if you have a derived class, its `sameAs` method will now only accept other instances of that same derived class:
->
-> ```ts
-> class Box {
->   content: string = "";
->   sameAs(other: this) {
->     return other.content === this.content;
->   }
-> }
->
-> class DerivedBox extends Box {
->   otherContent: string = "?";
-> }
->
-> const base = new Box();
-> const derived = new DerivedBox();
-> derived.sameAs(base); // Error
-> ```
->
-> ```ts
-> Argument of type 'Box' is not assignable to parameter of type 'DerivedBox'.
-> Property 'otherContent' is missing in type 'Box' but required in type 'DerivedBox'.
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
-
-> You can use `this is Type` in the return position for methods in classes and interfaces. When mixed with a type narrowing (e.g. `if` statements) the type of the target object would be narrowed to the specified `Type`.
->
-> ```ts
-> class FileSystemObject {
->   isFile(): this is FileRep {
->     return this instanceof FileRep;
->   }
->   isDirectory(): this is Directory {
->     return this instanceof Directory;
->   }
->   isNetworked(): this is Networked & this {
->     return this.networked;
->   }
->   constructor(public path: string, private networked: boolean) {}
-> }
->
-> class FileRep extends FileSystemObject {
->   constructor(path: string, public content: string) {
->     super(path, false);
->   }
-> }
->
-> class Directory extends FileSystemObject {
->   children: FileSystemObject[];
-> }
->
-> interface Networked {
->   host: string;
-> }
->
-> const fso: FileSystemObject = new FileRep("foo/bar.txt", "foo");
->
-> if (fso.isFile()) {
->   fso.content;
->   // const fso: FileRep
-> } else if (fso.isDirectory()) {
->   fso.children;
->   // const fso: Directory
-> } else if (fso.isNetworked()) {
->   fso.host;
->   // const fso: Networked & FileSystemObject
-> }
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
-
-> A common use-case for a `this`-based type guard is to allow for lazy validation of a particular field. For example, this case removes an `undefined` from the value held inside `box` when `hasValue` has been verified to be `true`:
->
-> ```ts
-> class Box<T> {
->   value?: T;
->
->   hasValue(): this is { value: T } {
->     return this.value !== undefined;
->   }
-> }
->
-> const box = new Box<string>();
-> box.value = "Gameboy";
->
-> box.value;
-> // (property) Box<string>.value?: string
->
-> if (box.hasValue()) {
->   box.value;
->   // (property) value: string
-> }
-> ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
