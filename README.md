@@ -119,6 +119,7 @@
       - General
       - `this`-Based Type Guard
     - Generic Classes
+    - Class Instance Type
   - Class Members
     - Fields
     - Constructors
@@ -137,7 +138,6 @@
       - Protected
       - Private
     - Static Members
-  - Constructor Signatures
   - Constructor Functions
   - Decorators
     - General
@@ -3532,6 +3532,34 @@ Comparison:
 
 "a class has two sides to its type: the static side and the instance side. Generic classes are only generic over their instance side rather than their static side, so when working with classes, static members can not use the class’s type parameter." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/generics.html))
 
+#### Class Instance Type
+
+> JavaScript classes are instantiated with the `new` operator. Given the type of a class itself, the `InstanceType` utility type models this operation.
+>
+> ```ts
+> class Point {
+>   createdAt: number;
+>   x: number;
+>   y: number;
+>   constructor(x: number, y: number) {
+>     this.createdAt = Date.now();
+>     this.x = x;
+>     this.y = y;
+>   }
+> }
+> type PointInstance = InstanceType<typeof Point>;
+>
+> function moveRight(point: PointInstance) {
+>   point.x += 5;
+> }
+>
+> const point = new Point(3, 4);
+> moveRight(point);
+> point.x; // => 8
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
 ### Class Members
 
 #### Fields
@@ -4018,34 +4046,6 @@ Comparison:
 > ```
 >
 > . . . The `static` members of a generic class can never refer to the class’s type parameters.
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
-
-### Constructor Signatures
-
-> JavaScript classes are instantiated with the `new` operator. Given the type of a class itself, the `InstanceType` utility type models this operation.
->
-> ```ts
-> class Point {
->   createdAt: number;
->   x: number;
->   y: number;
->   constructor(x: number, y: number) {
->     this.createdAt = Date.now();
->     this.x = x;
->     this.y = y;
->   }
-> }
-> type PointInstance = InstanceType<typeof Point>;
->
-> function moveRight(point: PointInstance) {
->   point.x += 5;
-> }
->
-> const point = new Point(3, 4);
-> moveRight(point);
-> point.x; // => 8
-> ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
