@@ -2998,7 +2998,7 @@ Comparison:
 
 ### General
 
-### Class Expressions
+#### Class Expressions
 
 > Class expressions are very similar to class declarations. The only real difference is that class expressions don’t need a name, though we can refer to them via whatever identifier they ended up bound to:
 >
@@ -3149,7 +3149,7 @@ Comparison:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
-### Generic Classes
+#### Generic Classes
 
 > ```ts
 > class GenericNumber<NumType> {
