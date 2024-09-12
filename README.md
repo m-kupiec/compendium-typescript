@@ -114,6 +114,7 @@
     - Inheritance
       - General
       - Type-Only Field Declarations
+    - Abstract Classes
     - `this` Type
       - General
       - `this`-Based Type Guard
@@ -136,8 +137,6 @@
       - Protected
       - Private
     - Static Members
-  - Abstract Classes
-  - Abstract Contruct Signatures
   - Constructor Signatures
   - Constructor Functions
   - Decorators
@@ -3255,6 +3254,108 @@ Comparison:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
+#### Abstract Classes
+
+"Classes, methods, and fields in TypeScript may be _abstract_. An _abstract method_ or _abstract field_ is one that hasn’t had an implementation provided. These members must exist inside an _abstract class_" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html))
+
+"When a class doesn’t have any abstract members, it is said to be _concrete_." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html))
+
+"The role of abstract classes is to serve as a base class for subclasses which do implement all the abstract members." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html))
+
+> an _abstract class_ . . . cannot be directly instantiated. . . .
+>
+> ```ts
+> abstract class Base {
+>   abstract getName(): string;
+>
+>   printName() {
+>     console.log("Hello, " + this.getName());
+>   }
+> }
+>
+> const b = new Base(); // Error
+> ```
+>
+> ```ts
+> Cannot create an instance of an abstract class.
+> ```
+>
+> . . . we need to make a derived class and implement the abstract members:
+>
+> ```ts
+> class Derived extends Base {
+>   getName() {
+>     return "world";
+>   }
+> }
+>
+> const d = new Derived();
+> d.printName();
+> ```
+>
+> Notice that if we forget to implement the base class’s abstract members, we’ll get an error:
+>
+> ```ts
+> class Derived extends Base {
+>   // forgot to do anything
+> }
+> ```
+>
+> ```ts
+> Non-abstract class 'Derived' does not implement all abstract members of 'Base'
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
+> ```ts
+> abstract class Base {
+>   abstract getName(): string;
+>
+>   printName() {
+>     console.log("Hello, " + this.getName());
+>   }
+> }
+>
+> // . . .
+>
+> class Derived extends Base {
+>   getName() {
+>     return "world";
+>   }
+> }
+> ```
+>
+> . . . Sometimes you want to accept some class constructor function that produces an instance of a class which derives from some abstract class. For example, you might want to write this code:
+>
+> ```ts
+> function greet(ctor: typeof Base) {
+>   const instance = new ctor(); // Error
+>   instance.printName();
+> }
+> ```
+>
+> ```ts
+> Cannot create an instance of an abstract class.
+> ```
+>
+> . . . Instead, you want to write a function that accepts something with a construct signature:
+>
+> ```ts
+> function greet(ctor: new () => Base) {
+>   const instance = new ctor();
+>   instance.printName();
+> }
+> greet(Derived);
+> greet(Base); // Error
+> ```
+>
+> ```ts
+> Argument of type 'typeof Base' is not assignable to parameter of type 'new () => Base'.
+>   Cannot assign an abstract constructor type to a non-abstract constructor type.
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
 #### `this` Type
 
 ##### General
@@ -3917,110 +4018,6 @@ Comparison:
 > ```
 >
 > . . . The `static` members of a generic class can never refer to the class’s type parameters.
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
-
-### Abstract Classes
-
-"Classes, methods, and fields in TypeScript may be _abstract_. An _abstract method_ or _abstract field_ is one that hasn’t had an implementation provided. These members must exist inside an _abstract class_" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html))
-
-"When a class doesn’t have any abstract members, it is said to be _concrete_." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html))
-
-"The role of abstract classes is to serve as a base class for subclasses which do implement all the abstract members." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html))
-
-> an _abstract class_ . . . cannot be directly instantiated. . . .
->
-> ```ts
-> abstract class Base {
->   abstract getName(): string;
->
->   printName() {
->     console.log("Hello, " + this.getName());
->   }
-> }
->
-> const b = new Base(); // Error
-> ```
->
-> ```ts
-> Cannot create an instance of an abstract class.
-> ```
->
-> . . . we need to make a derived class and implement the abstract members:
->
-> ```ts
-> class Derived extends Base {
->   getName() {
->     return "world";
->   }
-> }
->
-> const d = new Derived();
-> d.printName();
-> ```
->
-> Notice that if we forget to implement the base class’s abstract members, we’ll get an error:
->
-> ```ts
-> class Derived extends Base {
->   // forgot to do anything
-> }
-> ```
->
-> ```ts
-> Non-abstract class 'Derived' does not implement all abstract members of 'Base'
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
-
-### Abstract Contruct Signatures
-
-> ```ts
-> abstract class Base {
->   abstract getName(): string;
->
->   printName() {
->     console.log("Hello, " + this.getName());
->   }
-> }
->
-> // . . .
->
-> class Derived extends Base {
->   getName() {
->     return "world";
->   }
-> }
-> ```
->
-> . . . Sometimes you want to accept some class constructor function that produces an instance of a class which derives from some abstract class. For example, you might want to write this code:
->
-> ```ts
-> function greet(ctor: typeof Base) {
->   const instance = new ctor(); // Error
->   instance.printName();
-> }
-> ```
->
-> ```ts
-> Cannot create an instance of an abstract class.
-> ```
->
-> . . . Instead, you want to write a function that accepts something with a construct signature:
->
-> ```ts
-> function greet(ctor: new () => Base) {
->   const instance = new ctor();
->   instance.printName();
-> }
-> greet(Derived);
-> greet(Base); // Error
-> ```
->
-> ```ts
-> Argument of type 'typeof Base' is not assignable to parameter of type 'new () => Base'.
->   Cannot assign an abstract constructor type to a non-abstract constructor type.
-> ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
