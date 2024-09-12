@@ -3683,7 +3683,7 @@ Comparison:
 
 ### `this` Parameter
 
-> JavaScript’s handling of this is indeed unusual:
+> JavaScript’s handling of `this` is indeed unusual:
 >
 > ```ts
 > class MyClass {
