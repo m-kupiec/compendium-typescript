@@ -127,7 +127,7 @@
       - Private
     - Static Members
   - Inheritance
-    - `extends` Clause
+    - General
     - Type-Only Field Declarations
   - Generic Classes
   - Class Expressions
@@ -3545,7 +3545,7 @@ Comparison:
 
 ### Inheritance
 
-#### `extends` Clause
+#### General
 
 > TypeScript enforces that a derived class is always a subtype of its base class. For example, here’s a legal way to override a method:
 >
