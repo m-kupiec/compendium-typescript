@@ -160,6 +160,8 @@
     - Non-Null Assertion Operator
   - Custom Control Flow Analysis
     - Type Predicates
+      - General
+      - Advantages/Disadvantages
     - Assertion Signatures
   - Modules
     - General
@@ -4644,33 +4646,11 @@ Example use case:
 
 #### Type Predicates
 
+##### General
+
 "To define a user-defined type guard, we simply need to define a function whose return type is a _type predicate_" ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/narrowing.html))
 
 "_Type Predicate Functions_ are functions that return a `boolean` value and have a particular return type syntax. A _type predicate_ is a type assertion that checks if an object has a specific property or set of properties. This allows TypeScript to narrow (or refine) the type of an object based on the result of the function." ([Matias Hernández](https://matiashernandez.dev/blog/post/what-are-type-predicates-in-typescript))
-
-Pros:
-
-> One of the major advantages of type predicate functions is that they provide a way to express complex type relationships in a readable and understandable way. They allow you to define custom functions that not only perform a specific task but also return a boolean value that tells TypeScript whether a variable is of a particular type. This can make your code more expressive and self-documenting.
->
-> They can also be useful when you need to perform dynamic type checks on an object. For example, imagine you have a function that takes an object as an argument, but you’re not sure whether the object has a specific property. With a type predicate function, you can check for the presence of that property and narrow the type of the object to include that property.
->
-> [Matias Hernández](https://matiashernandez.dev/blog/post/>>what-are-type-predicates-in-typescript)
-
-Cons:
-
-> the most important problem of this functions is a risk, there is an easy way to introduce bugs to the process. You can wirte incorrect predicates leading to unexpected or undesired type narrowing. This can result in runtime errors or unexpected behavior, which can be difficult to diagnose and fix.
->
-> Type predicates ressembles the use (and pitfalls) of using `as` for type assertions, you can lie to the type system, it equals to say “I know more about this type than the compiler” and force the type to be the desired one, as an example:
->
-> ```ts
-> function isString(x: unknown): x is string {
->   return typeof x === "number";
-> }
-> ```
->
-> The above example check if `x` is a `number`, and if that is `true` then the predicate say that the variable is a `string`. If later you use that type predicate, TS assume that the variable is an `string` and the type safety will be lost.
->
-> [Matias Hernández](https://matiashernandez.dev/blog/post/>what-are-type-predicates-in-typescript)
 
 > ```ts
 > function isFish(pet: Fish | Bird): pet is Fish {
@@ -4719,6 +4699,32 @@ Cons:
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)
 
 "classes can use `this is Type` to narrow their type." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/narrowing.html))
+
+##### Advantages/Disadvantages
+
+Pros:
+
+> One of the major advantages of type predicate functions is that they provide a way to express complex type relationships in a readable and understandable way. They allow you to define custom functions that not only perform a specific task but also return a boolean value that tells TypeScript whether a variable is of a particular type. This can make your code more expressive and self-documenting.
+>
+> They can also be useful when you need to perform dynamic type checks on an object. For example, imagine you have a function that takes an object as an argument, but you’re not sure whether the object has a specific property. With a type predicate function, you can check for the presence of that property and narrow the type of the object to include that property.
+>
+> [Matias Hernández](https://matiashernandez.dev/blog/post/>>what-are-type-predicates-in-typescript)
+
+Cons:
+
+> the most important problem of this functions is a risk, there is an easy way to introduce bugs to the process. You can wirte incorrect predicates leading to unexpected or undesired type narrowing. This can result in runtime errors or unexpected behavior, which can be difficult to diagnose and fix.
+>
+> Type predicates ressembles the use (and pitfalls) of using `as` for type assertions, you can lie to the type system, it equals to say “I know more about this type than the compiler” and force the type to be the desired one, as an example:
+>
+> ```ts
+> function isString(x: unknown): x is string {
+>   return typeof x === "number";
+> }
+> ```
+>
+> The above example check if `x` is a `number`, and if that is `true` then the predicate say that the variable is a `string`. If later you use that type predicate, TS assume that the variable is an `string` and the type safety will be lost.
+>
+> [Matias Hernández](https://matiashernandez.dev/blog/post/>what-are-type-predicates-in-typescript)
 
 #### Assertion Signatures
 
