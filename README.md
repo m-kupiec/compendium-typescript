@@ -108,7 +108,7 @@
     - Workarounds
 - **Class Types**
   - Structural Comparison
-  - Class Memebers
+  - Class Members
     - Fields
     - Constructors
       - General
@@ -3055,7 +3055,7 @@ Comparison:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
-### Class Memebers
+### Class Members
 
 #### Fields
 
