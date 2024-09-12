@@ -4920,7 +4920,9 @@ Cons:
 
 > TypeScript has extended the `import` syntax with two concepts for declaring an import of a type:
 >
-> `import type` | Which is an import statement which can only import types:
+> **`import type`**
+>
+> Which is an import statement which can only import types:
 >
 > ```ts
 > // @filename: animal.ts
@@ -4941,7 +4943,9 @@ Cons:
 > 'createCatName' cannot be used as a value because it was imported using 'import type'.
 > ```
 >
-> Inline `type` imports | TypeScript 4.5 also allows for individual imports to be prefixed with `type` to indicate that the imported reference is a type:
+> **Inline `type` imports**
+>
+> TypeScript 4.5 also allows for individual imports to be prefixed with `type` to indicate that the imported reference is a type:
 >
 > ```ts
 > // @filename: app.ts
