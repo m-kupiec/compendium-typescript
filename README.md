@@ -119,7 +119,9 @@
       - General
       - `this`-Based Type Guard
     - Generic Classes
-    - Class Instance Type
+    - Class Instances
+      - Constructor Functions as Parameters
+      - Class Instance Type
   - Class Members
     - Fields
     - Constructors
@@ -138,7 +140,6 @@
       - Protected
       - Private
     - Static Members
-  - Constructor Functions
   - Decorators
     - General
     - Basic Usage: Logging
@@ -3307,55 +3308,6 @@ Comparison:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
-> ```ts
-> abstract class Base {
->   abstract getName(): string;
->
->   printName() {
->     console.log("Hello, " + this.getName());
->   }
-> }
->
-> // . . .
->
-> class Derived extends Base {
->   getName() {
->     return "world";
->   }
-> }
-> ```
->
-> . . . Sometimes you want to accept some class constructor function that produces an instance of a class which derives from some abstract class. For example, you might want to write this code:
->
-> ```ts
-> function greet(ctor: typeof Base) {
->   const instance = new ctor(); // Error
->   instance.printName();
-> }
-> ```
->
-> ```ts
-> Cannot create an instance of an abstract class.
-> ```
->
-> . . . Instead, you want to write a function that accepts something with a construct signature:
->
-> ```ts
-> function greet(ctor: new () => Base) {
->   const instance = new ctor();
->   instance.printName();
-> }
-> greet(Derived);
-> greet(Base); // Error
-> ```
->
-> ```ts
-> Argument of type 'typeof Base' is not assignable to parameter of type 'new () => Base'.
->   Cannot assign an abstract constructor type to a non-abstract constructor type.
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
-
 #### `this` Type
 
 ##### General
@@ -3532,7 +3484,106 @@ Comparison:
 
 "a class has two sides to its type: the static side and the instance side. Generic classes are only generic over their instance side rather than their static side, so when working with classes, static members can not use the class’s type parameter." ([TypeScript](https://www.typescriptlang.org/docs/handbook/2/generics.html))
 
-#### Class Instance Type
+#### Class Instances
+
+##### Constructor Functions as Parameters
+
+> ```ts
+> abstract class Base {
+>   abstract getName(): string;
+>
+>   printName() {
+>     console.log("Hello, " + this.getName());
+>   }
+> }
+>
+> // . . .
+>
+> class Derived extends Base {
+>   getName() {
+>     return "world";
+>   }
+> }
+> ```
+>
+> . . . Sometimes you want to accept some class constructor function that produces an instance of a class which derives from some abstract class. For example, you might want to write this code:
+>
+> ```ts
+> function greet(ctor: typeof Base) {
+>   const instance = new ctor(); // Error
+>   instance.printName();
+> }
+> ```
+>
+> ```ts
+> Cannot create an instance of an abstract class.
+> ```
+>
+> . . . Instead, you want to write a function that accepts something with a construct signature:
+>
+> ```ts
+> function greet(ctor: new () => Base) {
+>   const instance = new ctor();
+>   instance.printName();
+> }
+> greet(Derived);
+> greet(Base); // Error
+> ```
+>
+> ```ts
+> Argument of type 'typeof Base' is not assignable to parameter of type 'new () => Base'.
+>   Cannot assign an abstract constructor type to a non-abstract constructor type.
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
+> When creating factories in TypeScript using generics, it is necessary to refer to class types by their constructor functions. For example,
+>
+> ```ts
+> function create<Type>(c: { new (): Type }): Type {
+>   return new c();
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/generics.html)
+
+> example uses the prototype property to infer and constrain relationships between the constructor function and the instance side of class types.
+>
+> ```ts
+> class BeeKeeper {
+>   hasMask: boolean = true;
+> }
+>
+> class ZooKeeper {
+>   nametag: string = "Mikle";
+> }
+>
+> class Animal {
+>   numLegs: number = 4;
+> }
+>
+> class Bee extends Animal {
+>   numLegs = 6;
+>   keeper: BeeKeeper = new BeeKeeper();
+> }
+>
+> class Lion extends Animal {
+>   keeper: ZooKeeper = new ZooKeeper();
+> }
+>
+> function createInstance<A extends Animal>(c: new () => A): A {
+>   return new c();
+> }
+>
+> createInstance(Lion).keeper.nametag;
+> createInstance(Bee).keeper.hasMask;
+> ```
+>
+> This pattern is used to power the mixins design pattern.
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/generics.html)
+
+##### Class Instance Type
 
 > JavaScript classes are instantiated with the `new` operator. Given the type of a class itself, the `InstanceType` utility type models this operation.
 >
@@ -4048,54 +4099,6 @@ Comparison:
 > . . . The `static` members of a generic class can never refer to the class’s type parameters.
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
-
-### Constructor Functions
-
-> When creating factories in TypeScript using generics, it is necessary to refer to class types by their constructor functions. For example,
->
-> ```ts
-> function create<Type>(c: { new (): Type }): Type {
->   return new c();
-> }
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/generics.html)
-
-> example uses the prototype property to infer and constrain relationships between the constructor function and the instance side of class types.
->
-> ```ts
-> class BeeKeeper {
->   hasMask: boolean = true;
-> }
->
-> class ZooKeeper {
->   nametag: string = "Mikle";
-> }
->
-> class Animal {
->   numLegs: number = 4;
-> }
->
-> class Bee extends Animal {
->   numLegs = 6;
->   keeper: BeeKeeper = new BeeKeeper();
-> }
->
-> class Lion extends Animal {
->   keeper: ZooKeeper = new ZooKeeper();
-> }
->
-> function createInstance<A extends Animal>(c: new () => A): A {
->   return new c();
-> }
->
-> createInstance(Lion).keeper.nametag;
-> createInstance(Bee).keeper.hasMask;
-> ```
->
-> This pattern is used to power the mixins design pattern.
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/generics.html)
 
 ### Decorators
 
