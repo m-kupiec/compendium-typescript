@@ -111,6 +111,9 @@
     - Class Expressions
     - Structural Comparison
     - Implementing Interfaces
+    - Inheritance
+      - General
+      - Type-Only Field Declarations
     - Generic Classes
   - Class Members
     - Fields
@@ -130,9 +133,6 @@
       - Protected
       - Private
     - Static Members
-  - Inheritance
-    - General
-    - Type-Only Field Declarations
   - `this` Type
   - Abstract Classes
   - Abstract Contruct Signatures
@@ -3150,6 +3150,109 @@ Comparison:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
+#### Inheritance
+
+##### General
+
+> TypeScript enforces that a derived class is always a subtype of its base class. For example, here’s a legal way to override a method:
+>
+> ```ts
+> class Base {
+>   greet() {
+>     console.log("Hello, world!");
+>   }
+> }
+>
+> class Derived extends Base {
+>   greet(name?: string) {
+>     if (name === undefined) {
+>       super.greet();
+>     } else {
+>       console.log(`Hello, ${name.toUpperCase()}`);
+>     }
+>   }
+> }
+>
+> const d = new Derived();
+> d.greet();
+> d.greet("reader");
+> ```
+>
+> It’s important that a derived class follow its base class contract. Remember that it’s very common (and always legal!) to refer to a derived class instance through a base class reference:
+>
+> ```ts
+> // Alias the derived instance through a base class reference
+> const b: Base = d;
+> // No problem
+> b.greet();
+> ```
+>
+> What if `Derived` didn’t follow Base’s contract?
+>
+> ```ts
+> class Base {
+>   greet() {
+>     console.log("Hello, world!");
+>   }
+> }
+>
+> class Derived extends Base {
+>   // Make this parameter required
+>   greet(name: string) {
+>     // Error
+>     console.log(`Hello, ${name.toUpperCase()}`);
+>   }
+> }
+> ```
+>
+> ```ts
+> Property 'greet' in type 'Derived' is not assignable to the same property in base type 'Base'.
+> Type '(name: string) => void' is not assignable to type '() => void'.
+> Target signature provides too few arguments. Expected 1 or more, but got 0.
+> ```
+>
+> If we compiled this code despite the error, this sample would then crash:
+>
+> ```ts
+> const b: Base = new Derived();
+> // Crashes because "name" will be undefined
+> b.greet();
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
+##### Type-Only Field Declarations
+
+> When `target >= ES2022` or `useDefineForClassFields` is `true`, class fields are initialized after the parent class constructor completes, overwriting any value set by the parent class. This can be a problem when you only want to re-declare a more accurate type for an inherited field. To handle these cases, you can write `declare` to indicate to TypeScript that there should be no runtime effect for this field declaration.
+>
+> ```ts
+> interface Animal {
+>   dateOfBirth: any;
+> }
+>
+> interface Dog extends Animal {
+>   breed: any;
+> }
+>
+> class AnimalHouse {
+>   resident: Animal;
+>   constructor(animal: Animal) {
+>     this.resident = animal;
+>   }
+> }
+>
+> class DogHouse extends AnimalHouse {
+>   // Does not emit JavaScript code,
+>   // only ensures the types are correct
+>   declare resident: Dog;
+>   constructor(dog: Dog) {
+>     super(dog);
+>   }
+> }
+> ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
 #### Generic Classes
 
 > ```ts
@@ -3653,109 +3756,6 @@ Comparison:
 > ```
 >
 > . . . The `static` members of a generic class can never refer to the class’s type parameters.
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
-
-### Inheritance
-
-#### General
-
-> TypeScript enforces that a derived class is always a subtype of its base class. For example, here’s a legal way to override a method:
->
-> ```ts
-> class Base {
->   greet() {
->     console.log("Hello, world!");
->   }
-> }
->
-> class Derived extends Base {
->   greet(name?: string) {
->     if (name === undefined) {
->       super.greet();
->     } else {
->       console.log(`Hello, ${name.toUpperCase()}`);
->     }
->   }
-> }
->
-> const d = new Derived();
-> d.greet();
-> d.greet("reader");
-> ```
->
-> It’s important that a derived class follow its base class contract. Remember that it’s very common (and always legal!) to refer to a derived class instance through a base class reference:
->
-> ```ts
-> // Alias the derived instance through a base class reference
-> const b: Base = d;
-> // No problem
-> b.greet();
-> ```
->
-> What if `Derived` didn’t follow Base’s contract?
->
-> ```ts
-> class Base {
->   greet() {
->     console.log("Hello, world!");
->   }
-> }
->
-> class Derived extends Base {
->   // Make this parameter required
->   greet(name: string) {
->     // Error
->     console.log(`Hello, ${name.toUpperCase()}`);
->   }
-> }
-> ```
->
-> ```ts
-> Property 'greet' in type 'Derived' is not assignable to the same property in base type 'Base'.
-> Type '(name: string) => void' is not assignable to type '() => void'.
-> Target signature provides too few arguments. Expected 1 or more, but got 0.
-> ```
->
-> If we compiled this code despite the error, this sample would then crash:
->
-> ```ts
-> const b: Base = new Derived();
-> // Crashes because "name" will be undefined
-> b.greet();
-> ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
-
-#### Type-Only Field Declarations
-
-> When `target >= ES2022` or `useDefineForClassFields` is `true`, class fields are initialized after the parent class constructor completes, overwriting any value set by the parent class. This can be a problem when you only want to re-declare a more accurate type for an inherited field. To handle these cases, you can write `declare` to indicate to TypeScript that there should be no runtime effect for this field declaration.
->
-> ```ts
-> interface Animal {
->   dateOfBirth: any;
-> }
->
-> interface Dog extends Animal {
->   breed: any;
-> }
->
-> class AnimalHouse {
->   resident: Animal;
->   constructor(animal: Animal) {
->     this.resident = animal;
->   }
-> }
->
-> class DogHouse extends AnimalHouse {
->   // Does not emit JavaScript code,
->   // only ensures the types are correct
->   declare resident: Dog;
->   constructor(dog: Dog) {
->     super(dog);
->   }
-> }
-> ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
