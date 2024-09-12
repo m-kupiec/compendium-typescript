@@ -166,7 +166,7 @@
       - General
       - First Type
       - Second Type
-      - Comparison with Type Predicates
+    - Type Predicates vs. Assertion Signatures
   - Modules
     - General
     - `namespaces`
@@ -4834,7 +4834,7 @@ Cons:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/>typescript-3-7.html#assertion-functions)
 
-##### Comparison with Type Predicates
+#### Type Predicates vs. Assertion Signatures
 
 > **Type Gurads**: A function with a return type describing the CFA [(control flow analysis)] change for a new scope when it is `true`.
 >
