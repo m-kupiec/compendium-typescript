@@ -2447,7 +2447,7 @@ Comparison:
 > ```
 >
 > ```ts
-> Argument of type 'number' is not assignable to parameter of type '{ length: >number; }'.
+> Argument of type 'number' is not assignable to parameter of type '{ length: number; }'.
 > ```
 >
 > . . . Because we constrained `Type` to `{ length: number }`, we were allowed to access the `.length` property of the `a` and `b` parameters. Without the type constraint, we wouldn’t be able to access those properties because the values might have been some other type without a `length` property.
