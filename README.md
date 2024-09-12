@@ -120,6 +120,8 @@
       - Parameter Properties
       - Overloads
     - Methods
+      - General
+      - `this` Parameter
     - Accessors
     - Index Signatures
     - Member Visibility
@@ -131,7 +133,6 @@
   - Inheritance
     - General
     - Type-Only Field Declarations
-  - `this` Parameter
   - `this` Type
   - Abstract Classes
   - Abstract Contruct Signatures
@@ -3295,6 +3296,8 @@ Comparison:
 
 #### Methods
 
+##### General
+
 > ```ts
 > class Point {
 >   x = 10;
@@ -3306,6 +3309,81 @@ Comparison:
 >   }
 > }
 > ```
+>
+> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+
+##### `this` Parameter
+
+> JavaScript’s handling of `this` is indeed unusual:
+>
+> ```ts
+> class MyClass {
+>   name = "MyClass";
+>   getName() {
+>     return this.name;
+>   }
+> }
+> const c = new MyClass();
+> const obj = {
+>   name: "obj",
+>   getName: c.getName,
+> };
+>
+> // Prints "obj", not "MyClass"
+> console.log(obj.getName());
+> ```
+>
+> Long story short, by default, the value of `this` inside a function depends on how the function was called. In this example, because the function was called through the `obj` reference, its value of `this` was `obj` rather than the class instance. . . .
+>
+> If you have a function that will often be called in a way that loses its `this` context, it can make sense to use an arrow function property instead of a method definition:
+>
+> ```ts
+> class MyClass {
+>   name = "MyClass";
+>   getName = () => {
+>     return this.name;
+>   };
+> }
+> const c = new MyClass();
+> const g = c.getName;
+> // Prints "MyClass" instead of crashing
+> console.log(g());
+> ```
+>
+> This has some trade-offs:
+>
+> - The `this` value is guaranteed to be correct at runtime, even for code not checked with TypeScript
+> - This will use more memory, because each class instance will have its own copy of each function defined this way
+> - You can’t use `super.getName` in a derived class, because there’s no entry in the prototype chain to fetch the base class method from
+>
+> . . .
+> Instead of using an arrow function, we can add a `this` parameter to method definitions to statically enforce that the method is called correctly:
+>
+> ```ts
+> class MyClass {
+>   name = "MyClass";
+>   getName(this: MyClass) {
+>     return this.name;
+>   }
+> }
+> const c = new MyClass();
+> // OK
+> c.getName();
+>
+> // Error, would crash
+> const g = c.getName;
+> console.log(g());
+> ```
+>
+> ```ts
+> The 'this' context of type 'void' is not assignable to method's 'this' of type 'MyClass'.
+> ```
+>
+> This method makes the opposite trade-offs of the arrow function approach:
+>
+> - JavaScript callers might still use the class method incorrectly without realizing it
+> - Only one function per class definition gets allocated, rather than one per class instance
+> - Base method definitions can still be called via `super`.
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
@@ -3678,81 +3756,6 @@ Comparison:
 >   }
 > }
 > ```
->
-> [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
-
-### `this` Parameter
-
-> JavaScript’s handling of `this` is indeed unusual:
->
-> ```ts
-> class MyClass {
->   name = "MyClass";
->   getName() {
->     return this.name;
->   }
-> }
-> const c = new MyClass();
-> const obj = {
->   name: "obj",
->   getName: c.getName,
-> };
->
-> // Prints "obj", not "MyClass"
-> console.log(obj.getName());
-> ```
->
-> Long story short, by default, the value of `this` inside a function depends on how the function was called. In this example, because the function was called through the `obj` reference, its value of `this` was `obj` rather than the class instance. . . .
->
-> If you have a function that will often be called in a way that loses its `this` context, it can make sense to use an arrow function property instead of a method definition:
->
-> ```ts
-> class MyClass {
->   name = "MyClass";
->   getName = () => {
->     return this.name;
->   };
-> }
-> const c = new MyClass();
-> const g = c.getName;
-> // Prints "MyClass" instead of crashing
-> console.log(g());
-> ```
->
-> This has some trade-offs:
->
-> - The `this` value is guaranteed to be correct at runtime, even for code not checked with TypeScript
-> - This will use more memory, because each class instance will have its own copy of each function defined this way
-> - You can’t use `super.getName` in a derived class, because there’s no entry in the prototype chain to fetch the base class method from
->
-> . . .
-> Instead of using an arrow function, we can add a `this` parameter to method definitions to statically enforce that the method is called correctly:
->
-> ```ts
-> class MyClass {
->   name = "MyClass";
->   getName(this: MyClass) {
->     return this.name;
->   }
-> }
-> const c = new MyClass();
-> // OK
-> c.getName();
->
-> // Error, would crash
-> const g = c.getName;
-> console.log(g());
-> ```
->
-> ```ts
-> The 'this' context of type 'void' is not assignable to method's 'this' of type 'MyClass'.
-> ```
->
-> This method makes the opposite trade-offs of the arrow function approach:
->
-> - JavaScript callers might still use the class method incorrectly without realizing it
-> - Only one function per class definition gets allocated, rather than one per class instance
-> - Base method definitions can still be called via `super`.
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
