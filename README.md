@@ -4565,9 +4565,8 @@ Example use case:
 > }
 >
 > // ❌ error - before *and* after is not allowed
-> @before
-> @after
-> export class Bar {
+> // prettier-ignore
+> @before export @after class Bar {
 >   // ...
 > }
 > ```
