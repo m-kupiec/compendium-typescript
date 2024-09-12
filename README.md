@@ -163,6 +163,10 @@
       - General
       - Advantages/Disadvantages
     - Assertion Signatures
+      - General
+      - First Type
+      - Second Type
+      - Comparison with Type Predicates
   - Modules
     - General
     - `namespaces`
@@ -4728,6 +4732,8 @@ Cons:
 
 #### Assertion Signatures
 
+##### General
+
 > There’s a specific set of functions that throw an error if something unexpected happened. They’re called “assertion” functions. As an example, Node.js has a dedicated function for this called assert.
 >
 > ```js
@@ -4750,6 +4756,8 @@ Cons:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#assertion-functions)
 
+##### First Type
+
 > The first type of assertion signature models the way that Node’s `assert` function works. It ensures that whatever condition is being checked must be true for the remainder of the containing scope. . . . `asserts condition` says that whatever gets passed into the `condition` parameter must be `true` if the `assert` returns (because otherwise it would throw an error). That means that for the rest of the scope, that condition must be truthy. As an example, using this assertion function means we do catch our original yell example.
 >
 > ```ts
@@ -4769,6 +4777,8 @@ Cons:
 > ```
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#assertion-functions)
+
+##### Second Type
 
 > The other type of assertion signature doesn’t check for a condition, but instead tells TypeScript that a specific variable or property has a different type.
 >
@@ -4824,7 +4834,7 @@ Cons:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/release-notes/>typescript-3-7.html#assertion-functions)
 
-Comparison of type predicates and assertion signatures:
+##### Comparison with Type Predicates
 
 > **Type Gurads**: A function with a return type describing the CFA [(control flow analysis)] change for a new scope when it is `true`.
 >
