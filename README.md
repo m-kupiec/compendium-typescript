@@ -5274,7 +5274,7 @@ Cons:
 >
 > . . . we could easily have misspelled `getDistance` and not gotten an error.
 >
-> For this reason, TypeScript has the `noImplicitThis` option. When that option is set, TypeScript will issue an error when this is used without an explicit (or inferred) type.
+> For this reason, TypeScript has the `noImplicitThis` option. When that option is set, TypeScript will issue an error when `this` is used without an explicit (or inferred) type.
 >
 > The fix is to use a `this`-parameter to give an explicit type in the interface or in the function itself:
 >
