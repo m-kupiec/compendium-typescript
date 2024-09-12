@@ -4239,7 +4239,7 @@ Example use case:
 > greet();
 > ```
 >
-> We can write a decorator that uses addInitializer to call bind in the constructor for us.
+> We can write a decorator that uses `addInitializer` to call bind in the constructor for us.
 >
 > ```ts
 > function bound(originalMethod: any, context: ClassMethodDecoratorContext) {
