@@ -3373,6 +3373,22 @@ Comparison:
 >
 > [TypeScript](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
+- > The code . . . is an example of a `this`-based type guard in TypeScript.
+  >
+  > In this code, each method (`isFile`, `isDirectory`, and `isNetworked`) is used as a custom type guard to narrow down the type of `this` at runtime. Here's how it works:
+  >
+  > - **`isFile(): this is FileRep`** checks whether the current object (`this`) is an instance of the `FileRep` class. If it returns `true`, TypeScript knows that `this` is of type `FileRep`.
+  > - **`isDirectory(): this is Directory`** checks whether `this` is an instance of the `Directory` class.
+  > - **`isNetworked(): this is Networked & this`** checks whether the object has the `networked` property set to `true`, and if so, narrows `this` to be a combination of `Networked` and the current class (`FileSystemObject` or one of its subclasses).
+  >
+  > In the conditional block:
+  >
+  > - If `fso.isFile()` is `true`, TypeScript knows `fso` is of type `FileRep`, and you can safely access `fso.content`.
+  > - If `fso.isDirectory()` is `true`, `fso` is of type `Directory`, allowing access to `fso.children`.
+  > - If `fso.isNetworked()` is `true`, `fso` is of type `Networked & FileSystemObject`, so `fso.host` is accessible.
+  >
+  > ChatGPT
+
 > A common use-case for a `this`-based type guard is to allow for lazy validation of a particular field. For example, this case removes an `undefined` from the value held inside `box` when `hasValue` has been verified to be `true`:
 >
 > ```ts
