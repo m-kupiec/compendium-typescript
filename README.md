@@ -1,6 +1,10 @@
-# TypeScript Reference
+# TypeScript Compendium
 
-## TOC
+Welcome to the _TypeScript Compendium_, part of the _[Front-End Compendia](https://github.com/m-kupiec/compendia/blob/main/README.md)_ project—a curated collection of Markdown-based notebooks that provide in-depth coverage of front-end development topics. This notebook is dedicated to TypeScript and offers a deep dive into types, generics, type inference, and utilities, making it a useful guide for developers integrating TypeScript with JavaScript or transitioning to a strongly typed codebase.
+
+This compendium is part of the _[Front-End Compendia](https://github.com/m-kupiec/compendia/blob/main/README.md)_ project, where each notebook focuses on a unique technology. To discover additional compendia on topics like JavaScript and React, and to learn about future releases, please visit [the main repository](https://github.com/m-kupiec/compendia/blob/main/README.md) for the full Table of Contents.
+
+## Table of Contents
 
 ### Introduction
 
